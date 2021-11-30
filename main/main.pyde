@@ -20,6 +20,7 @@ players = {
 }
 images = {}
 clicked = False
+NO_ESCAPE = '0'
 
 # ==================================================
 # state 0 = menu
@@ -111,6 +112,11 @@ def mouseReleased():
 
 # key press function
 def keyPressed():
+    if key == ESC:
+        this.key = NO_ESCAPE
+        fill(0, 50)
+        rect(0, 0, width, height)
+        state = 1
     global state, players
         
     # nameinput_system key input
