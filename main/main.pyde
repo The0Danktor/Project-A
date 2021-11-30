@@ -26,6 +26,7 @@ clicked = False
 # state 1/4 = nameinput player1/4
 # state 5 = start screen
 # state 6 = dice
+# state 7 = niks
 # ==================================================
 
 # setup function
