@@ -51,7 +51,6 @@ def shuffleNames(players):
         value = values_list[rng]
         values_list.remove(value)
         values_list_.append(value)
-        print(len(temp_list), values_list, values_list_)
     c = 1
     for i in values_list_:
         players['player'+ str(c)] = i
