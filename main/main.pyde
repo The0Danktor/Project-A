@@ -5,13 +5,15 @@
 # imports for other files
 import title_display as t_dis
 import nameinput_display as n_dis
-import nameinput_system as n_sys
 import menu_display as m_dis
+import esc_display as e_dis
+import nameinput_system as n_sys
 import dice_system as d_sys
 add_library("minim")
 
 # setup global variables
 state = 0
+backup_state = 0
 players = {
            'player1' : 'Player 1',
            'player2' : 'Player 2',
@@ -27,7 +29,7 @@ NO_ESCAPE = '0'
 # state 1/4 = nameinput player1/4
 # state 5 = start screen
 # state 6 = dice
-# state 7 = niks
+# state 7 = esc menu
 # ==================================================
 
 # setup function
@@ -74,6 +76,8 @@ def draw():
         t_dis.displayScreen(players['player1'], players['player2'], players['player3'], players['player4'], images)
     elif state == 6:
         d_sys.dice_systeem(mousePressed)
+    elif state == 7:
+        e_dis.displayScreen()
 
 # ==================================================
 
@@ -92,32 +96,48 @@ def mousePressed():
         state = t_dis.mousePressed_(images, players)
     elif state == 0:
         state = m_dis.mousePressed_()
+    elif state == 7:
+        state = e_dis.mousePressed_()
+        if state == -1:
+            state = backup_state
         
     if saved_state != state:
-        if state == 0:
-            m_dis.loadScreen(images)
-        elif state in (1,2,3,4):
-            n_dis.loadScreen(images)
-        elif state == 5:
-            t_dis.loadScreen(images)
-        elif state == 6:
-            background('#5493BF')
+        refresh()
 
 def mouseReleased():
     global clicked
     clicked = False
     
     d_sys.mouseReleased_()
+    
+def refresh():
+    global state
+    if state == 0:
+        m_dis.loadScreen(images)
+    elif state in (1,2,3,4):
+        n_dis.loadScreen(images)
+    elif state == 5:
+        t_dis.loadScreen(images)
+    elif state == 6:
+        background('#5493BF')
 
 # ==================================================
 
 # key press function
 def keyPressed():
+    global backup_state
     if key == ESC:
         this.key = NO_ESCAPE
-        fill(0, 50)
-        rect(0, 0, width, height)
-        state = 1
+        if state != 0:
+            if state != 7:
+                fill(0, 100)
+                rectMode(CORNER)
+                rect(0, 0, width, height)
+                backup_state = state
+                state = 7
+            else:
+                state = backup_state
+                refresh()
     global state, players
         
     # nameinput_system key input
