@@ -30,6 +30,7 @@ NO_ESCAPE = '0'
 # state 5 = start screen
 # state 6 = dice
 # state 7 = esc menu
+# state 8 = test
 # ==================================================
 
 # setup function
