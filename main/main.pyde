@@ -7,7 +7,7 @@ import title_display as t_dis
 import nameinput_display as n_dis
 import nameinput_system as n_sys
 import menu_display as m_dis
-import dice_system as d_sis
+import dice_system as d_sys
 add_library("minim")
 
 # setup global variables
@@ -72,7 +72,7 @@ def draw():
     elif state == 5:
         t_dis.displayScreen(players['player1'], players['player2'], players['player3'], players['player4'], images)
     elif state == 6:
-        d_sis.dice_systeem(mousePressed)
+        d_sys.dice_systeem(mousePressed)
 
 # ==================================================
 
@@ -106,7 +106,7 @@ def mouseReleased():
     global clicked
     clicked = False
     
-    d_sis.mouseReleased_()
+    d_sys.mouseReleased_()
 
 # ==================================================
 
