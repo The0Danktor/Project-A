@@ -1,4 +1,14 @@
 import random
+import functions as f
+pressed = True
+amountD4 = 0
+amountD6 = 0
+amountD10 = 0
+cijfers = []
+cijferD10 = 0
+cijferD6 = 0
+cijferD4 = 0
+totaal = 0
 
 def setup():
     fullScreen()
@@ -6,51 +16,90 @@ def setup():
     strokeWeight(5)
 
 def draw():
+    dice_systeem()
+
+def dice_systeem():
     knop()
     adddiceD6()
     adddiceD4()
     adddiceD10()
+    totalCounter()
 
 
+def mouseReleased():
+    global pressed
+    pressed = True    
 
-
-
-def diceD6():
-    cijferD6 = random.randint(1,6)
-    strokeWeight(5)
-    fill(255)
-    rectMode(CENTER)
-    rect(width/2, height/2, 100, 100 , 20)
-    textSize(60)
-    fill(0)
-    text(str(cijferD6) ,width/2.04, height/1.93)
-
-def diceD4():
-    cijferD4 = random.randint(1,4)
-    strokeWeight(5)
-    fill(255)
-    rectMode(CENTER)
-    rect(width/2.5, height/2, 100, 100 , 20)
-    textSize(60)
-    fill(0)
-    text(str(cijferD4) ,width/2.56, height/1.93)
+def totalCounter():
+    global pressed
+    global amountD4
+    global amountD6
+    global amountD10
+    global cijfers
+    global cijferD4
+    global cijferD10
+    global cijferD6
+    global totaal
+    if amountD4 == 0 and amountD6 == 0 and amountD10 == 0 and pressed:
+        for i in cijfers:
+            totaal += i
+        rectMode(CENTER)
+        fill('#EA9C88')
+        rect(width/1.4, height/1.2, 100, 100)
+        fill(0)
+        textSize(40)
+        w = textWidth(str(totaal))
+        w = (width - w)//1.395
+        text(str(totaal), w , height/1.18)
+        totaal = 0
+        
     
-def diceD10():
-    cijferD10 = random.randint(1,10)
-    strokeWeight(5)
-    fill(255)
-    rectMode(CENTER)
-    rect(width/1.67, height/2, 100, 100 , 20)
-    textSize(60)
-    fill(0)
-    W = textWidth(str(cijferD10))
-    W = (width - W) //1.66
-    text(str(cijferD10) ,W, height/1.93)
+    
+def diceD6(amount):
+    global cijferD6
+    if  amount > 0:
+        cijferD6 = random.randint(1,6)
+        strokeWeight(5)
+        fill(255)
+        rectMode(CENTER)
+        rect(width/2, height/2, 100, 100 , 20)
+        textSize(60)
+        fill(0)
+        text(str(cijferD6) ,width/2.04, height/1.93)
+
+def diceD4(amount):
+    global cijferD4
+    if amount > 0:
+        cijferD4 = random.randint(1,4)
+        strokeWeight(5)
+        fill(255)
+        rectMode(CENTER)
+        rect(width/2.5, height/2, 100, 100 , 20)
+        textSize(60)
+        fill(0)
+        text(str(cijferD4) ,width/2.56, height/1.93)
+
+    
+def diceD10(amount):
+    global cijferD10
+    if amount > 0 :
+        cijferD10 = random.randint(1,10)
+        strokeWeight(5)
+        fill(255)
+        rectMode(CENTER)
+        rect(width/1.67, height/2, 100, 100 , 20)
+        textSize(60)
+        fill(0)
+        W = textWidth(str(cijferD10))
+        W = (width - W) //1.66
+        text(str(cijferD10) ,W, height/1.93)
  
-def mousePressed():
-    print(mouseX, mouseY)
+
        
 def adddiceD6():
+    global pressed
+    global amountD6
+    textSize(60)
     fill('#EA9C88')
     rectMode(CORNERS)
     rectX1 = width/2.11 
@@ -60,10 +109,33 @@ def adddiceD6():
     rectY2 = height/1.29
     rect(rectX1, rectY1, rectX2, rectY2)
     rect(rectX1, rectY1, rectX3, rectY2)
-    if mousePressed and (rectX1 < mouseX < rectX3) and (rectY1 < mouseY < rectY2):
-        diceD6()
+    fill(0)
+    w = textWidth('+')
+    w = (width - w) //2.05
+    text('+', w , height/ 1.32)
+    w = textWidth('-')
+    w = (width - w) //1.945
+    text('-', w , height/ 1.32)
+    rectMode(CENTER)
+    fill('#EA9C88')
+    rect(rectX3, height/1.5, 100, 60)
+    fill(0)
+    textSize(40)
+    w = textWidth(str(amountD6))
+    w = (width - w)//2
+    text(str(amountD6), w , height/1.465)
+    if mousePressed and (rectX1 < mouseX < rectX3) and (rectY1 < mouseY < rectY2) and pressed:
+        amountD6 += 1
+        pressed = False
+    if mousePressed and (rectX3 < mouseX < rectX2) and (rectY1 < mouseY < rectY2) and pressed:
+        if amountD6 > 0:
+            amountD6 -= 1
+        pressed = False
 
 def adddiceD10():
+    global pressed
+    global amountD10
+    textSize(60)
     fill('#EA9C88')
     rectMode(CORNERS)
     rectX1 = width/1.748 
@@ -73,10 +145,33 @@ def adddiceD10():
     rectY2 = height/1.29
     rect(rectX1, rectY1, rectX2, rectY2)
     rect(rectX1, rectY1, rectX3, rectY2)
-    if mousePressed and (rectX1 < mouseX < rectX3) and (rectY1 < mouseY < rectY2):
-        diceD10()
+    fill(0)
+    w = textWidth('+')
+    w = (width - w) //1.7
+    text('+', w , height/ 1.32)
+    w = textWidth('-')
+    w = (width - w) //1.624
+    text('-', w , height/ 1.32)
+    rectMode(CENTER)
+    fill('#EA9C88')
+    rect(rectX3, height/1.5, 100, 60)
+    fill(0)
+    textSize(40)
+    w = textWidth(str(amountD10))
+    w = (width - w)//1.664
+    text(str(amountD10), w , height/1.465)
+    if mousePressed and (rectX1 < mouseX < rectX3) and (rectY1 < mouseY < rectY2)and pressed:
+        amountD10 += 1
+        pressed = False
+    if mousePressed and (rectX3 < mouseX < rectX2) and (rectY1 < mouseY < rectY2)and pressed:
+        if amountD10 > 0:
+            amountD10 -= 1
+        pressed = False
 
 def adddiceD4():
+    global pressed
+    global amountD4
+    textSize(60)
     fill('#EA9C88')
     rectMode(CORNERS)
     rectX1 = width/2.68
@@ -86,11 +181,39 @@ def adddiceD4():
     rectY2 = height/1.29
     rect(rectX1, rectY1, rectX2, rectY2)
     rect(rectX1, rectY1, rectX3, rectY2)
-    if mousePressed and (rectX1 < mouseX < rectX3) and (rectY1 < mouseY < rectY2):
-        diceD4()
+    fill(0)
+    w = textWidth('+')
+    w = (width - w) //2.6
+    text('+', w , height/ 1.32)
+    w = textWidth('-')
+    w = (width - w) //2.43
+    text('-', w , height/ 1.32)
+    rectMode(CENTER)
+    fill('#EA9C88')
+    rect(rectX3, height/1.5, 100, 60)
+    fill(0)
+    textSize(40)
+    w = textWidth(str(amountD4))
+    w = (width - w)//2.507
+    text(str(amountD4), w , height/1.465)
+    if mousePressed and (rectX1 < mouseX < rectX3) and (rectY1 < mouseY < rectY2) and pressed:
+        amountD4 += 1
+        pressed = False
+    if mousePressed and (rectX3 < mouseX < rectX2) and (rectY1 < mouseY < rectY2) and pressed :
+        if amountD4 > 0:
+            amountD4 -= 1
+        pressed = False
         
     
 def knop():
+    global pressed
+    global amountD4
+    global amountD6
+    global amountD10
+    global cijfers
+    global cijferD4
+    global cijferD10
+    global cijferD6
     fill('#EA9C88')
     rectMode(CORNERS)
     rectX1 = width/2.68
@@ -103,8 +226,20 @@ def knop():
     w = textWidth('dobbelen')
     w = (width - w) //2
     text('dobbelen', w , height/1.17)
-    if mousePressed and (rectX1 < mouseX < rectX2)and(rectY1 < mouseY < rectY2 ):
-        diceD4()
-        diceD6()
-        diceD10()
-    #if mouseReleased and (rectX1 < mouseX < rectX2)and(rectY1 < mouseY < rectY2 ):
+    if mousePressed and (rectX1 < mouseX < rectX2)and(rectY1 < mouseY < rectY2 ) and pressed :
+        diceD4(amountD4)
+        diceD6(amountD6)
+        diceD10(amountD10)
+        if amountD4 > 0 and  pressed:
+            amountD4 -= 1
+            cijfers.append(cijferD4)
+        if amountD6 > 0 and  pressed:
+            amountD6 -= 1
+            cijfers.append(cijferD6)
+        if amountD10 > 0 and  pressed:
+            amountD10 -= 1
+            cijfers.append(cijferD10)
+        if pressed: 
+            pressed = False
+        
+        
