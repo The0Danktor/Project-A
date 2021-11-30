@@ -1,5 +1,4 @@
 import random
-import functions as f
 pressed = True
 amountD4 = 0
 amountD6 = 0
@@ -23,14 +22,14 @@ def dice_systeem():
     adddiceD6()
     adddiceD4()
     adddiceD10()
-    totalCounter()
+    totalCounter(CENTER,'#EA9C88',width/1.4, height/1.2,1.395,height/1.18)
 
 
 def mouseReleased():
     global pressed
     pressed = True    
 
-def totalCounter():
+def totalCounter(mode,kleur,breedte,hoogte,textbreedte,texthoogte):
     global pressed
     global amountD4
     global amountD6
@@ -43,14 +42,14 @@ def totalCounter():
     if amountD4 == 0 and amountD6 == 0 and amountD10 == 0 and pressed:
         for i in cijfers:
             totaal += i
-        rectMode(CENTER)
+        rectMode(mode)
         fill('#EA9C88')
-        rect(width/1.4, height/1.2, 100, 100)
+        rect(breedte, hoogte, 100, 100)
         fill(0)
         textSize(40)
         w = textWidth(str(totaal))
-        w = (width - w)//1.395
-        text(str(totaal), w , height/1.18)
+        w = (width - w)//textbreedte
+        text(str(totaal), w , texthoogte)
         totaal = 0
         
     
