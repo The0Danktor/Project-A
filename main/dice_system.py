@@ -10,13 +10,6 @@ cijferD6 = 0
 cijferD4 = 0
 totaal = 0
 
-# def setup():
-#     fullScreen()
-#     background('#5493BF')
-#     strokeWeight(5)
-
-# def draw():
-#     dice_systeem()
 
 def dice_systeem(mousePressed):
     stroke(0)
