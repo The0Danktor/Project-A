@@ -14,11 +14,11 @@ totaal = 0
 def dice_systeem(mousePressed):
     stroke(0)
     strokeWeight(5)
-    knop(mousePressed)
+    knop(mousePressed,CORNERS,'#EA9C88',width/2.68,width/1.6,height/1.27,height/1.14,)
     adddiceD6(mousePressed)
     adddiceD4(mousePressed)
     adddiceD10(mousePressed)
-    totalCounter(CENTER,'#EA9C88',width/1.4, height/1.2,1.395,height/1.18)
+    totalCounter(CENTER,'#EA9C88',width/1.4, height/1.2,1.395,height/1.18,2,height/1.17)
 
 
 def mouseReleased_():
@@ -39,7 +39,7 @@ def totalCounter(mode,kleur,breedte,hoogte,textbreedte,texthoogte):
         for i in cijfers:
             totaal += i
         rectMode(mode)
-        fill('#EA9C88')
+        fill(kleur)
         rect(breedte, hoogte, 100, 100)
         fill(0)
         textSize(40)
@@ -200,7 +200,7 @@ def adddiceD4(mousePressed):
         pressed = False
         
     
-def knop(mousePressed):
+def knop(mousePressed,mode,kleur,rectX1,rectX2,rectY1,rectY2,textbreedte,texthoogte):
     global pressed
     global amountD4
     global amountD6
@@ -209,8 +209,8 @@ def knop(mousePressed):
     global cijferD4
     global cijferD10
     global cijferD6
-    fill('#EA9C88')
-    rectMode(CORNERS)
+    fill(kleur)
+    rectMode(mode)
     rectX1 = width/2.68
     rectX2 = width/1.6
     rectY1 = height/1.27
@@ -219,8 +219,8 @@ def knop(mousePressed):
     textSize(60)
     fill(0)
     w = textWidth('dobbelen')
-    w = (width - w) //2
-    text('dobbelen', w , height/1.17)
+    w = (width - w) //textbreedte
+    text('dobbelen', w , texthoogte)
     if mousePressed and (rectX1 < mouseX < rectX2)and(rectY1 < mouseY < rectY2 ) and pressed :
         diceD4(amountD4)
         diceD6(amountD6)
