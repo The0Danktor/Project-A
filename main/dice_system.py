@@ -14,11 +14,11 @@ totaal = 0
 def dice_systeem(mousePressed):
     stroke(0)
     strokeWeight(5)
-    knop(mousePressed,CORNERS,'#EA9C88',width/2.68,width/1.6,height/1.27,height/1.14,)
+    knop(mousePressed,CORNERS,'#EA9C88',width/2.68,width/1.6,height/1.27,height/1.14,2,height/1.17)
     adddiceD6(mousePressed)
     adddiceD4(mousePressed)
     adddiceD10(mousePressed)
-    totalCounter(CENTER,'#EA9C88',width/1.4, height/1.2,1.395,height/1.18,2,height/1.17)
+    totalCounter(CENTER,'#EA9C88',width/1.4, height/1.2,1.395,height/1.18)
 
 
 def mouseReleased_():
