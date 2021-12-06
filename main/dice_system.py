@@ -33,26 +33,33 @@ def old_numbers(textbreedte1,texthoogte1,textbreedte2,texthoogte2,textbreedte3,t
     oldD4 = cijferD4
     oldD6 = cijferD6
     oldD10 = cijferD10
-    noStroke()
-    fill('#5493BF')
     rectMode(CENTER)
-    rect(width/textbreedte2,texthoogte2,1000,70)
-    fill(0)
     textSize(40)
     w1 = textWidth(str(cijferD4))
     w1 = (width - w1)//textbreedte1
     if oldD4 != 0:
+        fill(255)
+        rect(width/textbreedte1,texthoogte1,100,70)
+        fill(0)
         text(str(cijferD4), w1 , texthoogte1)
     w2 = textWidth(str(cijferD6))
     w2 = (width - w2)//textbreedte2
     if oldD6 != 0:
+        fill(255)
+        rect(width/textbreedte2,texthoogte2,100,70)
+        fill(0)
         text(str(cijferD6), w2 , texthoogte2)
     w3 = textWidth(str(cijferD10))
     w3 = (width - w3)//textbreedte3
     if oldD10 != 0:
+        fill(255)
+        rect(width/textbreedte3,texthoogte3,100,70)
+        fill(0)
         text(str(cijferD10), w3 , texthoogte3)
     
-#def player_display(players):
+def player_display(players):
+    rectMode(CORNER)
+    
     
 
 def totalCounter(mode,kleur,breedte,hoogte,textbreedte,texthoogte):
