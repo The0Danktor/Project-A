@@ -1,5 +1,4 @@
 import random
-
 pressed = True
 amountD4 = 0
 amountD6 = 0
@@ -9,6 +8,7 @@ cijferD10 = 0
 cijferD6 = 0
 cijferD4 = 0
 totaal = 0
+
 
 
 def dice_systeem(mousePressed):
@@ -21,9 +21,39 @@ def dice_systeem(mousePressed):
     totalCounter(CENTER,'#EA9C88',width/1.4, height/1.2,1.395,height/1.18)
 
 
+
 def mouseReleased_():
     global pressed
     pressed = True    
+
+def old_numbers(textbreedte1,texthoogte1,textbreedte2,texthoogte2,textbreedte3,texthoogte3):
+    global cijferD4
+    global cijferD10
+    global cijferD6
+    oldD4 = cijferD4
+    oldD6 = cijferD6
+    oldD10 = cijferD10
+    noStroke()
+    fill('#5493BF')
+    rectMode(CENTER)
+    rect(width/textbreedte2,texthoogte2,1000,70)
+    fill(0)
+    textSize(40)
+    w1 = textWidth(str(cijferD4))
+    w1 = (width - w1)//textbreedte1
+    if oldD4 != 0:
+        text(str(cijferD4), w1 , texthoogte1)
+    w2 = textWidth(str(cijferD6))
+    w2 = (width - w2)//textbreedte2
+    if oldD6 != 0:
+        text(str(cijferD6), w2 , texthoogte2)
+    w3 = textWidth(str(cijferD10))
+    w3 = (width - w3)//textbreedte3
+    if oldD10 != 0:
+        text(str(cijferD10), w3 , texthoogte3)
+    
+#def player_display(players):
+    
 
 def totalCounter(mode,kleur,breedte,hoogte,textbreedte,texthoogte):
     global pressed
@@ -222,6 +252,7 @@ def knop(mousePressed,mode,kleur,rectX1,rectX2,rectY1,rectY2,textbreedte,texthoo
     w = (width - w) //textbreedte
     text('dobbelen', w , texthoogte)
     if mousePressed and (rectX1 < mouseX < rectX2)and(rectY1 < mouseY < rectY2 ) and pressed :
+        old_numbers(2.56, height/2.6 ,2.04,height/2.6 ,1.66,height/2.6)
         diceD4(amountD4)
         diceD6(amountD6)
         diceD10(amountD10)
