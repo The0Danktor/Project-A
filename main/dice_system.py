@@ -8,17 +8,26 @@ cijferD10 = 0
 cijferD6 = 0
 cijferD4 = 0
 totaal = 0
+totaal1 = 0
+totaal2 = 0
+getelt = False
+state = 0
+loaded = False
 
 
-
-def dice_systeem(mousePressed):
-    stroke(0)
-    strokeWeight(5)
-    knop(mousePressed,CORNERS,'#EA9C88',width/2.68,width/1.6,height/1.27,height/1.14,2,height/1.17)
-    adddiceD6(mousePressed)
-    adddiceD4(mousePressed)
-    adddiceD10(mousePressed)
-    totalCounter(CENTER,'#EA9C88',width/1.4, height/1.2,1.395,height/1.18)
+def dice_systeem(mousePressed,players):
+    if state < 2:
+        stroke(0)
+        strokeWeight(5)
+        knop(mousePressed,CORNERS,'#EA9C88',width/2.68,width/1.6,height/1.27,height/1.14,2,height/1.17)
+        adddiceD6(mousePressed)
+        adddiceD4(mousePressed)
+        adddiceD10(mousePressed)
+        totalCounter(CENTER,'#EA9C88',width/1.4, height/1.2,1.395,height/1.18)
+        player_display(players)
+        next(mousePressed)
+    elif state == 2 and not loaded:
+        dual(players)
 
 
 
@@ -58,10 +67,81 @@ def old_numbers(textbreedte1,texthoogte1,textbreedte2,texthoogte2,textbreedte3,t
         text(str(cijferD10), w3 , texthoogte3)
     
 def player_display(players):
-    rectMode(CORNER)
+    global totaal
+    global totaal1
+    global totaal2
+    if state == 0:
+        totaal1 = totaal
+    elif state == 1:
+        totaal2 = totaal
+    rectMode(CORNERS)
+    fill(150)
+    rect(0,0, width/4.8,height/5,5)
+    fill(0)
+    text(players['player1'],width/48, height/20)
+    text('totaal :'+ str(totaal1),width/48, height/8)
     
+    fill(150)
+    rect(width/1.263, 0,width,height/5,5)
+    fill(0)
+    text(players['player2'],width/1.23, height/20)
+    text('totaal :'+ str(totaal2),width/1.23, height/8)
+
+
+def dual(players):
+    global loaded
+    global totaal1
+    global totaal2
+    loaded = True
+    fill (0,100)
+    rect(0,0,width,height)
+    if totaal1 > totaal2:
+        fill(255)
+        W = textWidth(players['player1'])
+        W = (width - W) //2
+        text(players['player1']+' wins',W,height/2)
+    elif totaal2 > totaal1:
+        fill(0)
+        W = textWidth(players['player2'])
+        W = (width - W) //2
+        text(players['player2'] +' wins',W,height/2)
+    elif totaal2 == totaal1:
+        fill(255)
+        W = textWidth('draw')
+        W = (width - W) //2
+        text('draw',W,height/2)
     
 
+def next(mousePressed):
+    global pressed
+    global totaal
+    global getelt
+    global state
+    global cijfers
+    rectX1 = width/1.3
+    rectX2 = width
+    rectY1 = height/1.14
+    rectY2 = height
+    rectMode(CORNERS)
+    fill('#EA9C88')
+    rect(rectX1,rectY1,rectX2,rectY2)
+    if mousePressed and (rectX1 < mouseX < rectX2)and(rectY1 < mouseY < rectY2 ) and pressed:
+        cijfers = []
+        totaal = 0
+        getelt = False
+        state += 1
+        pressed = False
+        if state == 1:
+            noStroke()
+            rectMode(CENTER)
+            fill('#5493BF')
+            rect(width/2,height/2,1000,400)
+        
+        
+    
+    
+    
+    
 def totalCounter(mode,kleur,breedte,hoogte,textbreedte,texthoogte):
     global pressed
     global amountD4
@@ -72,18 +152,13 @@ def totalCounter(mode,kleur,breedte,hoogte,textbreedte,texthoogte):
     global cijferD10
     global cijferD6
     global totaal
-    if amountD4 == 0 and amountD6 == 0 and amountD10 == 0 and pressed:
+    global getelt
+    if amountD4 == 0 and amountD6 == 0 and amountD10 == 0 and not getelt and pressed:
         for i in cijfers:
             totaal += i
-        rectMode(mode)
-        fill(kleur)
-        rect(breedte, hoogte, 100, 100)
-        fill(0)
-        textSize(40)
-        w = textWidth(str(totaal))
-        w = (width - w)//textbreedte
-        text(str(totaal), w , texthoogte)
-        totaal = 0
+        if totaal > 0:
+            getelt = True
+    
         
     
     
