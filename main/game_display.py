@@ -1,6 +1,8 @@
 import nameinput_system as n_sys
 import functions as f
 
+game_turn = 1
+
 # game background image loader
 def loadScreen(images):
     image(images['game_img'], 0, 0, width, height)
@@ -49,19 +51,22 @@ def displayScreen(players, turn):
             stroke(0)
         f.textBox(width*0.80, height*0.05, width*0.1, height*0.1, players['player4'], '#FFFF00', 0)
     stroke(0)
-    f.textBox(width*0.7, height*0.7, width*0.2, height*0.2, '--->', 200, 0)
+    f.textBox(width*0.7, height*0.7, width*0.2, height*0.2, str(game_turn) + '--->', 200, 0)
     f.textBox(width*0.1, height*0.75, width*0.1, height*0.1, 'Dice', 200, 0)
     f.textBox(width*0.25, height*0.75, width*0.1, height*0.1, 'Cards', 200, 0)
 
 # button click system
 def mousePressed_(players, turn):
+    global game_turn
     if width*0.7 < mouseX < width*0.9 and height*0.7 < mouseY < height*0.9:
         turn += 1
         if turn > n_sys.update_t_dis()['pCount']:
             turn = 1
+            game_turn += 1
             
         print(turn)
         return turn
     if width*0.1 < mouseX < width*0.2 and height*0.75 < mouseY < height*0.85:
         return -6
     noStroke()
+    return -8
