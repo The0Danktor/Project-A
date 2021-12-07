@@ -18,9 +18,9 @@ loaded = False
 
 def dice_systeem(mousePressed,players,turn):
     player(players,turn)
-    if state == -1:
-        select_target()
-    elif state < 2:
+    # if state == -1:
+    #     select_target()
+    if state < 2:
         stroke(0)
         strokeWeight(5)
         knop(mousePressed,CORNERS,'#EA9C88',width/2.68,width/1.6,height/1.27,height/1.14,2,height/1.17)
@@ -40,8 +40,8 @@ def loadScreen():
 def player(players,turn):
     player = players['player'+str(turn)]
 
-def select_target():
-    n_sys.
+# def select_target():
+#     n_sys.
 def mouseReleased_():
     global pressed
     pressed = True    
@@ -367,6 +367,7 @@ def knop(mousePressed,mode,kleur,rectX1,rectX2,rectY1,rectY2,textbreedte,texthoo
             pressed = False
             
 def mousePressed_():
+    global state
     if state == 2:
         rectMode(CORNER)
         state = -1
