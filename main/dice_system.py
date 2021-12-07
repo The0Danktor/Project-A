@@ -1,4 +1,5 @@
 import random
+import nameinput_system as n_sys
 pressed = True
 amountD4 = 0
 amountD6 = 0
@@ -11,12 +12,15 @@ totaal = 0
 totaal1 = 0
 totaal2 = 0
 getelt = False
-state = 0
+state = -1
 loaded = False
 
 
-def dice_systeem(mousePressed,players):
-    if state < 2:
+def dice_systeem(mousePressed,players,turn):
+    player(players,turn)
+    if state == -1:
+        select_target()
+    elif state < 2:
         stroke(0)
         strokeWeight(5)
         knop(mousePressed,CORNERS,'#EA9C88',width/2.68,width/1.6,height/1.27,height/1.14,2,height/1.17)
@@ -28,9 +32,16 @@ def dice_systeem(mousePressed,players):
         next(mousePressed)
     elif state == 2 and not loaded:
         dual(players)
+        
+def loadScreen():
+    background('#5493BF')
+    global state
+    state = -1
+def player(players,turn):
+    player = players['player'+str(turn)]
 
-
-
+def select_target():
+    n_sys.
 def mouseReleased_():
     global pressed
     pressed = True    
