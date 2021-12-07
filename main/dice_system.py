@@ -106,7 +106,7 @@ def dual(players):
         W = (width - W) //2
         text(players['player1']+' wins',W,height/2)
     elif totaal2 > totaal1:
-        fill(0)
+        fill(255)
         W = textWidth(players['player2'])
         W = (width - W) //2
         text(players['player2'] +' wins',W,height/2)
