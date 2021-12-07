@@ -354,5 +354,10 @@ def knop(mousePressed,mode,kleur,rectX1,rectX2,rectY1,rectY2,textbreedte,texthoo
             cijfers.append(cijferD10)
         if pressed: 
             pressed = False
-        
-        
+            
+def mousePressed_():
+    if state == 2:
+        rectMode(CORNER)
+        state = -1
+        return 8
+    return 6

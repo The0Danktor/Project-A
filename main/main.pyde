@@ -102,6 +102,8 @@ def mousePressed():
         state = t_dis.mousePressed_(images, players)
     elif state == 0:
         state = m_dis.mousePressed_()
+    elif state == 6:
+        state = d_sys.mousePressed_()
     elif state == 7:
         state = e_dis.mousePressed_()
         if state == -1:
