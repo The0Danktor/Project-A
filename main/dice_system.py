@@ -75,13 +75,18 @@ def player_display(players):
     elif state == 1:
         totaal2 = totaal
     rectMode(CORNERS)
-    fill(150)
+    if state == 0:
+        fill(100)
+    else :
+        fill(150)
     rect(0,0, width/4.8,height/5,5)
     fill(0)
     text(players['player1'],width/48, height/20)
     text('totaal :'+ str(totaal1),width/48, height/8)
-    
-    fill(150)
+    if state == 1:
+        fill(100)
+    else :
+        fill(150)
     rect(width/1.263, 0,width,height/5,5)
     fill(0)
     text(players['player2'],width/1.23, height/20)
