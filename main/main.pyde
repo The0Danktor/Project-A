@@ -75,7 +75,7 @@ def draw():
     elif state == 5:
         t_dis.displayScreen(players['player1'], players['player2'], players['player3'], players['player4'], images)
     elif state == 6:
-        d_sys.dice_systeem(mousePressed)
+        d_sys.dice_systeem(mousePressed,players)
     elif state == 7:
         e_dis.displayScreen()
 
