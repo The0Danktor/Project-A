@@ -131,7 +131,7 @@ def refresh():
     elif state == 5:
         t_dis.loadScreen(images)
     elif state == 6:
-        background('#5493BF')
+        d_sys.loadScreen()
     elif state == 8:
         g_dis.loadScreen(images)
 
