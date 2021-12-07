@@ -70,7 +70,7 @@ def update_n_dis(player_):
     }
     return ret
 
-# synchronises variables with title_display
+# synchronises variables with title_display and game_display
 def update_t_dis():
     global pCount, mode, modeSpecs
     ret = {

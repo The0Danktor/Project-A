@@ -116,7 +116,7 @@ def mousePressed_(images, players):
     if width*0.1 < mouseX < width*0.3 and height*0.31 < mouseY < height*0.46:
         n_sys.changeMode()
     if width*0.35 < mouseX < width*0.65 and height*0.4 < mouseY < height*0.6:
-        return 6
+        return 8
     
     #failsafe
     return 5
