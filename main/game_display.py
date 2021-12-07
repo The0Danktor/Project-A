@@ -50,8 +50,8 @@ def displayScreen(players, turn):
         f.textBox(width*0.80, height*0.05, width*0.1, height*0.1, players['player4'], '#FFFF00', 0)
     stroke(0)
     f.textBox(width*0.7, height*0.7, width*0.2, height*0.2, '--->', 200, 0)
-    f.textBox(width*0.1, height*0.75, width*0.1, height*0.15, 'Dice', 200, 0)
-    f.textBox(width*0.25, height*0.75, width*0.1, height*0.15, 'Cards', 200, 0)
+    f.textBox(width*0.1, height*0.75, width*0.1, height*0.1, 'Dice', 200, 0)
+    f.textBox(width*0.25, height*0.75, width*0.1, height*0.1, 'Cards', 200, 0)
 
 # button click system
 def mousePressed_(players, turn):
@@ -62,6 +62,6 @@ def mousePressed_(players, turn):
             
         print(turn)
         return turn
-    if width*0.1 < mouseX < width*0.2 and height*0.75 < mouseY < height*0.9:
+    if width*0.1 < mouseX < width*0.2 and height*0.75 < mouseY < height*0.85:
         return -6
     noStroke()
