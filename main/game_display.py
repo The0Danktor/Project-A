@@ -54,6 +54,17 @@ def displayScreen(players, turn):
     f.textBox(width*0.7, height*0.7, width*0.2, height*0.2, str(game_turn) + '--->', 200, 0)
     f.textBox(width*0.1, height*0.75, width*0.1, height*0.1, 'Dice', 200, 0)
     f.textBox(width*0.25, height*0.75, width*0.1, height*0.1, 'Cards', 200, 0)
+    draw_hexagon(width*0.5, height*0.5, 50)
+    
+def draw_hexagon(x, y, side):
+    beginShape()
+    vertex(( x + side * sin(PI/2), y + side * cos(PI/2)))
+    vertex(( x + side * sin(PI/6), y + side * cos(PI/6)))
+    vertex(( x + side * sin(11 * PI/6), y + side * cos(11 * PI/6)))
+    vertex(( x + side * sin(3 * PI/2), y + side * cos(3 * PI/2)))
+    vertex(( x + side * sin(7 * PI/6), y + side * cos(7 * PI/6)))
+    vertex(( x + side * sin(5 * PI/6), y + side * cos(5 * PI/6)))
+    endShape(CLOSE)
 
 # button click system
 def mousePressed_(players, turn):
