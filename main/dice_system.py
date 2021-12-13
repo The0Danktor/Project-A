@@ -17,9 +17,8 @@ loaded = False
 
 
 def dice_systeem(mousePressed,players,turn):
-    player(players,turn)
-    # if state == -1:
-    #     select_target()
+    if state == -1:
+         select_target()
     if state < 2:
         stroke(0)
         strokeWeight(5)
@@ -28,20 +27,25 @@ def dice_systeem(mousePressed,players,turn):
         adddiceD4(mousePressed)
         adddiceD10(mousePressed)
         totalCounter(CENTER,'#EA9C88',width/1.4, height/1.2,1.395,height/1.18)
-        player_display(players)
+        player_display(players,turn)
         next(mousePressed)
     elif state == 2 and not loaded:
-        dual(players)
+        dual(players,turn)
         
 def loadScreen():
     background('#5493BF')
     global state
     state = -1
-def player(players,turn):
-    player = players['player'+str(turn)]
 
-# def select_target():
-#     n_sys.
+
+def select_target():
+    global state
+    pCount = n_sys.playerCount()
+    if pCount == 2:
+        state = 0
+    #if pCount == 4:
+        
+
 def mouseReleased_():
     global pressed
     pressed = True    
@@ -77,7 +81,7 @@ def old_numbers(textbreedte1,texthoogte1,textbreedte2,texthoogte2,textbreedte3,t
         fill(0)
         text(str(cijferD10), w3 , texthoogte3)
     
-def player_display(players):
+def player_display(players,turn):
     global totaal
     global totaal1
     global totaal2
@@ -92,7 +96,7 @@ def player_display(players):
         fill(150)
     rect(0,0, width/4.8,height/5,5)
     fill(0)
-    text(players['player1'],width/48, height/20)
+    text(players['player'+str(turn)],width/48, height/20)
     text('totaal :'+ str(totaal1),width/48, height/8)
     if state == 1:
         fill(100)
@@ -104,7 +108,7 @@ def player_display(players):
     text('totaal :'+ str(totaal2),width/1.23, height/8)
 
 
-def dual(players):
+def dual(players,turn):
     global loaded
     global totaal1
     global totaal2
@@ -113,7 +117,7 @@ def dual(players):
     rect(0,0,width,height)
     if totaal1 > totaal2:
         fill(255)
-        W = textWidth(players['player1'])
+        W = textWidth(players['player' +str(turn)])
         W = (width - W) //2
         text(players['player1']+' wins',W,height/2)
     elif totaal2 > totaal1:
@@ -141,6 +145,8 @@ def next(mousePressed):
     rectMode(CORNERS)
     fill('#EA9C88')
     rect(rectX1,rectY1,rectX2,rectY2)
+    fill(0)
+    text ('volgende',width/1.2,height/1.05)
     if mousePressed and (rectX1 < mouseX < rectX2)and(rectY1 < mouseY < rectY2 ) and pressed:
         cijfers = []
         totaal = 0
@@ -370,6 +376,6 @@ def mousePressed_():
     global state
     if state == 2:
         rectMode(CORNER)
-        state = -1
+        state = 0
         return 8
     return 6
