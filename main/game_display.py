@@ -57,6 +57,9 @@ def displayScreen(players, turn):
     draw_hexagon(width*0.5, height*0.5, 50)
     
 def draw_hexagon(x, y, side):
+    strokeWeight(2)
+    stroke(255)
+    noFill()
     beginShape()
     vertex(( x + side * sin(PI/2), y + side * cos(PI/2)))
     vertex(( x + side * sin(PI/6), y + side * cos(PI/6)))
@@ -65,6 +68,7 @@ def draw_hexagon(x, y, side):
     vertex(( x + side * sin(7 * PI/6), y + side * cos(7 * PI/6)))
     vertex(( x + side * sin(5 * PI/6), y + side * cos(5 * PI/6)))
     endShape(CLOSE)
+    noStroke()
 
 # button click system
 def mousePressed_(players, turn):
