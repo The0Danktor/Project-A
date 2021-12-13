@@ -14,12 +14,13 @@ totaal2 = 0
 getelt = False
 state = -1
 loaded = False
+target = 1
 
 
 def dice_systeem(mousePressed,players,turn):
     if state == -1:
-         select_target()
-    if state < 2:
+         select_target(mousePressed,players,turn)
+    elif state < 2:
         stroke(0)
         strokeWeight(5)
         knop(mousePressed,CORNERS,'#EA9C88',width/2.68,width/1.6,height/1.27,height/1.14,2,height/1.17)
@@ -31,20 +32,245 @@ def dice_systeem(mousePressed,players,turn):
         next(mousePressed)
     elif state == 2 and not loaded:
         dual(players,turn)
+    
         
 def loadScreen():
-    background('#5493BF')
-    global state
-    state = -1
-
-
-def select_target():
-    global state
-    pCount = n_sys.playerCount()
-    if pCount == 2:
-        state = 0
-    #if pCount == 4:
+    
+    if state == -1:
+        background(100)
         
+    else:
+        background('#5493BF')
+        
+
+
+
+def select_target(mousePressed,players,turn):
+    strokeWeight(5)
+    global target
+    global state
+    global loaded
+    loaded = False
+    pCount = n_sys.update_t_dis()['pCount']
+    if pCount == 2:
+        if turn == 1:
+            target = 2
+        elif turn == 2:
+            target == 1
+        state = 0
+    if pCount == 4:
+        background(100)
+        if turn == 1:
+            if (( width/2.45 > mouseX > width/3.265) and ( height/1.812 > mouseY > height/2.227)):
+                stroke(255)
+            else:
+                stroke(0)
+            fill(150)
+            rectMode(CENTER)
+            rect(width/2.8, height/2, width*0.1, height*0.1 , 20)
+            fill(0)
+            textSize(32)
+            W = textWidth(players['player2'])
+            W = (width - W) //2.9
+            text(players['player2'],W, height/1.965)
+            
+            if (( width/1.811 > mouseX > width/2.217) and ( height/1.812 > mouseY > height/2.227)):
+                stroke(255)
+            else:
+                stroke(0)
+            fill(150)
+            rect(width/2, height/2, width*0.1, height*0.1 , 20)
+            fill(0)
+            textSize(32)
+            W = textWidth(players['player3'])
+            W = (width - W) //2
+            text(players['player3'],W, height/1.965)
+            
+            if (( width/1.435 > mouseX > width/1.681) and (height/1.812 > mouseY > height/2.227)):
+                stroke(255)
+            else:
+                stroke(0)
+            fill(150)
+            rect(width/1.55, height/2, width*0.1, height*0.1 , 20)
+            fill(0)
+            textSize(32)
+            W = textWidth(players['player4'])
+            W = (width - W) //1.525
+            text(players['player4'],W, height/1.965)
+            
+            if (( width/2.45 > mouseX > width/3.265) and ( height/1.812 > mouseY > height/2.227) and mousePressed):
+                target = 2
+                state += 1
+                background('#5493BF')
+            
+            if (( width/1.811 > mouseX > width/2.217) and ( height/1.812 > mouseY > height/2.227)and mousePressed):
+                target = 3
+                state += 1
+                background('#5493BF')
+            if (( width/1.435 > mouseX > width/1.681) and (height/1.812 > mouseY > height/2.227)and mousePressed):
+                target = 4
+                state += 1
+                background('#5493BF')
+            stroke(0)
+        
+        if turn == 2:
+            if (( width/2.45 > mouseX > width/3.265) and ( height/1.812 > mouseY > height/2.227)):
+                stroke(255)
+            else:
+                stroke(0)
+            fill(150)
+            rectMode(CENTER)
+            rect(width/2.8, height/2, width*0.1, height*0.1 , 20)
+            fill(0)
+            textSize(32)
+            W = textWidth(players['player1'])
+            W = (width - W) //2.9
+            text(players['player1'],W, height/1.965)
+            
+            if (( width/1.811 > mouseX > width/2.217) and ( height/1.812 > mouseY > height/2.227)):
+                stroke(255)
+            else:
+                stroke(0)
+            fill(150)
+            rect(width/2, height/2, width*0.1, height*0.1 , 20)
+            fill(0)
+            textSize(32)
+            W = textWidth(players['player3'])
+            W = (width - W) //2
+            text(players['player3'],W, height/1.965)
+            
+            if (( width/1.435 > mouseX > width/1.681) and (height/1.812 > mouseY > height/2.227)):
+                stroke(255)
+            else:
+                stroke(0)
+            fill(150)
+            rect(width/1.55, height/2, width*0.1, height*0.1 , 20)
+            fill(0)
+            textSize(32)
+            W = textWidth(players['player4'])
+            W = (width - W) //1.525
+            text(players['player4'],W, height/1.965)
+            
+            if (( width/2.45 > mouseX > width/3.265) and ( height/1.812 > mouseY > height/2.227) and mousePressed):
+                target = 1
+                state += 1
+                background('#5493BF')
+            
+            if (( width/1.811 > mouseX > width/2.217) and ( height/1.812 > mouseY > height/2.227)and mousePressed):
+                target = 3
+                state += 1
+                background('#5493BF')
+            if (( width/1.435 > mouseX > width/1.681) and (height/1.812 > mouseY > height/2.227)and mousePressed):
+                target = 4
+                state += 1
+                background('#5493BF')
+            stroke(0)
+            
+        if turn == 3:
+            if (( width/2.45 > mouseX > width/3.265) and ( height/1.812 > mouseY > height/2.227)):
+                stroke(255)
+            else:
+                stroke(0)
+            fill(150)
+            rectMode(CENTER)
+            rect(width/2.8, height/2, width*0.1, height*0.1 , 20)
+            fill(0)
+            textSize(32)
+            W = textWidth(players['player1'])
+            W = (width - W) //2.9
+            text(players['player1'],W, height/1.965)
+            
+            if (( width/1.811 > mouseX > width/2.217) and ( height/1.812 > mouseY > height/2.227)):
+                stroke(255)
+            else:
+                stroke(0)
+            fill(150)
+            rect(width/2, height/2, width*0.1, height*0.1 , 20)
+            fill(0)
+            textSize(32)
+            W = textWidth(players['player2'])
+            W = (width - W) //2
+            text(players['player2'],W, height/1.965)
+            
+            if (( width/1.435 > mouseX > width/1.681) and (height/1.812 > mouseY > height/2.227)):
+                stroke(255)
+            else:
+                stroke(0)
+            fill(150)
+            rect(width/1.55, height/2, width*0.1, height*0.1 , 20)
+            fill(0)
+            textSize(32)
+            W = textWidth(players['player4'])
+            W = (width - W) //1.525
+            text(players['player4'],W, height/1.965)
+            
+            if (( width/2.45 > mouseX > width/3.265) and ( height/1.812 > mouseY > height/2.227) and mousePressed):
+                target = 1
+                state += 1
+                background('#5493BF')
+            
+            if (( width/1.811 > mouseX > width/2.217) and ( height/1.812 > mouseY > height/2.227)and mousePressed):
+                target = 2
+                state += 1
+                background('#5493BF')
+            if (( width/1.435 > mouseX > width/1.681) and (height/1.812 > mouseY > height/2.227)and mousePressed):
+                target = 4
+                state += 1
+                background('#5493BF')
+            stroke(0)
+        
+        if turn == 4:
+            if (( width/2.45 > mouseX > width/3.265) and ( height/1.812 > mouseY > height/2.227)):
+                stroke(255)
+            else:
+                stroke(0)
+            fill(150)
+            rectMode(CENTER)
+            rect(width/2.8, height/2, width*0.1, height*0.1 , 20)
+            fill(0)
+            textSize(32)
+            W = textWidth(players['player1'])
+            W = (width - W) //2.9
+            text(players['player1'],W, height/1.965)
+            
+            if (( width/1.811 > mouseX > width/2.217) and ( height/1.812 > mouseY > height/2.227)):
+                stroke(255)
+            else:
+                stroke(0)
+            fill(150)
+            rect(width/2, height/2, width*0.1, height*0.1 , 20)
+            fill(0)
+            textSize(32)
+            W = textWidth(players['player2'])
+            W = (width - W) //2
+            text(players['player2'],W, height/1.965)
+            
+            if (( width/1.435 > mouseX > width/1.681) and (height/1.812 > mouseY > height/2.227)):
+                stroke(255)
+            else:
+                stroke(0)
+            fill(150)
+            rect(width/1.55, height/2, width*0.1, height*0.1 , 20)
+            fill(0)
+            textSize(32)
+            W = textWidth(players['player3'])
+            W = (width - W) //1.525
+            text(players['player3'],W, height/1.965)
+            
+            if (( width/2.45 > mouseX > width/3.265) and ( height/1.812 > mouseY > height/2.227) and mousePressed):
+                target = 1
+                state += 1
+                background('#5493BF')
+            
+            if (( width/1.811 > mouseX > width/2.217) and ( height/1.812 > mouseY > height/2.227)and mousePressed):
+                target = 2
+                state += 1
+                background('#5493BF')
+            if (( width/1.435 > mouseX > width/1.681) and (height/1.812 > mouseY > height/2.227)and mousePressed):
+                target = 3
+                state += 1
+                background('#5493BF')
+            stroke(0)
 
 def mouseReleased_():
     global pressed
@@ -104,7 +330,7 @@ def player_display(players,turn):
         fill(150)
     rect(width/1.263, 0,width,height/5,5)
     fill(0)
-    text(players['player2'],width/1.23, height/20)
+    text(players['player' + str(target)],width/1.23, height/20)
     text('totaal :'+ str(totaal2),width/1.23, height/8)
 
 
@@ -117,14 +343,14 @@ def dual(players,turn):
     rect(0,0,width,height)
     if totaal1 > totaal2:
         fill(255)
-        W = textWidth(players['player' +str(turn)])
+        W = textWidth(players['player' +str(turn)] +' wins')
         W = (width - W) //2
-        text(players['player1']+' wins',W,height/2)
+        text(players['player' +str(turn)]+' wins',W,height/2)
     elif totaal2 > totaal1:
         fill(255)
-        W = textWidth(players['player2'])
+        W = textWidth(players['player' + str(target)] +' wins')
         W = (width - W) //2
-        text(players['player2'] +' wins',W,height/2)
+        text(players['player' + str(target)] +' wins',W,height/2)
     elif totaal2 == totaal1:
         fill(255)
         W = textWidth('draw')
@@ -138,6 +364,9 @@ def next(mousePressed):
     global getelt
     global state
     global cijfers
+    global cijferD4
+    global cijferD10
+    global cijferD6
     rectX1 = width/1.3
     rectX2 = width
     rectY1 = height/1.14
@@ -149,6 +378,9 @@ def next(mousePressed):
     text ('volgende',width/1.2,height/1.05)
     if mousePressed and (rectX1 < mouseX < rectX2)and(rectY1 < mouseY < rectY2 ) and pressed:
         cijfers = []
+        cijferD4 = 0
+        cijferD6 = 0
+        cijferD10 = 0
         totaal = 0
         getelt = False
         state += 1
@@ -373,9 +605,23 @@ def knop(mousePressed,mode,kleur,rectX1,rectX2,rectY1,rectY2,textbreedte,texthoo
             pressed = False
             
 def mousePressed_():
-    global state
+    global pressed,amountD4,amountD6,amountD10,cijfers,cijfersD10,cijfersD6,cijfersD4,totaal,totaal1,totaal2,getelt,state,loaded,target
     if state == 2:
         rectMode(CORNER)
-        state = 0
+        pressed = True
+        amountD4 = 0
+        amountD6 = 0
+        amountD10 = 0
+        cijfers = []
+        cijferD10 = 0
+        cijferD6 = 0
+        cijferD4 = 0
+        totaal = 0
+        totaal1 = 0
+        totaal2 = 0
+        getelt = False
+        state = -1
+        loaded = False
+        target = 1
         return 8
     return 6
