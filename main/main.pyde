@@ -11,6 +11,7 @@ import game_display as g_dis
 import nameinput_system as n_sys
 import dice_system as d_sys
 import game_system as g_sys
+import settings_display as s_dis
 add_library("minim")
 
 # setup global variables
@@ -35,6 +36,7 @@ NO_ESCAPE = '0'
 # state 6 = dice
 # state 7 = esc menu
 # state 8 = game active
+# state 9 = settings
 # ==================================================
 
 # setup function
