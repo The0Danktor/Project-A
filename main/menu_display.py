@@ -15,7 +15,7 @@ def mousePressed_():
     if (0.75*width > mouseX > 0.25*width) and (0.2*height > mouseY > 0.1*height):
         return 5
     elif (0.75*width > mouseX > 0.25*width) and (0.35*height > mouseY > 0.25*height):
-        return 0
+        return 9
     elif (0.75*width > mouseX > 0.25*width) and (0.5*height > mouseY > 0.4*height):
         exit()
     

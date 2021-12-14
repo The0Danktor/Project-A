@@ -28,6 +28,7 @@ images = {}
 fields = {}
 clicked = False
 NO_ESCAPE = '0'
+sf = 0
 
 # ==================================================
 # state 0 = menu
@@ -42,7 +43,7 @@ NO_ESCAPE = '0'
 # setup function
 def setup():
     # Import dictonaries
-    global images, fields
+    global images, fields, sf
     images = {
               'board_img' : loadImage("board3.png"),
               'title_img' : loadImage("titlescreen.png"),
@@ -76,8 +77,9 @@ def setup():
 
 # draw function
 def draw():
-    global state, players
+    global state, players, sf
     
+    sf.setVolume(s_dis.volume())
     # display loader
     if state == 0:
         m_dis.displayScreen()
@@ -92,9 +94,10 @@ def draw():
     elif state == 8:
         g_dis.displayScreen(players, turn, images, fields)
         g_sys.draw_(mousePressed)
-
+    elif state == 9:
+        s_dis.displayScreen(mousePressed,mouseReleased)
 # ==================================================
-
+    
 # mouse press function
 def mousePressed():
     global clicked, players, state, turn
@@ -132,6 +135,7 @@ def mouseReleased():
     
     d_sys.mouseReleased_()
     g_sys.mouseReleased_()
+    s_dis.mouseReleased_()
     
 def refresh():
     global state
@@ -153,7 +157,7 @@ def keyPressed():
     global backup_state
     if key == ESC:
         this.key = NO_ESCAPE
-        if state != 0:
+        if state != 0 and state != 9:
             if state != 7:
                 fill(0, 100)
                 rectMode(CORNER)
@@ -163,6 +167,9 @@ def keyPressed():
             else:
                 state = backup_state
                 refresh()
+        if state == 9:
+            state = 0
+            refresh()
     global state, players
         
     # nameinput_system key input
