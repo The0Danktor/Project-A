@@ -6,8 +6,9 @@ current = 0
 def createPieces():
     global piece_locs
     piece_locs = [
-                  [width*0.140, height*0.285],
-                  [width*0.180, height*0.250]
+                  [width*0.140, height*0.285, 0],
+                  [width*0.180, height*0.250, 1],
+                  [width*0.260, height*0.250, 2]
                   ]
     print(piece_locs)
     
@@ -16,18 +17,18 @@ def getPieces():
     return piece_locs
 
 def draw_(mouse_pressed):
-
     global piece_locs, mouse_down, current
-    if (((mouseX - piece_locs[0][0])**2 + (mouseY - piece_locs[0][1])**2 < width*0.25**2) and mouse_pressed) or (mouse_down == True and current == 0):
+    if (((mouseX - piece_locs[current][0])**2 + (mouseY - piece_locs[current][1])**2 < width*0.25**2) and mouse_pressed) or (mouse_down == True):
         mouse_down = True
-        piece_locs[0][0] = mouseX
-        piece_locs[0][1] = mouseY
-        current = 0
-    if (((mouseX - piece_locs[1][0])**2 + (mouseY - piece_locs[1][1])**2 < width*0.25**2) and mouse_pressed) or (mouse_down == True and current == 1):
-        mouse_down = True
-        piece_locs[1][0] = mouseX
-        piece_locs[1][1] = mouseY
-        current = 1
+        piece_locs[current][0] = mouseX
+        piece_locs[current][1] = mouseY
+    elif mouse_pressed:
+        saved = width
+        for pos in piece_locs:
+            distance = sqrt((pos[0] - mouseX)**2 + (pos[1] - mouseY)**2)
+            if distance < saved:
+                saved = distance
+                current = pos[2]
 
 def mouseReleased_():
     global piece_loc, mouse_down, current
@@ -38,7 +39,6 @@ def mouseReleased_():
         for k in [word for word in fields.keys() if word.endswith("x")]:
             distance = sqrt((fields[k] - mouseX)**2 + (fields[k[:-1] + 'y'] - mouseY)**2)
             if distance < saved:
-                print(distance, saved)
                 saved = distance
                 loc = k
         piece_locs[current][0] = fields[loc]

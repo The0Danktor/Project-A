@@ -63,15 +63,15 @@ def displayScreen(players, turn, images, fields):
     
     fill(0)
     image(images['board_img'], width*0.1, height*0.18, width*0.4, width*0.4)
-    for k in [word for word in fields.keys() if word.endswith("x")]:
-        ellipseMode(CENTER)
-        ellipse(fields[k], fields[k[:-1] + 'y'], width*0.002, width*0.002)
-        ellipseMode(CORNER)
+    # for k in [word for word in fields.keys() if word.endswith("x")]:
+    #     ellipseMode(CENTER)
+    #     ellipse(fields[k], fields[k[:-1] + 'y'], width*0.002, width*0.002)
+    #     ellipseMode(CORNER)
         
     piece_locs = g_sys.getPieces()
     imageMode(CENTER)
-    image(images['troll_img'], piece_locs[0][0], piece_locs[0][1], width*0.05, height*0.05)
-    image(images['troll_img'], piece_locs[1][0], piece_locs[1][1], width*0.05, height*0.05)
+    for piece in piece_locs:
+        image(images['troll_img'], piece[0], piece[1], width*0.05, height*0.05)
     imageMode(CORNER)
 
 # button click system
