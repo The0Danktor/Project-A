@@ -1,4 +1,5 @@
 import nameinput_system as n_sys
+import game_system as g_sys
 import functions as f
 
 game_turn = 1
@@ -8,7 +9,7 @@ def loadScreen(images):
     image(images['game_img'], 0, 0, width, height)
 
 # game display function [displays the game screen]
-def displayScreen(players, turn):
+def displayScreen(players, turn, images, fields):
 
     # Player name displays
     pCount = n_sys.update_t_dis()['pCount']
@@ -51,24 +52,21 @@ def displayScreen(players, turn):
             stroke(0)
         f.textBox(width*0.80, height*0.05, width*0.1, height*0.1, players['player4'], '#FFFF00', 0)
     stroke(0)
-    f.textBox(width*0.7, height*0.7, width*0.2, height*0.2, str(game_turn) + '--->', 200, 0)
-    f.textBox(width*0.1, height*0.75, width*0.1, height*0.1, 'Dice', 200, 0)
-    f.textBox(width*0.25, height*0.75, width*0.1, height*0.1, 'Cards', 200, 0)
-    draw_hexagon(width*0.5, height*0.5, 50)
+    f.textBox(width*0.7, height*0.7, width*0.2, height*0.2, '--->', 200, 0)
+    f.textBox(width*0.1, height*0.85, width*0.1, height*0.1, 'Dice', 200, 0)
+    f.textBox(width*0.25, height*0.85, width*0.1, height*0.1, 'Cards', 200, 0)
     
-def draw_hexagon(x, y, side):
-    strokeWeight(2)
-    stroke(255)
-    noFill()
-    beginShape()
-    vertex(( x + side * sin(PI/2), y + side * cos(PI/2)))
-    vertex(( x + side * sin(PI/6), y + side * cos(PI/6)))
-    vertex(( x + side * sin(11 * PI/6), y + side * cos(11 * PI/6)))
-    vertex(( x + side * sin(3 * PI/2), y + side * cos(3 * PI/2)))
-    vertex(( x + side * sin(7 * PI/6), y + side * cos(7 * PI/6)))
-    vertex(( x + side * sin(5 * PI/6), y + side * cos(5 * PI/6)))
-    endShape(CLOSE)
-    noStroke()
+    fill(50)
+    rect(width*0.7, height*0.24, width*0.2, height*0.38, 10)
+    fill(255)
+    text('Turns: ' + str(game_turn), f.center('Turns: ' + str(game_turn), width*0.19, height*0.1, 1) - (width / 2) + width*0.8, height*0.60)
+    
+    fill(0)
+    image(images['board_img'], width*0.1, height*0.18, width*0.4, width*0.4)
+    for k in [word for word in fields.keys() if word.endswith("x")]:
+        ellipseMode(CENTER)
+        ellipse(fields[k], fields[k[:-1] + 'y'], width*0.002, width*0.002)
+        ellipseMode(CORNER)
 
 # button click system
 def mousePressed_(players, turn):
@@ -81,7 +79,7 @@ def mousePressed_(players, turn):
             
         print(turn)
         return turn
-    if width*0.1 < mouseX < width*0.2 and height*0.75 < mouseY < height*0.85:
+    if width*0.1 < mouseX < width*0.2 and height*0.85 < mouseY < height*0.95:
         return -6
     noStroke()
     return -8

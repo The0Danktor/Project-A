@@ -10,6 +10,7 @@ import esc_display as e_dis
 import game_display as g_dis
 import nameinput_system as n_sys
 import dice_system as d_sys
+import game_system as g_sys
 add_library("minim")
 
 # setup global variables
@@ -23,6 +24,7 @@ players = {
 }
 turn = 1
 images = {}
+fields = {}
 clicked = False
 NO_ESCAPE = '0'
 
@@ -37,14 +39,15 @@ NO_ESCAPE = '0'
 
 # setup function
 def setup():
-    # Import images
-    global images
+    # Import dictonaries
+    global images, fields
     images = {
               'board_img' : loadImage("board3.png"),
               'title_img' : loadImage("titlescreen.png"),
               'menu_img'  : loadImage("camo.png"),
               'game_img'  : loadImage("test_background.jpg")
     }
+    fields = g_sys.createField()
     
     # size(1800,800)
     # this.surface.setResizable(True)
@@ -83,7 +86,7 @@ def draw():
     elif state == 7:
         e_dis.displayScreen()
     elif state == 8:
-        g_dis.displayScreen(players, turn)
+        g_dis.displayScreen(players, turn, images, fields)
 
 # ==================================================
 
