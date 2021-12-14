@@ -1,5 +1,8 @@
+import functions as f
 import random
 import nameinput_system as n_sys
+# ==================================================
+# alle global variable
 pressed = True
 amountD4 = 0
 amountD6 = 0
@@ -15,13 +18,12 @@ getelt = False
 state = -1
 loaded = False
 target = 1
-
-
+# ==================================================
+#de main die gecalled wordt door de draw
 def dice_systeem(mousePressed,players,turn):
     if state == -1:
          select_target(mousePressed,players,turn)
     elif state < 2:
-        background('#5493BF')
         stroke(0)
         strokeWeight(5)
         knop(mousePressed,CORNERS,'#EA9C88',width/2.68,width/1.6,height/1.27,height/1.14,2,height/1.17)
@@ -33,18 +35,21 @@ def dice_systeem(mousePressed,players,turn):
         next(mousePressed)
     elif state == 2 and not loaded:
         dual(players,turn)
-    
+# ==================================================
+# loadSceen fuction on de achtergrond 1 keer te laden    
         
 def loadScreen():
-    
-    if state == -1:
-        background(100)
+    pCount = n_sys.update_t_dis()['pCount']
+    if pCount == 4:
+        if state == -1:
+            background(100)
         
-    else:
+        else:
+            background('#5493BF')
+    elif pCount  ==2:
         background('#5493BF')
-        
-
-
+# ==================================================
+# systeem on je tegenstander te kiezen
 
 def select_target(mousePressed,players,turn):
     strokeWeight(5)
@@ -53,6 +58,7 @@ def select_target(mousePressed,players,turn):
     global loaded
     loaded = False
     pCount = n_sys.update_t_dis()['pCount']
+# als je er met twee spelers speelt dan past 
     if pCount == 2:
         if turn == 1:
             target = 2
@@ -70,7 +76,7 @@ def select_target(mousePressed,players,turn):
             rectMode(CENTER)
             rect(width/2.8, height/2, width*0.1, height*0.1 , 20)
             fill(0)
-            textSize(32)
+            textSize(26)
             W = textWidth(players['player2'])
             W = (width - W) //2.9
             text(players['player2'],W, height/1.965)
@@ -82,7 +88,7 @@ def select_target(mousePressed,players,turn):
             fill(150)
             rect(width/2, height/2, width*0.1, height*0.1 , 20)
             fill(0)
-            textSize(32)
+            textSize(26)
             W = textWidth(players['player3'])
             W = (width - W) //2
             text(players['player3'],W, height/1.965)
@@ -94,7 +100,7 @@ def select_target(mousePressed,players,turn):
             fill(150)
             rect(width/1.55, height/2, width*0.1, height*0.1 , 20)
             fill(0)
-            textSize(32)
+            textSize(26)
             W = textWidth(players['player4'])
             W = (width - W) //1.525
             text(players['player4'],W, height/1.965)
@@ -123,7 +129,7 @@ def select_target(mousePressed,players,turn):
             rectMode(CENTER)
             rect(width/2.8, height/2, width*0.1, height*0.1 , 20)
             fill(0)
-            textSize(32)
+            textSize(26)
             W = textWidth(players['player1'])
             W = (width - W) //2.9
             text(players['player1'],W, height/1.965)
@@ -135,7 +141,7 @@ def select_target(mousePressed,players,turn):
             fill(150)
             rect(width/2, height/2, width*0.1, height*0.1 , 20)
             fill(0)
-            textSize(32)
+            textSize(26)
             W = textWidth(players['player3'])
             W = (width - W) //2
             text(players['player3'],W, height/1.965)
@@ -147,7 +153,7 @@ def select_target(mousePressed,players,turn):
             fill(150)
             rect(width/1.55, height/2, width*0.1, height*0.1 , 20)
             fill(0)
-            textSize(32)
+            textSize(26)
             W = textWidth(players['player4'])
             W = (width - W) //1.525
             text(players['player4'],W, height/1.965)
@@ -176,7 +182,7 @@ def select_target(mousePressed,players,turn):
             rectMode(CENTER)
             rect(width/2.8, height/2, width*0.1, height*0.1 , 20)
             fill(0)
-            textSize(32)
+            textSize(26)
             W = textWidth(players['player1'])
             W = (width - W) //2.9
             text(players['player1'],W, height/1.965)
@@ -188,7 +194,7 @@ def select_target(mousePressed,players,turn):
             fill(150)
             rect(width/2, height/2, width*0.1, height*0.1 , 20)
             fill(0)
-            textSize(32)
+            textSize(26)
             W = textWidth(players['player2'])
             W = (width - W) //2
             text(players['player2'],W, height/1.965)
@@ -200,7 +206,7 @@ def select_target(mousePressed,players,turn):
             fill(150)
             rect(width/1.55, height/2, width*0.1, height*0.1 , 20)
             fill(0)
-            textSize(32)
+            textSize(26)
             W = textWidth(players['player4'])
             W = (width - W) //1.525
             text(players['player4'],W, height/1.965)
@@ -229,7 +235,7 @@ def select_target(mousePressed,players,turn):
             rectMode(CENTER)
             rect(width/2.8, height/2, width*0.1, height*0.1 , 20)
             fill(0)
-            textSize(32)
+            textSize(26)
             W = textWidth(players['player1'])
             W = (width - W) //2.9
             text(players['player1'],W, height/1.965)
@@ -241,7 +247,7 @@ def select_target(mousePressed,players,turn):
             fill(150)
             rect(width/2, height/2, width*0.1, height*0.1 , 20)
             fill(0)
-            textSize(32)
+            textSize(26)
             W = textWidth(players['player2'])
             W = (width - W) //2
             text(players['player2'],W, height/1.965)
@@ -253,7 +259,7 @@ def select_target(mousePressed,players,turn):
             fill(150)
             rect(width/1.55, height/2, width*0.1, height*0.1 , 20)
             fill(0)
-            textSize(32)
+            textSize(26)
             W = textWidth(players['player3'])
             W = (width - W) //1.525
             text(players['player3'],W, height/1.965)
