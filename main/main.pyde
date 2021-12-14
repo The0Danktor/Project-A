@@ -45,9 +45,11 @@ def setup():
               'board_img' : loadImage("board3.png"),
               'title_img' : loadImage("titlescreen.png"),
               'menu_img'  : loadImage("camo.png"),
-              'game_img'  : loadImage("test_background.jpg")
+              'game_img'  : loadImage("test_background.jpg"),
+              'troll_img' : loadImage("unnamed.png")
     }
     fields = g_sys.createField()
+    g_sys.createPieces()
     
     # size(1800,800)
     # this.surface.setResizable(True)
@@ -87,6 +89,7 @@ def draw():
         e_dis.displayScreen()
     elif state == 8:
         g_dis.displayScreen(players, turn, images, fields)
+        g_sys.draw_(mousePressed)
 
 # ==================================================
 
@@ -126,6 +129,7 @@ def mouseReleased():
     clicked = False
     
     d_sys.mouseReleased_()
+    g_sys.mouseReleased_()
     
 def refresh():
     global state

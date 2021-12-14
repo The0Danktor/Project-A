@@ -10,7 +10,7 @@ def loadScreen(images):
 
 # game display function [displays the game screen]
 def displayScreen(players, turn, images, fields):
-
+    
     # Player name displays
     pCount = n_sys.update_t_dis()['pCount']
     mode = n_sys.update_t_dis()['mode']
@@ -67,6 +67,12 @@ def displayScreen(players, turn, images, fields):
         ellipseMode(CENTER)
         ellipse(fields[k], fields[k[:-1] + 'y'], width*0.002, width*0.002)
         ellipseMode(CORNER)
+        
+    piece_locs = g_sys.getPieces()
+    imageMode(CENTER)
+    image(images['troll_img'], piece_locs[0][0], piece_locs[0][1], width*0.05, height*0.05)
+    image(images['troll_img'], piece_locs[1][0], piece_locs[1][1], width*0.05, height*0.05)
+    imageMode(CORNER)
 
 # button click system
 def mousePressed_(players, turn):

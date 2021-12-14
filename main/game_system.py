@@ -1,4 +1,52 @@
+fields = {}
+piece_locs = ()
+mouse_down = False
+current = 0
+
+def createPieces():
+    global piece_locs
+    piece_locs = [
+                  [width*0.140, height*0.285],
+                  [width*0.180, height*0.250]
+                  ]
+    print(piece_locs)
+    
+def getPieces():
+    global piece_locs
+    return piece_locs
+
+def draw_(mouse_pressed):
+
+    global piece_locs, mouse_down, current
+    if (((mouseX - piece_locs[0][0])**2 + (mouseY - piece_locs[0][1])**2 < width*0.25**2) and mouse_pressed) or (mouse_down == True and current == 0):
+        mouse_down = True
+        piece_locs[0][0] = mouseX
+        piece_locs[0][1] = mouseY
+        current = 0
+    if (((mouseX - piece_locs[1][0])**2 + (mouseY - piece_locs[1][1])**2 < width*0.25**2) and mouse_pressed) or (mouse_down == True and current == 1):
+        mouse_down = True
+        piece_locs[1][0] = mouseX
+        piece_locs[1][1] = mouseY
+        current = 1
+
+def mouseReleased_():
+    global piece_loc, mouse_down, current
+    if mouse_down == True:
+        mouse_down = False
+        saved = width
+        loc = 'a7x'
+        for k in [word for word in fields.keys() if word.endswith("x")]:
+            distance = sqrt((fields[k] - mouseX)**2 + (fields[k[:-1] + 'y'] - mouseY)**2)
+            if distance < saved:
+                print(distance, saved)
+                saved = distance
+                loc = k
+        piece_locs[current][0] = fields[loc]
+        piece_locs[current][1] = fields[loc[:-1] + 'y']
+            
+
 def createField():
+    global fields
     x_offset = width*0.04
     y_offset = height*0.0715
     x_start = width*0.140
