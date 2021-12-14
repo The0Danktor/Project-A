@@ -171,3 +171,6 @@ def keyPressed():
             players['player' + str(state)] = n_sys.returnName()
             state = 5
             t_dis.loadScreen(images)
+    if state == 8:
+        if key == '+':
+            g_sys.createPiece()
