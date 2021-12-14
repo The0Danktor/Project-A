@@ -1,3 +1,4 @@
+import functions as f
 import random
 import nameinput_system as n_sys
 pressed = True
@@ -70,7 +71,7 @@ def select_target(mousePressed,players,turn):
             rectMode(CENTER)
             rect(width/2.8, height/2, width*0.1, height*0.1 , 20)
             fill(0)
-            textSize(32)
+            textSize(26)
             W = textWidth(players['player2'])
             W = (width - W) //2.9
             text(players['player2'],W, height/1.965)
@@ -82,7 +83,7 @@ def select_target(mousePressed,players,turn):
             fill(150)
             rect(width/2, height/2, width*0.1, height*0.1 , 20)
             fill(0)
-            textSize(32)
+            textSize(26)
             W = textWidth(players['player3'])
             W = (width - W) //2
             text(players['player3'],W, height/1.965)
@@ -94,7 +95,7 @@ def select_target(mousePressed,players,turn):
             fill(150)
             rect(width/1.55, height/2, width*0.1, height*0.1 , 20)
             fill(0)
-            textSize(32)
+            textSize(26)
             W = textWidth(players['player4'])
             W = (width - W) //1.525
             text(players['player4'],W, height/1.965)
@@ -123,7 +124,7 @@ def select_target(mousePressed,players,turn):
             rectMode(CENTER)
             rect(width/2.8, height/2, width*0.1, height*0.1 , 20)
             fill(0)
-            textSize(32)
+            textSize(26)
             W = textWidth(players['player1'])
             W = (width - W) //2.9
             text(players['player1'],W, height/1.965)
@@ -135,7 +136,7 @@ def select_target(mousePressed,players,turn):
             fill(150)
             rect(width/2, height/2, width*0.1, height*0.1 , 20)
             fill(0)
-            textSize(32)
+            textSize(26)
             W = textWidth(players['player3'])
             W = (width - W) //2
             text(players['player3'],W, height/1.965)
@@ -147,7 +148,7 @@ def select_target(mousePressed,players,turn):
             fill(150)
             rect(width/1.55, height/2, width*0.1, height*0.1 , 20)
             fill(0)
-            textSize(32)
+            textSize(26)
             W = textWidth(players['player4'])
             W = (width - W) //1.525
             text(players['player4'],W, height/1.965)
@@ -176,7 +177,7 @@ def select_target(mousePressed,players,turn):
             rectMode(CENTER)
             rect(width/2.8, height/2, width*0.1, height*0.1 , 20)
             fill(0)
-            textSize(32)
+            textSize(26)
             W = textWidth(players['player1'])
             W = (width - W) //2.9
             text(players['player1'],W, height/1.965)
@@ -188,7 +189,7 @@ def select_target(mousePressed,players,turn):
             fill(150)
             rect(width/2, height/2, width*0.1, height*0.1 , 20)
             fill(0)
-            textSize(32)
+            textSize(26)
             W = textWidth(players['player2'])
             W = (width - W) //2
             text(players['player2'],W, height/1.965)
@@ -200,7 +201,7 @@ def select_target(mousePressed,players,turn):
             fill(150)
             rect(width/1.55, height/2, width*0.1, height*0.1 , 20)
             fill(0)
-            textSize(32)
+            textSize(26)
             W = textWidth(players['player4'])
             W = (width - W) //1.525
             text(players['player4'],W, height/1.965)
@@ -229,7 +230,7 @@ def select_target(mousePressed,players,turn):
             rectMode(CENTER)
             rect(width/2.8, height/2, width*0.1, height*0.1 , 20)
             fill(0)
-            textSize(32)
+            textSize(26)
             W = textWidth(players['player1'])
             W = (width - W) //2.9
             text(players['player1'],W, height/1.965)
@@ -241,7 +242,7 @@ def select_target(mousePressed,players,turn):
             fill(150)
             rect(width/2, height/2, width*0.1, height*0.1 , 20)
             fill(0)
-            textSize(32)
+            textSize(26)
             W = textWidth(players['player2'])
             W = (width - W) //2
             text(players['player2'],W, height/1.965)
@@ -253,7 +254,7 @@ def select_target(mousePressed,players,turn):
             fill(150)
             rect(width/1.55, height/2, width*0.1, height*0.1 , 20)
             fill(0)
-            textSize(32)
+            textSize(26)
             W = textWidth(players['player3'])
             W = (width - W) //1.525
             text(players['player3'],W, height/1.965)
