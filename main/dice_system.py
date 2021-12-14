@@ -21,6 +21,7 @@ def dice_systeem(mousePressed,players,turn):
     if state == -1:
          select_target(mousePressed,players,turn)
     elif state < 2:
+        background('#5493BF')
         stroke(0)
         strokeWeight(5)
         knop(mousePressed,CORNERS,'#EA9C88',width/2.68,width/1.6,height/1.27,height/1.14,2,height/1.17)
