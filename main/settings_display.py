@@ -4,7 +4,7 @@ taal1 = True
 taal2 = True
 
 
-x = 660
+x = 1060
 x2 = 660
 mouse_down = False
 mouse_down2 = False
@@ -56,10 +56,8 @@ def slider1(mousePressed):
     ellipse(x,y,20,20)
 
 def volume():
-    print((x-660)//6,(x2-660)//6)
-    music_volume = (x-660)/600
-    print(music_volume)
-    sfx_volume = (x2-660)/600
+    music_volume = ((x-660)/6)-50
+    sfx_volume = ((x-660)/6)-50
     return music_volume
           
     # de slider
