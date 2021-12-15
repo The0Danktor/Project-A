@@ -58,16 +58,21 @@ def select_target(mousePressed,players,turn):
     global loaded
     loaded = False
     pCount = n_sys.update_t_dis()['pCount']
-# als je er met twee spelers speelt dan past 
+# als je met twee spelers speelt dan is je tegenstander automatish de andere speler 
     if pCount == 2:
         if turn == 1:
             target = 2
         elif turn == 2:
             target == 1
         state = 0
+# als je met vier spelers speelt dan kan je zelf een tegenstander kiezen 
     if pCount == 4:
         background(100)
+
+# als het speler 1 zijn beurt is        
         if turn == 1:
+            
+            # kies speler 3 als tegenstander
             if (( width/2.45 > mouseX > width/3.265) and ( height/1.812 > mouseY > height/2.227)):
                 stroke(255)
             else:
@@ -77,22 +82,24 @@ def select_target(mousePressed,players,turn):
             rect(width/2.8, height/2, width*0.1, height*0.1 , 20)
             fill(0)
             textSize(26)
-            W = textWidth(players['player2'])
-            W = (width - W) //2.9
-            text(players['player2'],W, height/1.965)
-            
-            if (( width/1.811 > mouseX > width/2.217) and ( height/1.812 > mouseY > height/2.227)):
-                stroke(255)
-            else:
-                stroke(0)
-            fill(150)
-            rect(width/2, height/2, width*0.1, height*0.1 , 20)
-            fill(0)
-            textSize(26)
             W = textWidth(players['player3'])
-            W = (width - W) //2
+            W = (width - W) //2.9
             text(players['player3'],W, height/1.965)
             
+            # kies speler 2 als tegenstander
+            # if (( width/1.811 > mouseX > width/2.217) and ( height/1.812 > mouseY > height/2.227)):
+            #     stroke(255)
+            # else:
+            #     stroke(0)
+            # fill(150)
+            # rect(width/2, height/2, width*0.1, height*0.1 , 20)
+            # fill(0)
+            # textSize(26)
+            # W = textWidth(players['player2'])
+            # W = (width - W) //2
+            # text(players['player2'],W, height/1.965)
+            
+            # kies speler 4 als tegenstander
             if (( width/1.435 > mouseX > width/1.681) and (height/1.812 > mouseY > height/2.227)):
                 stroke(255)
             else:
@@ -105,22 +112,29 @@ def select_target(mousePressed,players,turn):
             W = (width - W) //1.525
             text(players['player4'],W, height/1.965)
             
+            # speler 3
             if (( width/2.45 > mouseX > width/3.265) and ( height/1.812 > mouseY > height/2.227) and mousePressed):
-                target = 2
-                state += 1
-                background('#5493BF')
-            
-            if (( width/1.811 > mouseX > width/2.217) and ( height/1.812 > mouseY > height/2.227)and mousePressed):
                 target = 3
                 state += 1
                 background('#5493BF')
+            
+            # speler 2
+            # if (( width/1.811 > mouseX > width/2.217) and ( height/1.812 > mouseY > height/2.227)and mousePressed):
+            #     target = 2
+            #     state += 1
+            #     background('#5493BF')
+            
+            # speler 4
             if (( width/1.435 > mouseX > width/1.681) and (height/1.812 > mouseY > height/2.227)and mousePressed):
                 target = 4
                 state += 1
                 background('#5493BF')
             stroke(0)
-        
+ 
+# als het speler 2 zijn beurt is               
         if turn == 2:
+            
+            # kies speler 3 als tegenstander
             if (( width/2.45 > mouseX > width/3.265) and ( height/1.812 > mouseY > height/2.227)):
                 stroke(255)
             else:
@@ -130,22 +144,24 @@ def select_target(mousePressed,players,turn):
             rect(width/2.8, height/2, width*0.1, height*0.1 , 20)
             fill(0)
             textSize(26)
-            W = textWidth(players['player1'])
-            W = (width - W) //2.9
-            text(players['player1'],W, height/1.965)
-            
-            if (( width/1.811 > mouseX > width/2.217) and ( height/1.812 > mouseY > height/2.227)):
-                stroke(255)
-            else:
-                stroke(0)
-            fill(150)
-            rect(width/2, height/2, width*0.1, height*0.1 , 20)
-            fill(0)
-            textSize(26)
             W = textWidth(players['player3'])
-            W = (width - W) //2
+            W = (width - W) //2.9
             text(players['player3'],W, height/1.965)
             
+            # # kies speler 1 als tegenstander
+            # if (( width/1.811 > mouseX > width/2.217) and ( height/1.812 > mouseY > height/2.227)):
+            #     stroke(255)
+            # else:
+            #     stroke(0)
+            # fill(150)
+            # rect(width/2, height/2, width*0.1, height*0.1 , 20)
+            # fill(0)
+            # textSize(26)
+            # W = textWidth(players['player1'])
+            # W = (width - W) //2
+            # text(players['player1'],W, height/1.965)
+            
+            # kies speler 4 als tegenstander
             if (( width/1.435 > mouseX > width/1.681) and (height/1.812 > mouseY > height/2.227)):
                 stroke(255)
             else:
@@ -158,22 +174,29 @@ def select_target(mousePressed,players,turn):
             W = (width - W) //1.525
             text(players['player4'],W, height/1.965)
             
+            #speler 3
             if (( width/2.45 > mouseX > width/3.265) and ( height/1.812 > mouseY > height/2.227) and mousePressed):
-                target = 1
-                state += 1
-                background('#5493BF')
-            
-            if (( width/1.811 > mouseX > width/2.217) and ( height/1.812 > mouseY > height/2.227)and mousePressed):
                 target = 3
                 state += 1
                 background('#5493BF')
+            
+            # #speler 1
+            # if (( width/1.811 > mouseX > width/2.217) and ( height/1.812 > mouseY > height/2.227)and mousePressed):
+            #     target = 1
+            #     state += 1
+            #     background('#5493BF')
+            
+            #speler 4
             if (( width/1.435 > mouseX > width/1.681) and (height/1.812 > mouseY > height/2.227)and mousePressed):
                 target = 4
                 state += 1
                 background('#5493BF')
             stroke(0)
-            
+
+# als speler 3 aan beurt is            
         if turn == 3:
+            
+            # kies speler 1 als tegenstander
             if (( width/2.45 > mouseX > width/3.265) and ( height/1.812 > mouseY > height/2.227)):
                 stroke(255)
             else:
@@ -187,18 +210,20 @@ def select_target(mousePressed,players,turn):
             W = (width - W) //2.9
             text(players['player1'],W, height/1.965)
             
-            if (( width/1.811 > mouseX > width/2.217) and ( height/1.812 > mouseY > height/2.227)):
-                stroke(255)
-            else:
-                stroke(0)
-            fill(150)
-            rect(width/2, height/2, width*0.1, height*0.1 , 20)
-            fill(0)
-            textSize(26)
-            W = textWidth(players['player2'])
-            W = (width - W) //2
-            text(players['player2'],W, height/1.965)
+            # # kies speler 4 als tegenstander
+            # if (( width/1.811 > mouseX > width/2.217) and ( height/1.812 > mouseY > height/2.227)):
+            #     stroke(255)
+            # else:
+            #     stroke(0)
+            # fill(150)
+            # rect(width/2, height/2, width*0.1, height*0.1 , 20)
+            # fill(0)
+            # textSize(26)
+            # W = textWidth(players['player4'])
+            # W = (width - W) //2
+            # text(players['player4'],W, height/1.965)
             
+            # kies speler 2 als tegenstander
             if (( width/1.435 > mouseX > width/1.681) and (height/1.812 > mouseY > height/2.227)):
                 stroke(255)
             else:
@@ -207,26 +232,33 @@ def select_target(mousePressed,players,turn):
             rect(width/1.55, height/2, width*0.1, height*0.1 , 20)
             fill(0)
             textSize(26)
-            W = textWidth(players['player4'])
+            W = textWidth(players['player2'])
             W = (width - W) //1.525
-            text(players['player4'],W, height/1.965)
+            text(players['player2'],W, height/1.965)
             
+            # speler 1
             if (( width/2.45 > mouseX > width/3.265) and ( height/1.812 > mouseY > height/2.227) and mousePressed):
                 target = 1
                 state += 1
                 background('#5493BF')
             
-            if (( width/1.811 > mouseX > width/2.217) and ( height/1.812 > mouseY > height/2.227)and mousePressed):
-                target = 2
-                state += 1
-                background('#5493BF')
+            # # speler 4
+            # if (( width/1.811 > mouseX > width/2.217) and ( height/1.812 > mouseY > height/2.227)and mousePressed):
+            #     target = 4
+            #     state += 1
+            #     background('#5493BF')
+            
+            # speler 2
             if (( width/1.435 > mouseX > width/1.681) and (height/1.812 > mouseY > height/2.227)and mousePressed):
-                target = 4
+                target = 2
                 state += 1
                 background('#5493BF')
             stroke(0)
         
+# als speler 4 aan de beurt is        
         if turn == 4:
+            
+            # kies speler 1 als tegenstander
             if (( width/2.45 > mouseX > width/3.265) and ( height/1.812 > mouseY > height/2.227)):
                 stroke(255)
             else:
@@ -240,18 +272,20 @@ def select_target(mousePressed,players,turn):
             W = (width - W) //2.9
             text(players['player1'],W, height/1.965)
             
-            if (( width/1.811 > mouseX > width/2.217) and ( height/1.812 > mouseY > height/2.227)):
-                stroke(255)
-            else:
-                stroke(0)
-            fill(150)
-            rect(width/2, height/2, width*0.1, height*0.1 , 20)
-            fill(0)
-            textSize(26)
-            W = textWidth(players['player2'])
-            W = (width - W) //2
-            text(players['player2'],W, height/1.965)
+            # # kies speler 3 als tegenstander
+            # if (( width/1.811 > mouseX > width/2.217) and ( height/1.812 > mouseY > height/2.227)):
+            #     stroke(255)
+            # else:
+            #     stroke(0)
+            # fill(150)
+            # rect(width/2, height/2, width*0.1, height*0.1 , 20)
+            # fill(0)
+            # textSize(26)
+            # W = textWidth(players['player3'])
+            # W = (width - W) //2
+            # text(players['player3'],W, height/1.965)
             
+            # kies speler 2 als tegenstander
             if (( width/1.435 > mouseX > width/1.681) and (height/1.812 > mouseY > height/2.227)):
                 stroke(255)
             else:
@@ -260,21 +294,25 @@ def select_target(mousePressed,players,turn):
             rect(width/1.55, height/2, width*0.1, height*0.1 , 20)
             fill(0)
             textSize(26)
-            W = textWidth(players['player3'])
+            W = textWidth(players['player2'])
             W = (width - W) //1.525
-            text(players['player3'],W, height/1.965)
+            text(players['player2'],W, height/1.965)
             
+            # speler 1
             if (( width/2.45 > mouseX > width/3.265) and ( height/1.812 > mouseY > height/2.227) and mousePressed):
                 target = 1
                 state += 1
                 background('#5493BF')
             
-            if (( width/1.811 > mouseX > width/2.217) and ( height/1.812 > mouseY > height/2.227)and mousePressed):
-                target = 2
-                state += 1
-                background('#5493BF')
+            # # speler 3
+            # if (( width/1.811 > mouseX > width/2.217) and ( height/1.812 > mouseY > height/2.227)and mousePressed):
+            #     target = 3
+            #     state += 1
+            #     background('#5493BF')
+            
+            # speler 2
             if (( width/1.435 > mouseX > width/1.681) and (height/1.812 > mouseY > height/2.227)and mousePressed):
-                target = 3
+                target = 2
                 state += 1
                 background('#5493BF')
             stroke(0)
