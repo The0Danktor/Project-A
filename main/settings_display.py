@@ -28,6 +28,7 @@ def menu(mousePressed):
     rect(610,50,700,700,20)
     slider1(mousePressed)
     slider2(mousePressed)
+    volume()
 
 
 
@@ -57,6 +58,7 @@ def slider1(mousePressed):
 def volume():
     print((x-660)//6,(x2-660)//6)
     music_volume = (x-660)/600
+    print(music_volume)
     sfx_volume = (x2-660)/600
     return music_volume
           

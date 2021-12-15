@@ -78,8 +78,9 @@ def setup():
 # draw function
 def draw():
     global state, players, sf
-    
-    sf.setVolume(s_dis.volume())
+    #music_volume = s_dis.volume()
+    #print(music_volume)
+    #sf.setVolume(music_volume)
     # display loader
     if state == 0:
         m_dis.displayScreen()
