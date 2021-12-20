@@ -11,6 +11,7 @@ import game_display as g_dis
 import nameinput_system as n_sys
 import dice_system as d_sys
 import game_system as g_sys
+import token_system as t_sys
 add_library("minim")
 
 # setup global variables
