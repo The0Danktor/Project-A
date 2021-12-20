@@ -1,7 +1,5 @@
 import functions as f
 import random as r
-add_library("minim")
-global cardsNeg, cardsListNeg, cardsPos, cardsListPos, inv1, inv2, inv3, inv4, cardAmount1, cardAmount2, cardAmount3, cardAmount4, chosenPlayer, cardsNegPulled, cardsPosPulled, chosenPlayerInv
 cardsNeg = {"Trench Feet": "Je pelotons bewegen de volgende ronde 1 stap minder",
 "Hongersnood": "Pelotons op het slagveld kunnen 1 ronde niet bewegen en aanvallen",
 "Rat Attack": "Eerstvolgende gevecht doe je 1 schade minder",
