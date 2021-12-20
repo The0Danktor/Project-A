@@ -62,7 +62,7 @@ def displayScreen(players, turn, images, fields):
     fill(255)
     text('Turns: ' + str(game_turn), f.center('Turns: ' + str(game_turn), width*0.19, height*0.1, 1) - (width / 2) + width*0.8, height*0.60)
     
-    text('tokens: ' + str(tokens(turn)), f.center('Turns: ' + str(tokens(turn)), width*0.19, height*0.1, 1) - (width / 2) + width*0.8, height*0.60)
+    text('tokens: ' + str(t_sys.tokens(turn)), f.center('Turns: ' + str(t_sys.tokens(turn)), width*0.19, height*0.1, 1) - (width / 2) + width*0.8, height*0.50)
 
     
     fill(0)

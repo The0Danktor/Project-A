@@ -16,10 +16,13 @@ def token_teller(turn,textX1,textY2,boxed = False,X1=0,Y1=0,X2=0,Y2=0):
     text('tokens:' + str(tokens['tokensP' + str(turn)]),textX1,textY2)
     
 def tokens(turn):
-    return tokens['tokensP' + str(turn)]
+    player_tokens = int(tokens['tokensP' + str(turn)])
+    return player_tokens
 
         
-def tokens_remove:
-def tokens_add:
+def tokens_remove():
+    print(WIP)
+def tokens_add():
+    print(WIP)
     
     
