@@ -36,32 +36,6 @@ selectedCardNum = -1
 def displayScreen(images):
     global chosenPlayer
 
-    f.textBox(width/2-width/8, height/3, width/8*2, height/14, 'Dobbelen')
-    if chosenPlayer == 1:
-        f.textBox(width*1/5-width/24, height/10, width/12.1, height/9.8, 'Player 1', 100)
-        f.textBox(width*2/5-width/24, height/10, width/12.1, height/9.8, 'Player 2')
-        f.textBox(width*3/5-width/24, height/10, width/12.1, height/9.8, 'Player 3')
-        f.textBox(width*4/5-width/24, height/10, width/12.1, height/9.8, 'Player 4')
-    elif chosenPlayer == 2:
-        f.textBox(width*1/5-width/24, height/10, width/12.1, height/9.8, 'Player 1')
-        f.textBox(width*2/5-width/24, height/10, width/12.1, height/9.8, 'Player 2', 100)
-        f.textBox(width*3/5-width/24, height/10, width/12.1, height/9.8, 'Player 3')
-        f.textBox(width*4/5-width/24, height/10, width/12.1, height/9.8, 'Player 4')
-    elif chosenPlayer == 3:
-        f.textBox(width*1/5-width/24, height/10, width/12.1, height/9.8, 'Player 1')
-        f.textBox(width*2/5-width/24, height/10, width/12.1, height/9.8, 'Player 2')
-        f.textBox(width*3/5-width/24, height/10, width/12.1, height/9.8, 'Player 3', 100)
-        f.textBox(width*4/5-width/24, height/10, width/12.1, height/9.8, 'Player 4')
-    elif chosenPlayer == 4:
-        f.textBox(width*1/5-width/24, height/10, width/12.1, height/9.8, 'Player 1')
-        f.textBox(width*2/5-width/24, height/10, width/12.1, height/9.8, 'Player 2')
-        f.textBox(width*3/5-width/24, height/10, width/12.1, height/9.8, 'Player 3')
-        f.textBox(width*4/5-width/24, height/10, width/12.1, height/9.8, 'Player 4', 100)
-    else:
-        f.textBox(width*1/5-width/24, height/10, width/12.1, height/9.8, 'Player 1')
-        f.textBox(width*2/5-width/24, height/10, width/12.1, height/9.8, 'Player 2')
-        f.textBox(width*3/5-width/24, height/10, width/12.1, height/9.8, 'Player 3')
-        f.textBox(width*4/5-width/24, height/10, width/12.1, height/9.8, 'Player 4')
         
 def loadScreen(images):
     image(images['menu_img'], 0, 0, width, height)
