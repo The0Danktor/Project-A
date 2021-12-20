@@ -89,24 +89,35 @@ def mouseReleased_():
 
 def languageButton1(mousePressed):
     global taal1
-    if mousePressed and (mouseButton == LEFT):
-        fill(200)
-    elif mousePressed and (mouseButton == RIGHT):
-        fill(255)
-    else:
-        fill('#050505')
-    strokeWeight(10)
-
+    #if #mousePressed and (mouseButton == LEFT):
+    fill(200)
     rect(660, 350, 100, 100)
+    fill(0)
+    text('Nederlands', 660, 350, 100, 100)
+    if 660 < mouseX < 500 and 450 < mouseY < 400:
+        print('Nederlands')
+    #elif mousePressed and (mouseButton == RIGHT):
+        #fill(255)
+    #else:
+        #fill('#050505')
+    #strokeWeight(10)
+
+    #rect(660, 350, 100, 100)
     
 def languageButton2(mousePressed):
     global taal2
-    if mousePressed and (mouseButton == LEFT):
-        fill(200)
-    elif mousePressed and (mouseButton == RIGHT):
-        fill(255)
-    else:
-        fill('#050505')
-    strokeWeight(10)
-
+    fill(200)
     rect(1010, 350, 100, 100)
+    fill(0)
+    text('English', 1010, 350, 100, 100)
+    if 1010 < mouseX < 1400 and 450 < mouseY < 400:
+        print('English')
+    #if mousePressed and (mouseButton == LEFT):
+
+    #elif mousePressed and (mouseButton == RIGHT):
+        #fill(255)
+    #else:
+        #fill('#050505')
+    #strokeWeight(10)
+
+    #rect(1010, 350, 100, 100)
