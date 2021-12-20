@@ -12,6 +12,7 @@ import nameinput_system as n_sys
 import dice_system as d_sys
 import game_system as g_sys
 import token_system as t_sys
+import kaarten_system as k_sys
 add_library("minim")
 
 # setup global variables
@@ -36,6 +37,7 @@ NO_ESCAPE = '0'
 # state 6 = dice
 # state 7 = esc menu
 # state 8 = game active
+# state 9 = card
 # ==================================================
 
 # setup function
@@ -91,6 +93,8 @@ def draw():
     elif state == 8:
         g_dis.displayScreen(players, turn, images, fields)
         g_sys.draw_(mousePressed)
+    elif state == 9:
+        k_sys.displayscreen(images)
 
 # ==================================================
 
