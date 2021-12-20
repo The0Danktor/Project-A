@@ -62,7 +62,7 @@ def displayScreen(players, turn, images, fields):
     text('Turns: ' + str(game_turn), f.center('Turns: ' + str(game_turn), width*0.19, height*0.1, 1) - (width / 2) + width*0.8, height*0.60)
     
     fill(0)
-    image(images['board_img'], width*0.1, height*0.18, width*0.4, width*0.4)
+    image(images['board_img'], width*0.1, height*0.18, width*0.4, height*0.64)
     # for k in [word for word in fields.keys() if word.endswith("x")]:
     #     ellipseMode(CENTER)
     #     ellipse(fields[k], fields[k[:-1] + 'y'], width*0.002, width*0.002)
