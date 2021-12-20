@@ -128,7 +128,7 @@ def mousePressed():
         else:
             state = ret * -1
     elif state == 9:
-        k_sys.mousePressed_
+        k_sys.mousePressed_()
         
     if saved_state != state:
         refresh()
@@ -152,6 +152,8 @@ def refresh():
         d_sys.loadScreen()
     elif state == 8:
         g_dis.loadScreen(images)
+    elif state == 9:
+        k_sys.loadScreen(images)
 
 # ==================================================
 
