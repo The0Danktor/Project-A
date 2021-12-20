@@ -1,6 +1,7 @@
 import nameinput_system as n_sys
 import game_system as g_sys
 import functions as f
+import token_system as t_sys
 
 game_turn = 1
 
@@ -60,6 +61,8 @@ def displayScreen(players, turn, images, fields):
     rect(width*0.7, height*0.24, width*0.2, height*0.38, 10)
     fill(255)
     text('Turns: ' + str(game_turn), f.center('Turns: ' + str(game_turn), width*0.19, height*0.1, 1) - (width / 2) + width*0.8, height*0.60)
+    
+    t_sys.token_teller(turn,1351, 469)
     
     fill(0)
     image(images['board_img'], width*0.1, height*0.18, width*0.4, height*0.64)

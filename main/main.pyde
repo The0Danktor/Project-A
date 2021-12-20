@@ -102,6 +102,7 @@ def draw():
 # mouse press function
 def mousePressed():
     global clicked, players, state, turn
+    print(mouseX,mouseY)
     if clicked == True:
         return
     else:

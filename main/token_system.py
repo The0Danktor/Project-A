@@ -1,12 +1,18 @@
 import nameinput_system as n_sys
+import functions as f
 
 modeSpecs = n_sys.update_t_dis()['modeSpecs']
 tokenbegin_count = modeSpecs['tokens']
 tokens_add = 3
-tokens = 0
-
-def test():
-
-    fill(255)
-    text(str(tokenbegin_count),100,100)
-    text(str(tokens_add),300,300)
+tokens = {
+'tokensP1': 0,
+'tokensP2': 5,
+'tokensP3': 10,
+'tokensP4': 15
+}
+def token_teller(turn,textX1,textY2,boxed = False,X1=0,Y1=0,X2=0,Y2=0):
+    if boxed:
+        rect(X1,Y1,X2,Y2,10)
+    text('tokens:' + str(tokens['tokensP' + str(turn)]),textX1,textY2)
+    
+    
