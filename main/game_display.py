@@ -81,11 +81,12 @@ def mousePressed_(players, turn):
         turn += 1
         if turn > n_sys.update_t_dis()['pCount']:
             turn = 1
-            game_turn += 1
-            
+            game_turn += 1    
         print(turn)
         return turn
     if width*0.1 < mouseX < width*0.2 and height*0.85 < mouseY < height*0.95:
         return -6
+    if width*0.25 < mouseX < width*0.35 and height*0.85 < mouseY < height*0.95:
+        return -9
     noStroke()
     return -8

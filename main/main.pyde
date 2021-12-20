@@ -94,7 +94,8 @@ def draw():
         g_dis.displayScreen(players, turn, images, fields)
         g_sys.draw_(mousePressed)
     elif state == 9:
-        k_sys.displayscreen(images)
+        k_sys.displayScreen(images)
+
 
 # ==================================================
 
@@ -121,10 +122,13 @@ def mousePressed():
             state = backup_state
     elif state == 8:
         ret = g_dis.mousePressed_(players, turn)
+        
         if ret > 0:
             turn = ret
         else:
             state = ret * -1
+    elif state == 9:
+        k_sys.mousePressed_
         
     if saved_state != state:
         refresh()

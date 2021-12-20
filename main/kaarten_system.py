@@ -68,7 +68,7 @@ def displayScreen(images):
 
 
 
-def mousePressed():
+def mousePressed_():
     global cardsNeg, cardsListNeg, cardsPos, cardsListPos, inv1, inv2, inv3, inv4, cardAmount1, cardAmount2, cardAmount3, cardAmount4, chosenPlayer, cardsNegPulled, cardsPosPulled, chosenPlayerInv, selectedCard, cardState, selectedCardNum
     import functions as f
     
