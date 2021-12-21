@@ -45,11 +45,17 @@ def setup():
     # Import dictonaries
     global images, fields
     images = {
-              'board_img' : loadImage("board3.png"),
-              'title_img' : loadImage("titlescreen.png"),
-              'menu_img'  : loadImage("camo.png"),
-              'game_img'  : loadImage("test_background.jpg"),
-              'troll_img' : loadImage("unnamed.png")
+              'board_img'     : loadImage("board3.png"),
+              'main_img'      : loadImage("title_screen.png"),
+              'background_img': loadImage("background.png"),
+              'start_img'     : loadImage("start.png"),
+              'settings_img'  : loadImage("settings.png"),
+              'exit_img'      : loadImage("exit.png"),
+              'title_img'     : loadImage("titlescreen.png"),
+              'menu_img'      : loadImage("camo.png"),
+              'game_img'      : loadImage("test_background.jpg"),
+              'troll_img'     : loadImage("unnamed.png"),
+              'soldier_img'   : loadImage("soldier.png")
     }
     fields = g_sys.createField()
     g_sys.createPieces()
@@ -81,7 +87,7 @@ def draw():
     
     # display loader
     if state == 0:
-        m_dis.displayScreen()
+        m_dis.displayScreen(images)
     elif 1 <= state <= 4:
         n_dis.displayScreen(state, images)
     elif state == 5:

@@ -15,7 +15,7 @@ def displayScreen(player1, player2, player3, player4, images):
     
     # background refresh
     if req_refresh == True:
-        image(images['title_img'], 0, 0, width, height)
+        image(images['background_img'], 0, 0, width, height)
         req_refresh = False
     
     # Player name displays
@@ -47,7 +47,7 @@ def displayScreen(player1, player2, player3, player4, images):
     noStroke()
     
     # texts above player name displays
-    fill(0)
+    fill(200)
     if pCount == 4:
         text('Click to edit player 1:', f.center('Click to edit player 1:', width*0.2, height*0.1) - (width / 2) + width*0.8, height*0.07)
         text('Click to edit player 2:', f.center('Click to edit player 2:', width*0.2, height*0.1) - (width / 2) + width*0.8, height*0.30)
@@ -60,7 +60,7 @@ def displayScreen(player1, player2, player3, player4, images):
     text('Click to change:', f.center('Click to change:', width*0.2, height*0.1) - (width / 2) + width*0.2, height*0.30)
     
     # white overlays
-    fill(255)
+    fill(0)
     if pCount == 4:
         text('Click to edit player 1:', f.center('Click to edit player 1:', width*0.2, height*0.1, 1) - (width / 2) + width*0.8, height*0.07)
         text('Click to edit player 2:', f.center('Click to edit player 2:', width*0.2, height*0.1, 1) - (width / 2) + width*0.8, height*0.30)
@@ -72,6 +72,7 @@ def displayScreen(player1, player2, player3, player4, images):
     text('Click to change:', f.center('Click to change:', width*0.2, height*0.1, 1) - (width / 2) + width*0.2, height*0.07)
     text('Click to change:', f.center('Click to change:', width*0.2, height*0.1, 1) - (width / 2) + width*0.2, height*0.30)
     
+    fill(255)
     # mode info
     text('Time: ' + modeSpecs['speeltijd'], f.center('Time: ' + modeSpecs['speeltijd'], width*0.19, height*0.1, 1) - (width / 2) + width*0.2, height*0.60)
     text('Tokens: ' + str(modeSpecs['tokens']), f.center('Tokens: ' + str(modeSpecs['tokens']), width*0.19, height*0.1, 1) - (width / 2) + width*0.2, height*0.68)

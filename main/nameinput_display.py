@@ -4,7 +4,7 @@ import functions as f
 
 # nameinput background image loader
 def loadScreen(images):
-    image(images['board_img'], 0, 0, width, height)
+    image(images['background_img'], 0, 0, width, height)
 
 # nameinput display function [displays the nameinput screen]
 def displayScreen(player, images):

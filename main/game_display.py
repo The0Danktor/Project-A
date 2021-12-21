@@ -7,7 +7,7 @@ game_turn = 1
 
 # game background image loader
 def loadScreen(images):
-    image(images['game_img'], 0, 0, width, height)
+    image(images['background_img'], 0, 0, width, height)
 
 # game display function [displays the game screen]
 def displayScreen(players, turn, images, fields):
@@ -64,7 +64,20 @@ def displayScreen(players, turn, images, fields):
     
     text('Tokens: ' + str(t_sys.get_tokens(turn)), f.center('Tokens: ' + str(t_sys.get_tokens(turn)), width*0.19, height*0.1, 1) - (width / 2) + width*0.8, height*0.50)
 
-    
+    noStroke()
+    fill('#FF0000')
+    rect(width*0.1,height*0.17,width*0.4,height*0.01)
+    fill('#008000')
+    rect(width*0.1,height*0.82,width*0.4,height*0.01)
+    if pCount == 4:
+        fill('#FF0000')
+        rect(width*0.1,height*0.17,width*0.4,height*0.01)
+        fill('#008000')
+        rect(width*0.3,height*0.17,width*0.2,height*0.01)
+        fill('#0000FF')
+        rect(width*0.1,height*0.82,width*0.4,height*0.01)
+        fill('#FFFF00')
+        rect(width*0.3,height*0.82,width*0.2,height*0.01)
     fill(0)
     image(images['board_img'], width*0.1, height*0.18, width*0.4, height*0.64)
     # for k in [word for word in fields.keys() if word.endswith("x")]:
@@ -75,7 +88,7 @@ def displayScreen(players, turn, images, fields):
     piece_locs = g_sys.getPieces()
     imageMode(CENTER)
     for piece in piece_locs:
-        image(images['troll_img'], piece[0], piece[1], width*0.05, height*0.05)
+        image(images['soldier_img'], piece[0], piece[1], height*0.05, height*0.05)
     imageMode(CORNER)
 
 # button click system
