@@ -10,7 +10,7 @@ def loadScreen(images):
     image(images['background_img'], 0, 0, width, height)
 
 # game display function [displays the game screen]
-def displayScreen(players, turn, images, fields):
+def displayScreen(players, turn, images, fields, mousePressed_):
     
     # Player name displays
     pCount = n_sys.update_t_dis()['pCount']
@@ -87,10 +87,45 @@ def displayScreen(players, turn, images, fields):
         
     piece_locs = g_sys.getPieces()
     imageMode(CENTER)
+    
+    fields = g_sys.getFields()
+    if pCount == 2 and mousePressed_ == False:
+        if turn == 2:
+            checkSpot('b1', images)
+            checkSpot('d1', images)
+            checkSpot('f1', images)
+            checkSpot('h1', images)
+        else: 
+            checkSpot('b8', images)
+            checkSpot('d8', images)
+            checkSpot('f8', images)
+            checkSpot('h8', images)
+    elif pCount == 4 and mousePressed_ == False:
+        if turn == 1 or turn == 2:
+            checkSpot('b8', images)
+            checkSpot('d8', images)
+            checkSpot('f8', images)
+            checkSpot('h8', images)
+        else:
+            checkSpot('b1', images)
+            checkSpot('d1', images)
+            checkSpot('f1', images)
+            checkSpot('h1', images)
+            
     for piece in piece_locs:
-        image(images['soldier_img'], piece[0], piece[1], height*0.05, height*0.05)
+        image(images[str(piece[3]) + '_s_img'], piece[0], piece[1], height*0.05, height*0.05)
     imageMode(CORNER)
-
+    
+def checkSpot(field, images):
+    piece_locs = g_sys.getPieces()
+    fields = g_sys.getFields()
+    result = True
+    for piece in piece_locs:
+        if round(piece[0], 2) == round(fields[field + 'x'], 2) and round(piece[1], 2) == round(fields[field + 'y'], 2):
+            result = False
+    if result == True:
+        image(images['add_button_img'], fields[field + 'x'], fields[field + 'y'], height*0.05, height*0.05)
+    
 # button click system
 def mousePressed_(players, turn):
     global game_turn

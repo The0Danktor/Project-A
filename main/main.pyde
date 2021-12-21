@@ -55,7 +55,11 @@ def setup():
               'menu_img'      : loadImage("camo.png"),
               'game_img'      : loadImage("test_background.jpg"),
               'troll_img'     : loadImage("unnamed.png"),
-              'soldier_img'   : loadImage("soldier.png")
+              'red_s_img'     : loadImage("red_soldier.png"),
+              'blue_s_img'    : loadImage("blue_soldier.png"),
+              'green_s_img'   : loadImage("green_soldier.png"),
+              'yellow_s_img'  : loadImage("yellow_soldier.png"),
+              'add_button_img': loadImage("add_button.png")
     }
     fields = g_sys.createField()
     g_sys.createPieces()
@@ -97,7 +101,7 @@ def draw():
     elif state == 7:
         e_dis.displayScreen()
     elif state == 8:
-        g_dis.displayScreen(players, turn, images, fields)
+        g_dis.displayScreen(players, turn, images, fields, mousePressed)
         g_sys.draw_(mousePressed)
     elif state == 9:
         k_sys.displayScreen(images)

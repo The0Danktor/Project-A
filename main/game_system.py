@@ -6,9 +6,9 @@ current = 0
 def createPieces():
     global piece_locs
     piece_locs = [
-                  [width*0.140, height*0.285, 0],
-                  [width*0.180, height*0.250, 1],
-                  [width*0.260, height*0.250, 2]
+                  [width*0.140, height*0.285, 0, 'blue'],
+                  [width*0.180, height*0.250, 1, 'yellow'],
+                  [width*0.260, height*0.250, 2, 'yellow']
                   ]
     print(piece_locs)
     
@@ -16,9 +16,13 @@ def getPieces():
     global piece_locs
     return piece_locs
 
+def getFields():
+    global fields
+    return fields
+
 def createPiece(field = 'b1'):
     global piece_locs
-    piece_locs.append([fields[field + 'x'], fields[field + 'y'], len(piece_locs)])
+    piece_locs.append([fields[field + 'x'], fields[field + 'y'], len(piece_locs), 'green'])
 
 def draw_(mouse_pressed):
     global piece_locs, mouse_down, current
