@@ -3,7 +3,7 @@ import functions as f
 
 modeSpecs = n_sys.update_t_dis()['modeSpecs']
 tokenbegin_count = modeSpecs['tokens']
-tokens_add = 3
+tokens_eco = 3
 tokens = {
 'tokensP1': 0,
 'tokensP2': 5,
@@ -19,10 +19,16 @@ def get_tokens(turn):
     player_tokens = tokens['tokensP' + str(turn)]
     return player_tokens
 
-        
-def tokens_remove():
-    print(WIP)
-def tokens_add():
-    print(WIP)
+def token_per_turn(turn):
+    global tokens
+    tokens['tokensP' + str(turn)] += tokens_eco
+                
+def tokens_remove(amount):
+    global tokens
+    tokens['tokensP' + str(turn)] -= amount
+
+def tokens_add(turn):
+    global tokens
+    tokens['tokensP' + str(turn)] += amount
     
     
