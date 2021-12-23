@@ -1,6 +1,7 @@
 # imports for other files
 import functions as f
 import nameinput_system as n_sys
+import token_system as t_sys
 
 req_refresh = False
 
@@ -23,6 +24,8 @@ def displayScreen(player1, player2, player3, player4, images):
     pCount = n_sys.update_t_dis()['pCount']
     mode = n_sys.update_t_dis()['mode']
     modeSpecs = n_sys.update_t_dis()['modeSpecs']
+    
+    t_sys.tokenbegin_Refresh()
     
     stroke(0)
     strokeWeight(7)

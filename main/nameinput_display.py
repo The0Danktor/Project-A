@@ -21,3 +21,4 @@ def displayScreen(player, images):
         tempSize -= 1
         textSize(tempSize)
     text(typing, f.simpleCenter(typing), height*0.51, width*0.38, height*0.1)
+    
