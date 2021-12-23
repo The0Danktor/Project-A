@@ -82,6 +82,11 @@ def slider2(mousePressed):
     ellipseMode(CENTER)
     ellipse(x2,y2,20,20)
 
+def background_():
+    background_filler = background
+    
+    
+
 def mouseReleased_():
     global mouse_down, mouse_down2
     mouse_down = False
