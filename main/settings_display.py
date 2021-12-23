@@ -5,7 +5,7 @@ taal2 = True
 
 
 x = 1060
-x2 = 660
+x2 = 1060
 mouse_down = False
 mouse_down2 = False
 
@@ -17,6 +17,7 @@ def displayScreen(mousePressed,mouseReleased):
     #de eerste button
     languageButton1(mouseReleased)
     languageButton2(mouseReleased)
+    #background_()
 
     
     
@@ -81,9 +82,11 @@ def slider2(mousePressed):
     fill(255)
     ellipseMode(CENTER)
     ellipse(x2,y2,20,20)
+    print(x2-660)
 
 def background_():
-    background_filler = background
+    fill(0,((x2-660)//6))
+    rect(0,0,width,height)
     
     
 
