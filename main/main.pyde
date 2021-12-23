@@ -68,7 +68,7 @@ def setup():
     # this.surface.setResizable(True)
     # this.surface.setTitle("Trench Warfare")
     # this.surface.setLocation(100, 100)
-    fullScreen()
+    fullScreen(2)
     background(0)
     noStroke()
     fill(102)
