@@ -26,7 +26,7 @@ def createPiece(field = 'b1'):
 
 def draw_(mouse_pressed):
     global piece_locs, mouse_down, current
-    if (((mouseX - piece_locs[current][0])**2 + (mouseY - piece_locs[current][1])**2 < width*0.25**2) and mouse_pressed) or (mouse_down == True):
+    if (((mouseX - piece_locs[current][0])**2 + (mouseY - piece_locs[current][1])**2 < (width*0.018)**2) and mouse_pressed) or (mouse_down == True):
         mouse_down = True
         piece_locs[current][0] = mouseX
         piece_locs[current][1] = mouseY
