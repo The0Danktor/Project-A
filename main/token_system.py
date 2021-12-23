@@ -20,7 +20,8 @@ def tokenbegin_Refresh():
     'tokensP3': tokenbegin_count,
     'tokensP4': tokenbegin_count
     }
-    print(tokenbegin_count)
+
+
 def token_teller(turn,textX1,textY2,boxed = False,X1=0,Y1=0,X2=0,Y2=0):
     if boxed:
         rect(X1,Y1,X2,Y2,10)
