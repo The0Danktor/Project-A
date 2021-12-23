@@ -113,7 +113,7 @@ def displayScreen(players, turn, images, fields, mousePressed_):
             checkSpot('h1', images)
             
     for piece in piece_locs:
-        image(images[str(piece[3]) + '_s_img'], piece[0], piece[1], height*0.05, height*0.05)
+        image(images[str(piece[4]) + '_' + str(piece[3]) + '_img'], piece[0], piece[1], height*0.05, height*0.05)
     imageMode(CORNER)
     
 def checkSpot(field, images):

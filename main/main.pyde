@@ -59,6 +59,14 @@ def setup():
               'blue_s_img'    : loadImage("blue_soldier.png"),
               'green_s_img'   : loadImage("green_soldier.png"),
               'yellow_s_img'  : loadImage("yellow_soldier.png"),
+              'red_t_img'     : loadImage("red_tank.png"),
+              'blue_t_img'    : loadImage("blue_tank.png"),
+              'green_t_img'   : loadImage("green_tank.png"),
+              'yellow_t_img'  : loadImage("yellow_tank.png"),
+              'red_c_img'     : loadImage("red_car.png"),
+              'blue_c_img'    : loadImage("blue_car.png"),
+              'green_c_img'   : loadImage("green_car.png"),
+              'yellow_c_img'  : loadImage("yellow_car.png"),
               'add_button_img': loadImage("add_button.png")
     }
     fields = g_sys.createField()
@@ -102,7 +110,7 @@ def draw():
         e_dis.displayScreen()
     elif state == 8:
         g_dis.displayScreen(players, turn, images, fields, mousePressed)
-        g_sys.draw_(mousePressed)
+        g_sys.draw_(mousePressed, turn)
     elif state == 9:
         k_sys.displayScreen(images)
 
@@ -132,6 +140,7 @@ def mousePressed():
         if state == -1:
             state = backup_state
     elif state == 8:
+        g_sys.mousePressed_(turn)
         ret = g_dis.mousePressed_(players, turn)
         
         if ret > 0:

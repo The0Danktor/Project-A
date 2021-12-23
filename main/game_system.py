@@ -1,3 +1,5 @@
+import nameinput_system as n_sys
+
 fields = {}
 piece_locs = ()
 mouse_down = False
@@ -6,9 +8,9 @@ current = 0
 def createPieces():
     global piece_locs
     piece_locs = [
-                  [width*0.140, height*0.285, 0, 'blue'],
-                  [width*0.180, height*0.250, 1, 'yellow'],
-                  [width*0.260, height*0.250, 2, 'yellow']
+                  [width*0.140, height*0.285, 0, 's', 'blue'],
+                  [width*0.180, height*0.250, 1, 'c', 'yellow'],
+                  [width*0.260, height*0.250, 2, 't', 'yellow']
                   ]
     print(piece_locs)
     
@@ -20,23 +22,58 @@ def getFields():
     global fields
     return fields
 
-def createPiece(field = 'b1'):
+def createPiece(field = 'b1', type='s', colour='green'):
     global piece_locs
-    piece_locs.append([fields[field + 'x'], fields[field + 'y'], len(piece_locs), 'green'])
+    piece_locs.append([fields[field + 'x'], fields[field + 'y'], len(piece_locs), type, colour])
 
-def draw_(mouse_pressed):
+def mousePressed_(turn):
+    global current
+    
+    saved = width
+    for pos in piece_locs:
+        distance = sqrt((pos[0] - mouseX)**2 + (pos[1] - mouseY)**2)
+        if distance < saved:
+            saved = distance
+            current = pos[2]
+    
+    pCount = n_sys.update_t_dis()['pCount']
+    if (pCount == 2 and turn == 1) or (pCount == 4 and (turn == 1 or turn == 2)):
+        turn_locs = ['b8', 'd8', 'f8', 'h8']
+        field = 'h8'
+    else:
+        turn_locs = ['b1', 'd1', 'f1', 'h1']
+        field = 'h1'
+    for loc in turn_locs:
+        distance = sqrt((fields[loc + 'x'] - mouseX)**2 + (fields[loc + 'y'] - mouseY)**2)
+        if distance < saved:
+            saved = distance
+            field = loc
+    result = True
+    for piece in piece_locs:
+        if round(piece[0], 2) == round(fields[field + 'x'], 2) and round(piece[1], 2) == round(fields[field + 'y'], 2):
+            result = False
+    if result == True:
+        if ((mouseX - fields[field + "x"])**2 + (mouseY - fields[field + "y"])**2 < (width*0.018)**2):
+            if turn == 1:
+                colour = 'red'
+            elif turn == 2:
+                colour = 'green'
+            elif turn == 3:
+                colour = 'blue'
+            else:
+                colour = 'yellow'
+            createPiece(field, 't', colour)
+
+def draw_(mouse_pressed, turn):
     global piece_locs, mouse_down, current
     if (((mouseX - piece_locs[current][0])**2 + (mouseY - piece_locs[current][1])**2 < (width*0.018)**2) and mouse_pressed) or (mouse_down == True):
-        mouse_down = True
-        piece_locs[current][0] = mouseX
-        piece_locs[current][1] = mouseY
-    elif mouse_pressed:
-        saved = width
-        for pos in piece_locs:
-            distance = sqrt((pos[0] - mouseX)**2 + (pos[1] - mouseY)**2)
-            if distance < saved:
-                saved = distance
-                current = pos[2]
+        if (turn == 1 and piece_locs[current][4] == 'red')\
+        or (turn == 2 and piece_locs[current][4] == 'green')\
+        or (turn == 3 and piece_locs[current][4] == 'blue')\
+        or (turn == 4 and piece_locs[current][4] == 'yellow'):
+            mouse_down = True
+            piece_locs[current][0] = mouseX
+            piece_locs[current][1] = mouseY
 
 def mouseReleased_():
     global piece_loc, mouse_down, current
