@@ -1,84 +1,168 @@
 import nameinput_system as n_sys
 
-fields = {}
-piece_locs = ()
-mouse_down = False
-current = 0
+fields = {}        # a list of all fields on the board
+field_names = ('a1', 'a2', 'a3', 'a4', 'a5', 'a6', 'a7',
+               'b1', 'b2', 'b3', 'b4', 'b5', 'b6', 'b7', 'b8',
+               'c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7',
+               'd1', 'd2', 'd3', 'd4', 'd5', 'd6', 'd7', 'd8',
+               'e1', 'e2', 'e3', 'e4', 'e5', 'e6', 'e7',
+               'f1', 'f2', 'f3', 'f4', 'f5', 'f6', 'f7', 'f8',
+               'g1', 'g2', 'g3', 'g4', 'g5', 'g6', 'g7',
+               'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'h7', 'h8',
+               'i1', 'i2', 'i3', 'i4', 'i5', 'i6', 'i7'
+               )   # a list of all fields by name
+piece_locs = ()    # a list of all piece locations on the board
+valid_locs = []    # a list of valid locations for the current piece to move to
+mouse_down = False # indicates rather a piece is being moved
+current = 0        # indicates the current piece being moved [by index in piece_locs]
+backupx = 0        # stores origional x location of a piece being moved for return
+backupy = 0        # stores origional y location of a piece being moved for return
+choosing = False   # indicates rather the player is choosing a new piece or not
+choosing_info = {} # required info for after the player has chosen
 
+# creates an unused background piece used to counter empty list issues
 def createPieces():
     global piece_locs
-    piece_locs = [
-                  [width*0.140, height*0.285, 0, 's', 'blue'],
-                  [width*0.180, height*0.250, 1, 'c', 'yellow'],
-                  [width*0.260, height*0.250, 2, 't', 'yellow']
-                  ]
-    print(piece_locs)
+    piece_locs = [[0, 0, 0, 'unused', 'unused']]
     
+# updates choosing in game_display
+def updateChoosing():
+    global choosing
+    return choosing
+    
+# returns a list of all pieces
 def getPieces():
     global piece_locs
     return piece_locs
 
+# retunrs a list of all fields on the board
 def getFields():
     global fields
     return fields
 
-def createPiece(field = 'b1', type='s', colour='green'):
+# retunrs a list of all valid fields on the board
+def getValids():
+    global valid_locs, mouse_down
+    return [valid_locs, mouse_down]
+
+# creates a new piece on the board [s = soldier, c = car, t = tank]
+def createPiece(field = 'b1', type = 's', colour='green'):
     global piece_locs
     piece_locs.append([fields[field + 'x'], fields[field + 'y'], len(piece_locs), type, colour])
 
+# mousePressed() imported from main
 def mousePressed_(turn):
-    global current
+    global current, mouse_down, choosing, choosing_info
     
-    saved = width
-    for pos in piece_locs:
-        distance = sqrt((pos[0] - mouseX)**2 + (pos[1] - mouseY)**2)
-        if distance < saved:
-            saved = distance
-            current = pos[2]
-    
-    pCount = n_sys.update_t_dis()['pCount']
-    if (pCount == 2 and turn == 1) or (pCount == 4 and (turn == 1 or turn == 2)):
-        turn_locs = ['b8', 'd8', 'f8', 'h8']
-        field = 'h8'
+    if choosing == False:
+    # reset the current piece being moved to the piece closest to the cursor
+        if mouse_down != True:
+            saved = width
+            for pos in piece_locs:
+                distance = sqrt((pos[0] - mouseX)**2 + (pos[1] - mouseY)**2)
+                if distance < saved:
+                    saved = distance
+                    current = pos[2]
+        
+        # piece creation system
+        pCount = n_sys.update_t_dis()['pCount']
+        if (pCount == 2 and turn == 1) or (pCount == 4 and (turn == 1 or turn == 2)):
+            turn_locs = ['b8', 'd8', 'f8', 'h8']
+            field = 'h8'
+        else:
+            turn_locs = ['b1', 'd1', 'f1', 'h1']
+            field = 'h1'
+        for loc in turn_locs:
+            distance = sqrt((fields[loc + 'x'] - mouseX)**2 + (fields[loc + 'y'] - mouseY)**2)
+            if distance < saved:
+                saved = distance
+                field = loc
+        result = True
+        for piece in piece_locs:
+            if round(piece[0], 2) == round(fields[field + 'x'], 2) and round(piece[1], 2) == round(fields[field + 'y'], 2):
+                result = False
+        if result == True:
+            if ((mouseX - fields[field + "x"])**2 + (mouseY - fields[field + "y"])**2 < (width*0.018)**2):
+                if turn == 1:
+                    colour = 'red'
+                elif turn == 2:
+                    colour = 'green'
+                elif turn == 3:
+                    colour = 'blue'
+                else:
+                    colour = 'yellow'
+                choosing_info['field'] = field
+                choosing_info['colour'] = colour
+                choosing = True
     else:
-        turn_locs = ['b1', 'd1', 'f1', 'h1']
-        field = 'h1'
-    for loc in turn_locs:
-        distance = sqrt((fields[loc + 'x'] - mouseX)**2 + (fields[loc + 'y'] - mouseY)**2)
-        if distance < saved:
-            saved = distance
-            field = loc
-    result = True
-    for piece in piece_locs:
-        if round(piece[0], 2) == round(fields[field + 'x'], 2) and round(piece[1], 2) == round(fields[field + 'y'], 2):
-            result = False
-    if result == True:
-        if ((mouseX - fields[field + "x"])**2 + (mouseY - fields[field + "y"])**2 < (width*0.018)**2):
-            if turn == 1:
-                colour = 'red'
-            elif turn == 2:
-                colour = 'green'
-            elif turn == 3:
-                colour = 'blue'
-            else:
-                colour = 'yellow'
-            createPiece(field, 't', colour)
+        if width*0.285 < mouseX < width*0.315 and height*0.400 < mouseY < height*0.450:
+            choosing = False
+            createPiece(choosing_info['field'], 's', choosing_info['colour'])
+        elif width*0.285 < mouseX < width*0.315 and height*0.475 < mouseY < height*0.525:
+            choosing = False
+            createPiece(choosing_info['field'], 'c', choosing_info['colour'])
+        elif width*0.285 < mouseX < width*0.315 and height*0.550 < mouseY < height*0.600:
+            choosing = False
+            createPiece(choosing_info['field'], 't', choosing_info['colour'])
+        elif (mouseX < width*0.275 or mouseX > width*0.325) or (mouseY < height*0.375 or mouseY > height*0.625):
+            choosing = False
 
+# draw() imported from main
 def draw_(mouse_pressed, turn):
-    global piece_locs, mouse_down, current
+    global piece_locs, mouse_down, current, backupx, backupy, valid_locs, choosing
+    
+    # returns if the player is choosing
+    if choosing == True:
+        return
+    
+    # piece pickup/movement system
     if (((mouseX - piece_locs[current][0])**2 + (mouseY - piece_locs[current][1])**2 < (width*0.018)**2) and mouse_pressed) or (mouse_down == True):
+        # check if the piece belongs to the current player
         if (turn == 1 and piece_locs[current][4] == 'red')\
         or (turn == 2 and piece_locs[current][4] == 'green')\
         or (turn == 3 and piece_locs[current][4] == 'blue')\
         or (turn == 4 and piece_locs[current][4] == 'yellow'):
-            mouse_down = True
-            piece_locs[current][0] = mouseX
-            piece_locs[current][1] = mouseY
+            
+            # code on piece pickup
+            if mouse_down == False:
+                mouse_down = True
+                backupx = piece_locs[current][0]
+                backupy = piece_locs[current][1]
+                loc = 'a7x'
+                for k in [word for word in fields.keys() if word.endswith("x")]:
+                    if round(piece_locs[current][0], 2) == round(fields[k], 2) and round(piece_locs[current][1], 2) == round(fields[k[:-1] + 'y'], 2):
+                        loc = k
+                reach = 0
+                if piece_locs[current][3] == 's':
+                    reach = 3
+                if piece_locs[current][3] == 'c':
+                    reach = 5
+                if piece_locs[current][3] == 't':
+                    reach = 2
+                valid_locs = []
+                newloc = gridify(loc[:-1])
+                print(newloc)
+                checkMovement(newloc, reach)
+                print(valid_locs)
+            # code during piece pickup
+            if width*0.1 + height*0.025 < mouseX < width*0.5 - height*0.025 and height*0.205 < mouseY < height*0.805:
 
+                piece_locs[current][0] = mouseX
+                piece_locs[current][1] = mouseY
+
+# mouseReleased() imported from main
 def mouseReleased_():
-    global piece_loc, mouse_down, current
+    global piece_loc, mouse_down, current, fields, backupx, backupy, valid_locs, choosing
+    
+    # returns if the player is choosing
+    if choosing == True:
+        return
+    
+    # piece placement system
     if mouse_down == True:
         mouse_down = False
+        
+        # finds the nearset location to place piece in
         saved = width
         loc = 'a7x'
         for k in [word for word in fields.keys() if word.endswith("x")]:
@@ -86,10 +170,87 @@ def mouseReleased_():
             if distance < saved:
                 saved = distance
                 loc = k
-        piece_locs[current][0] = fields[loc]
-        piece_locs[current][1] = fields[loc[:-1] + 'y']
-            
+                
+        # checks if location is valid
+        if loc[:-1] in valid_locs:
+            piece_locs[current][0] = fields[loc]
+            piece_locs[current][1] = fields[loc[:-1] + 'y']
+        else:
+            piece_locs[current][0] = backupx
+            piece_locs[current][1] = backupy            
 
+def gridify(loc):
+    column = loc[:-1]
+    row = int(loc[1:])
+    if column == 'a' or column == 'c' or column == 'e' or column == 'g' or column == 'i':
+        row += 0.5
+    return [column, row]
+
+# validate movement
+def checkMovement(loc, reach = 1):
+    global valid_locs
+    if reach > 0:
+        column = loc[0]
+        row = loc[1]
+        #up/down
+        checkIfValid(reach, column + str(int(row + 1)))
+        checkIfValid(reach, column + str(int(row - 1)))
+        #left/right
+        if column == 'a':
+            checkIfValid(reach, 'b' + str(int(row + 0.5)))
+            checkIfValid(reach, 'b' + str(int(row - 0.5)))
+        elif column == 'b':
+            checkIfValid(reach, 'a' + str(int(row + 0.5)))
+            checkIfValid(reach, 'a' + str(int(row - 0.5)))
+            checkIfValid(reach, 'c' + str(int(row + 0.5)))
+            checkIfValid(reach, 'c' + str(int(row - 0.5)))
+        elif column == 'c':
+            checkIfValid(reach, 'b' + str(int(row + 0.5)))
+            checkIfValid(reach, 'b' + str(int(row - 0.5)))
+            checkIfValid(reach, 'd' + str(int(row + 0.5)))
+            checkIfValid(reach, 'd' + str(int(row - 0.5)))
+        elif column == 'd':
+            checkIfValid(reach, 'c' + str(int(row + 0.5)))
+            checkIfValid(reach, 'c' + str(int(row - 0.5)))
+            checkIfValid(reach, 'e' + str(int(row + 0.5)))
+            checkIfValid(reach, 'e' + str(int(row - 0.5)))
+        elif column == 'e':
+            checkIfValid(reach, 'd' + str(int(row + 0.5)))
+            checkIfValid(reach, 'd' + str(int(row - 0.5)))
+            checkIfValid(reach, 'f' + str(int(row + 0.5)))
+            checkIfValid(reach, 'f' + str(int(row - 0.5)))
+        elif column == 'f':
+            checkIfValid(reach, 'e' + str(int(row + 0.5)))
+            checkIfValid(reach, 'e' + str(int(row - 0.5)))
+            checkIfValid(reach, 'g' + str(int(row + 0.5)))
+            checkIfValid(reach, 'g' + str(int(row - 0.5)))
+        elif column == 'g':
+            checkIfValid(reach, 'f' + str(int(row + 0.5)))
+            checkIfValid(reach, 'f' + str(int(row - 0.5)))
+            checkIfValid(reach, 'h' + str(int(row + 0.5)))
+            checkIfValid(reach, 'h' + str(int(row - 0.5)))
+        elif column == 'h':
+            checkIfValid(reach, 'g' + str(int(row + 0.5)))
+            checkIfValid(reach, 'g' + str(int(row - 0.5)))
+            checkIfValid(reach, 'i' + str(int(row + 0.5)))
+            checkIfValid(reach, 'i' + str(int(row - 0.5)))
+        elif column == 'i':
+            checkIfValid(reach, 'h' + str(int(row + 0.5)))
+            checkIfValid(reach, 'h' + str(int(row - 0.5)))
+
+def checkIfValid(reach, loc):
+    if loc in field_names:
+        result = True
+        for piece in piece_locs:
+            if round(piece[0], 2) == round(fields[loc + 'x'], 2) and round(piece[1], 2) == round(fields[loc + 'y'], 2):
+                result = False
+        if result == True:
+            if not loc in valid_locs:
+                valid_locs.append(loc)
+            newloc = gridify(loc)
+            checkMovement(newloc, reach - 1)
+
+# creates the field
 def createField():
     global fields
     x_offset = width*0.04

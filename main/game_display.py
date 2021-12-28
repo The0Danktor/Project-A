@@ -80,6 +80,15 @@ def displayScreen(players, turn, images, fields, mousePressed_):
         rect(width*0.3,height*0.82,width*0.2,height*0.01)
     fill(0)
     image(images['board_img'], width*0.1, height*0.18, width*0.4, height*0.64)
+    
+    valid_locs = g_sys.getValids()[0]
+    mouse_down = g_sys.getValids()[1]
+    if mouse_down == True:
+        for loc in valid_locs:
+            ellipseMode(CENTER)
+            ellipse(fields[loc + 'x'], fields[loc + 'y'], width*0.002, width*0.002)
+            ellipseMode(CORNER)
+            
     # for k in [word for word in fields.keys() if word.endswith("x")]:
     #     ellipseMode(CENTER)
     #     ellipse(fields[k], fields[k[:-1] + 'y'], width*0.002, width*0.002)
@@ -89,7 +98,7 @@ def displayScreen(players, turn, images, fields, mousePressed_):
     imageMode(CENTER)
     
     fields = g_sys.getFields()
-    if pCount == 2 and mousePressed_ == False:
+    if pCount == 2 and mouse_down == False:
         if turn == 2:
             checkSpot('b1', images)
             checkSpot('d1', images)
@@ -100,7 +109,7 @@ def displayScreen(players, turn, images, fields, mousePressed_):
             checkSpot('d8', images)
             checkSpot('f8', images)
             checkSpot('h8', images)
-    elif pCount == 4 and mousePressed_ == False:
+    elif pCount == 4 and mouse_down == False:
         if turn == 1 or turn == 2:
             checkSpot('b8', images)
             checkSpot('d8', images)
@@ -113,8 +122,27 @@ def displayScreen(players, turn, images, fields, mousePressed_):
             checkSpot('h1', images)
             
     for piece in piece_locs:
-        image(images[str(piece[4]) + '_' + str(piece[3]) + '_img'], piece[0], piece[1], height*0.05, height*0.05)
+        if piece[4] != 'unused':
+            image(images[str(piece[4]) + '_' + str(piece[3]) + '_img'], piece[0], piece[1], height*0.05, height*0.05)
     imageMode(CORNER)
+    
+    choosing = g_sys.updateChoosing()
+    if choosing == True:
+        fill(50)
+        stroke(0)
+        strokeWeight(7)
+        rect(width*0.275, height*0.375, width*0.05, height*0.25, 20)
+        if turn == 1:
+            colour = 'red'
+        elif turn == 2:
+            colour = 'green'
+        elif turn == 3:
+            colour = 'blue'
+        else:
+            colour = 'yellow'
+        image(images[colour + '_s_img'], width*0.285, height*0.400, width*0.03, height*0.05)
+        image(images[colour + '_c_img'], width*0.285, height*0.475, width*0.03, height*0.05)
+        image(images[colour + '_t_img'], width*0.285, height*0.550, width*0.03, height*0.05)
     
 def checkSpot(field, images):
     piece_locs = g_sys.getPieces()

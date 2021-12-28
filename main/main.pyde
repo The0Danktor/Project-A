@@ -46,7 +46,7 @@ def setup():
     global images, fields
     images = {
               'board_img'     : loadImage("board3.png"),
-              'main_img'      : loadImage("title_screen.png"),
+              'main_img'      : loadImage("better_titlescreen.png"),
               'background_img': loadImage("background.png"),
               'start_img'     : loadImage("start.png"),
               'settings_img'  : loadImage("settings.png"),
