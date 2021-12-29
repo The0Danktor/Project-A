@@ -167,7 +167,7 @@ def mousePressed():
     elif state == 9:
         k_sys.mousePressed_()
     elif state == 10:
-        cd_sys.mousePressed_(images, turn, players)
+        state = cd_sys.mousePressed_(images, turn, players)
         
     if saved_state != state:
         refresh()

@@ -78,6 +78,8 @@ def mousePressed_(images, turn, players):
     
     if width-75 < mouseX < width and  0 < mouseY < 75:     #Terug knop
         return 8
+    else:
+        return 10
 
 def displayCards(inv):
     global cardsNeg, cardsListNeg, cardsPos, cardsListPos, inv1, inv2, inv3, inv4, cardAmount1, cardAmount2, cardAmount3, cardAmount4, chosenPlayer, cardsNegPulled, cardsPosPulled, chosenPlayerInv
@@ -126,20 +128,3 @@ def useCard(inv):
         cardsNegPulled.append(selectedCard)
     del inv[selectedCardNum]
     selectedCardNum = -1
-
-def reset(images):
-    global chosenPlayer, name
-    image(images['menu_img'], 0, 0, width, height)
-    
-    if chosenPlayer == 1:
-        displayCards(inv1)
-    elif chosenPlayer == 2:
-        displayCards(inv2)
-    elif chosenPlayer == 3:
-        displayCards(inv3)
-    elif chosenPlayer == 4:
-        displayCards(inv4)
-    
-    f.textBox(width/5, 0, width/5*3, height/10, name)
-    f.textBox(width-75, 0, 75, 75, "Terug")
-    cardState = 0
