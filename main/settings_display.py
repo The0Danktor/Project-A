@@ -17,7 +17,7 @@ def displayScreen(mousePressed,mouseReleased):
     #de eerste button
     languageButton1(mouseReleased)
     languageButton2(mouseReleased)
-    #background_()
+    background_()
 
     
     
@@ -99,9 +99,10 @@ def languageButton1(mousePressed):
     global taal1
     #if #mousePressed and (mouseButton == LEFT):
     fill(200)
-    rect(660, 350, 100, 100)
+    #rect(660, 350, 100, 100)
+    f.textBox(600, 350, 100, 100, 'NL')
     fill(0)
-    text('Nederlands', 660, 350, 100, 100)
+    #text('Nederlands', 660, 350, 100, 100)
     if 660 < mouseX < 500 and 450 < mouseY < 400:
         print('Nederlands')
     #elif mousePressed and (mouseButton == RIGHT):
@@ -115,9 +116,10 @@ def languageButton1(mousePressed):
 def languageButton2(mousePressed):
     global taal2
     fill(200)
-    rect(1010, 350, 100, 100)
+    #rect(1010, 350, 100, 100)
+    f.textBox(1010, 350, 100, 100, 'EN')
     fill(0)
-    text('English', 1010, 350, 100, 100)
+    #text('English', 1010, 350, 100, 100)
     if 1010 < mouseX < 1400 and 450 < mouseY < 400:
         print('English')
     #if mousePressed and (mouseButton == LEFT):
