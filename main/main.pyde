@@ -50,8 +50,8 @@ def setup():
     # Import dictonaries
     global images, fields,ruleweb
     # searches the path for the rule book and makes a link out of it
-    rulepath = find_files("rules.pdf",r"C:\Users")[0]
-    ruleweb =  'file:///' + (rulepath.replace("\\","/"))
+    #rulepath = find_files("rules.pdf",r"C:\Users")[0]
+    #ruleweb =  'file:///' + (rulepath.replace("\\","/"))
     images = {
               'board_img'     : loadImage("board3.png"),
               'main_img'      : loadImage("better_titlescreen.png"),
