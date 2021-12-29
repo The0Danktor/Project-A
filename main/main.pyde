@@ -3,6 +3,8 @@
 # ==================================================
 
 # imports for other files
+import webbrowser
+import os
 import title_display as t_dis
 import nameinput_display as n_dis
 import menu_display as m_dis
@@ -31,6 +33,7 @@ images = {}
 fields = {}
 clicked = False
 NO_ESCAPE = '0'
+ruleweb = ''
 
 # ==================================================
 # state 0 = menu
@@ -45,7 +48,10 @@ NO_ESCAPE = '0'
 # setup function
 def setup():
     # Import dictonaries
-    global images, fields
+    global images, fields,ruleweb
+    # searches the path for the rule book and makes a link out of it
+    rulepath = find_files("rules.pdf",r"C:\Users")[0]
+    ruleweb =  'file:///' + (rulepath.replace("\\","/"))
     images = {
               'board_img'     : loadImage("board3.png"),
               'main_img'      : loadImage("better_titlescreen.png"),
@@ -94,6 +100,7 @@ def setup():
     mainFont = createFont("SpecialElite-Regular.ttf", 18)
     textFont(mainFont)
 
+
 # ==================================================
 
 # draw function
@@ -118,7 +125,7 @@ def draw():
         k_sys.displayScreen(images)
     #==============================================
     #rules button
-    r_dis.displayScreen(images,mousePressed)
+    r_dis.displayScreen(images,mousePressed,ruleweb)
 
 
 
@@ -211,3 +218,11 @@ def keyPressed():
     if state == 8:
         if key == '+':
             g_sys.createPiece()
+#========================================================
+#path finder            
+def find_files(filename, search_path):
+   result = []
+   for root, dir, files in os.walk(search_path):
+      if filename in files:
+         result.append(os.path.join(root, filename))
+   return result

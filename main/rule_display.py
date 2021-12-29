@@ -2,14 +2,14 @@ import webbrowser
 
 
 
-def displayScreen(images,mousePressed):
-    button(images,mousePressed)
+def displayScreen(images,mousePressed,ruleweb):
+    button(images,mousePressed,ruleweb)
     
 
-def button(images,mousePressed):
+def button(images,mousePressed,ruleweb):
     image(images['rules_b_img'],0,height-40,40,40)
     if mousePressed and mouseX < 40 and mouseY > height - 40:
-        openrules()
-def openrules():
-    webbrowser.open_new(r'file:///C:/Users/jamie/Documents/GitHub/Project-A/main/data/Regelboekje%20Duidelijk.pdf')
+        openrules(ruleweb)
+def openrules(ruleweb):
+    webbrowser.open_new(ruleweb)
     
