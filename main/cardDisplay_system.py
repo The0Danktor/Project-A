@@ -18,24 +18,25 @@ cardsPos = {"Keep Digging": "Je volgende aanval doet 1 extra schade",
 "Gasmasker": "Je bent voor 1 ronde beschermd tegen een gasaanval"}
 cardsPosPulled = []
 cardsListPos = ["Keep Digging", "Kabiem!!!", "Body Armor", "Spotted", "Op Volle Toeren", "Gasmasker"]
-inv1 = ["Trench Feet", "Hongersnood", "Rat Attack", "Freeze", "Hongersnood", "Rat Attack", "Freeze", "Rat Attack"]        #Temporary Fill#
-inv2 = ["Trench Feet", "Hongersnood", "Rat Attack", "Freeze", "Trench Feet", "Hongersnood", "Rat Attack"]                 #Temporary Fill#
+inv1 = ["Trench Feet", "Hongersnood", "Rat Attack", "Freeze", "Hongersnood", "Rat Attack", "Freeze", "Rat Attack"]        #======Temporary Fill======#
+inv2 = ["Trench Feet", "Hongersnood", "Rat Attack", "Freeze", "Trench Feet", "Hongersnood", "Rat Attack"]                 #======Temporary Fill======#
 inv3 = []
 inv4 = []
-chosenPlayer = ''       #Speler die aan de beurt is + in setup en reset
 cardState = 0
 selectedCardNum = -1
 name = ''
 
-def loadScreen(images, turn):
+def displayScreen(turn, players):
     global chosenPlayer, name
     
     chosenPlayer = turn
-    name = 'player' + str(turn)
-    image(images['menu_img'], 0, 0, width, height)
 
-def displayScreen(images, turn, players):
-    global chosenPlayer, chosenPlayerInv, cardState
+
+def loadScreen(images, turn, players):
+    global chosenPlayer, chosenPlayerInv, cardState, name
+    chosenPlayer = turn
+    name = 'player' + str(turn)
+    name = players[name]
     image(images['menu_img'], 0, 0, width, height)
     f.textBox(width/5, -5, width/5*3, height/10, name)
     f.textBox(width-75, 0, 75, 75, "Terug")
@@ -51,7 +52,7 @@ def displayScreen(images, turn, players):
     
     cardState = 0
     
-def mousePressed_():
+def mousePressed_(images, turn, players):
     global cardsNeg, cardsListNeg, cardsPos, cardsListPos, inv1, inv2, inv3, inv4, cardAmount1, cardAmount2, cardAmount3, cardAmount4, chosenPlayer, cardsNegPulled, cardsPosPulled, chosenPlayerInv, cardState
     if 0 < chosenPlayer < 5:       #Display en knoppen door middel van loop (Maximum display aan te passen door "i < 11" aan te passen)
         i = 1
@@ -61,24 +62,22 @@ def mousePressed_():
     
     if width/6*2 < mouseX < width/6*4 and height/10*6 < mouseY < height/10*6+height/6 and chosenPlayer == 1 and cardState == 1:
         useCard(inv1)
-        reset()
+        loadScreen(images, turn, players)
     
     if width/6*2 < mouseX < width/6*4 and height/10*6 < mouseY < height/10*6+height/6 and chosenPlayer == 2 and cardState == 1:
         useCard(inv2)
-        reset()
+        loadScreen(images, turn, players)
 
     if width/6*2 < mouseX < width/6*4 and height/10*6 < mouseY < height/10*6+height/6 and chosenPlayer == 3 and cardState == 1:
         useCard(inv3)
-        reset()
+        loadScreen(images, turn, players)
 
     if width/6*2 < mouseX < width/6*4 and height/10*6 < mouseY < height/10*6+height/6 and chosenPlayer == 4 and cardState == 1:
         useCard(inv4)
-        reset()
+        loadScreen(images, turn, players)
     
-    if width-75 < mouseX < width and  0 < mouseY < 75:
-        a = 1
-        exit()
-        #state = ???
+    if width-75 < mouseX < width and  0 < mouseY < 75:     #Terug knop
+        return 8
 
 def displayCards(inv):
     global cardsNeg, cardsListNeg, cardsPos, cardsListPos, inv1, inv2, inv3, inv4, cardAmount1, cardAmount2, cardAmount3, cardAmount4, chosenPlayer, cardsNegPulled, cardsPosPulled, chosenPlayerInv
@@ -121,12 +120,15 @@ def cardButton(num, inv):
 
 def useCard(inv):
     global cardsNeg, cardsListNeg, cardsPos, cardsListPos, inv1, inv2, inv3, inv4, cardAmount1, cardAmount2, cardAmount3, cardAmount4, chosenPlayer, cardsNegPulled, cardsPosPulled, chosenPlayerInv, selectedCard, selectedCardNum, cardState
-    f.textBox(width/2-width/8, height*3/8, width/8*2, height/14, inv[selectedCardNum] + " is gebruikt")
+    if selectedCard in cardsListPos:
+        cardsPosPulled.append(selectedCard)
+    else:
+        cardsNegPulled.append(selectedCard)
     del inv[selectedCardNum]
-    #Toevoegen aan gebruikte deck
     selectedCardNum = -1
 
-def reset():
+def reset(images):
+    global chosenPlayer, name
     image(images['menu_img'], 0, 0, width, height)
     
     if chosenPlayer == 1:
