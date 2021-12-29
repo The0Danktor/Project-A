@@ -126,7 +126,7 @@ def draw():
     elif state == 9:
         k_sys.displayScreen(images)
     elif state == 10:
-        cd_sys.displayScreen(images, turn, players)
+        cd_sys.displayScreen(turn, players)
     #==============================================
     #rules button
     r_dis.displayScreen(images,mousePressed,ruleweb)
@@ -167,7 +167,7 @@ def mousePressed():
     elif state == 9:
         k_sys.mousePressed_()
     elif state == 10:
-        cd_sys.mousePressed_()
+        cd_sys.mousePressed_(images, turn, players)
         
     if saved_state != state:
         refresh()
@@ -194,7 +194,7 @@ def refresh():
     elif state == 9:
         k_sys.loadScreen(images)
     elif state == 10:
-        cd_sys.loadScreen(images, turn)
+        cd_sys.loadScreen(images, turn, players)
 
 # ==================================================
 
