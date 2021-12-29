@@ -16,6 +16,7 @@ import dice_system as d_sys
 import game_system as g_sys
 import token_system as t_sys
 import kaarten_system as k_sys
+import cardDisplay_system as cd_sys
 add_library("minim")
 import webbrowser
 
@@ -43,6 +44,7 @@ ruleweb = ''
 # state 7 = esc menu
 # state 8 = game active
 # state 9 = card
+# state 10 = card display / use
 # ==================================================
 
 # setup function
@@ -123,6 +125,8 @@ def draw():
         g_sys.draw_(mousePressed, turn)
     elif state == 9:
         k_sys.displayScreen(images)
+    elif state == 10:
+        cd_sys.displayScreen(images, turn, players)
     #==============================================
     #rules button
     r_dis.displayScreen(images,mousePressed,ruleweb)
@@ -162,6 +166,8 @@ def mousePressed():
             state = ret * -1
     elif state == 9:
         k_sys.mousePressed_()
+    elif state == 10:
+        cd_sys.mousePressed_()
         
     if saved_state != state:
         refresh()
@@ -187,6 +193,8 @@ def refresh():
         g_dis.loadScreen(images)
     elif state == 9:
         k_sys.loadScreen(images)
+    elif state == 10:
+        cd_sys.loadScreen(images)
 
 # ==================================================
 
