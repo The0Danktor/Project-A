@@ -194,7 +194,7 @@ def refresh():
     elif state == 9:
         k_sys.loadScreen(images)
     elif state == 10:
-        cd_sys.loadScreen(images)
+        cd_sys.loadScreen(images, turn)
 
 # ==================================================
 

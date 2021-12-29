@@ -22,15 +22,19 @@ inv1 = ["Trench Feet", "Hongersnood", "Rat Attack", "Freeze", "Hongersnood", "Ra
 inv2 = ["Trench Feet", "Hongersnood", "Rat Attack", "Freeze", "Trench Feet", "Hongersnood", "Rat Attack"]                 #Temporary Fill#
 inv3 = []
 inv4 = []
-chosenPlayer = turn        #Speler die aan de beurt is + in setup en reset
+chosenPlayer = ''       #Speler die aan de beurt is + in setup en reset
 cardState = 0
 selectedCardNum = -1
-name = player + str(turn)
+name = ''
 
-def loadScreen(images):
+def loadScreen(images, turn):
+    global chosenPlayer, name
+    
+    chosenPlayer = turn
+    name = 'player' + str(turn)
     image(images['menu_img'], 0, 0, width, height)
 
-def loadScreen(images):
+def displayScreen(images, turn, players):
     global chosenPlayer, chosenPlayerInv, cardState
     image(images['menu_img'], 0, 0, width, height)
     f.textBox(width/5, -5, width/5*3, height/10, name)
