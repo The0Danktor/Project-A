@@ -39,7 +39,7 @@ def loadScreen(images, turn, players):
     name = players[name]
     image(images['menu_img'], 0, 0, width, height)
     f.textBox(width/5, -5, width/5*3, height/10, name)
-    f.textBox(width-75, 0, 75, 75, "Terug")
+    f.textBox(width-height/10, 0, height/10, height/10, "Terug")
     
     if chosenPlayer == 1:
         displayCards(inv1)
@@ -76,7 +76,7 @@ def mousePressed_(images, turn, players):
         useCard(inv4)
         loadScreen(images, turn, players)
     
-    if width-75 < mouseX < width and  0 < mouseY < 75:     #Terug knop
+    if width-height/10 < mouseX < width and  0 < mouseY < height/10:     #Terug knop
         return 8
     else:
         return 10
