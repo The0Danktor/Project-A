@@ -8,12 +8,14 @@ import nameinput_display as n_dis
 import menu_display as m_dis
 import esc_display as e_dis
 import game_display as g_dis
+import rule_display as r_dis
 import nameinput_system as n_sys
 import dice_system as d_sys
 import game_system as g_sys
 import token_system as t_sys
 import kaarten_system as k_sys
 add_library("minim")
+import webbrowser
 
 # setup global variables
 state = 0
@@ -67,7 +69,8 @@ def setup():
               'blue_c_img'    : loadImage("blue_car.png"),
               'green_c_img'   : loadImage("green_car.png"),
               'yellow_c_img'  : loadImage("yellow_car.png"),
-              'add_button_img': loadImage("add_button.png")
+              'add_button_img': loadImage("add_button.png"),
+              'rules_b_img'   : loadImage("rules_button.png")
     }
     fields = g_sys.createField()
     g_sys.createPieces()
@@ -113,6 +116,9 @@ def draw():
         g_sys.draw_(mousePressed, turn)
     elif state == 9:
         k_sys.displayScreen(images)
+    #==============================================
+    #rules button
+    r_dis.displayScreen(images,mousePressed)
 
 
 
