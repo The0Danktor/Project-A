@@ -45,6 +45,7 @@ ruleweb = ''
 # state 8 = game active
 # state 9 = card
 # state 10 = card display / use
+# state 11 = rulebook
 # ==================================================
 
 # setup function
@@ -65,6 +66,7 @@ def setup():
               'menu_img'      : loadImage("camo.png"),
               'game_img'      : loadImage("test_background.jpg"),
               'troll_img'     : loadImage("unnamed.png"),
+              
               'red_s_img'     : loadImage("red_soldier.png"),
               'blue_s_img'    : loadImage("blue_soldier.png"),
               'green_s_img'   : loadImage("green_soldier.png"),
@@ -78,7 +80,19 @@ def setup():
               'green_c_img'   : loadImage("green_car.png"),
               'yellow_c_img'  : loadImage("yellow_car.png"),
               'add_button_img': loadImage("add_button.png"),
-              'rules_b_img'   : loadImage("rules_button.png")
+              
+              'close_img'     : loadImage("close.png"),
+              'back_img'      : loadImage("back.png"),
+              'forward_img'   : loadImage("forward.png"),
+              'rules_b_img'   : loadImage("rules_button.png"),
+              
+              'rule_page_1'   : loadImage("regelboekje1.png"),
+              'rule_page_2'   : loadImage("regelboekje2.png"),
+              'rule_page_3'   : loadImage("regelboekje3.png"),
+              'rule_page_4'   : loadImage("regelboekje4.png"),
+              'rule_page_5'   : loadImage("regelboekje5.png"),
+              'rule_page_6'   : loadImage("regelboekje6.png"),
+              'rule_page_7'   : loadImage("regelboekje7.png")
     }
     fields = g_sys.createField()
     g_sys.createPieces()
@@ -109,6 +123,10 @@ def setup():
 def draw():
     global state, players
     
+    # display all screens except start
+    if state != 0:
+        image(images['rules_b_img'],width*0.01, height*0.94, width*0.03, height*0.05)
+    
     # display loader
     if state == 0:
         m_dis.displayScreen(images)
@@ -127,9 +145,11 @@ def draw():
         k_sys.displayScreen(images)
     elif state == 10:
         cd_sys.displayScreen(turn, players)
+    elif state == 11:
+        r_dis.displayScreen(images)
     #==============================================
     #rules button
-    r_dis.displayScreen(images,mousePressed,ruleweb)
+    #r_dis.displayScreen(images,mousePressed,ruleweb)
 
 
 
@@ -142,8 +162,17 @@ def mousePressed():
         return
     else:
         clicked = True
-        
+    
     saved_state = state
+    
+    # global mousePressed events
+    if state != 0 and state != 11:
+        if width*0.01 < mouseX < width*0.04 and height*0.94 < mouseY < height*0.99:
+            r_dis.setBackup(state)
+            state = 11
+            fill(0, 100)
+            rect(0, 0, width, height)
+            return
     
     # button registration
     if state == 5:
@@ -168,6 +197,8 @@ def mousePressed():
         k_sys.mousePressed_()
     elif state == 10:
         state = cd_sys.mousePressed_(images, turn, players)
+    elif state == 11:
+        state = r_dis.mousePressed_()
         
     if saved_state != state:
         refresh()
@@ -195,6 +226,9 @@ def refresh():
         k_sys.loadScreen(images)
     elif state == 10:
         cd_sys.loadScreen(images, turn, players)
+    elif state == 11:
+        fill(0, 100)
+        rect(0, 0, width, height)
 
 # ==================================================
 
