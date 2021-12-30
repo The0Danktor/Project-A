@@ -143,10 +143,21 @@ def draw_(mouse_pressed, turn):
                 newloc = gridify(loc[:-1])
                 checkMovement(newloc, reach)
             # code during piece pickup
-            if width*0.1 + height*0.025 < mouseX < width*0.5 - height*0.025 and height*0.205 < mouseY < height*0.805:
+            # if width*0.1 + height*0.025 < mouseX < width*0.5 - height*0.025 and height*0.205 < mouseY < height*0.805:
 
-                piece_locs[current][0] = mouseX
-                piece_locs[current][1] = mouseY
+            #     piece_locs[current][0] = mouseX
+            #     piece_locs[current][1] = mouseY
+            
+            piece_locs[current][0] = mouseX
+            piece_locs[current][1] = mouseY
+            if mouseX < width*0.1 + height*0.025: # check if the mouse is on the left side of the board
+                piece_locs[current][0] = width*0.1 + height*0.025
+            if mouseX > width*0.5 - height*0.025: # check if the mouse is on the right side of the board
+                piece_locs[current][0] = width*0.5 - height*0.025
+            if mouseY < height*0.205:             # check if the mouse is on the top side of the board
+                piece_locs[current][1] = height*0.205
+            if mouseY > height*0.805:             # check if the mouse is on the bottom side of the board
+                piece_locs[current][1] = height*0.805
 
 # mouseReleased() imported from main
 def mouseReleased_():
