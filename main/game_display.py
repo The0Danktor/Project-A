@@ -169,6 +169,6 @@ def mousePressed_(players, turn):
     if width*0.1 < mouseX < width*0.2 and height*0.85 < mouseY < height*0.95:
         return -6
     if width*0.25 < mouseX < width*0.35 and height*0.85 < mouseY < height*0.95:
-        return -9
+        return -10
     noStroke()
     return -8

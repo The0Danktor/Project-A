@@ -141,9 +141,7 @@ def draw_(mouse_pressed, turn):
                     reach = 2
                 valid_locs = []
                 newloc = gridify(loc[:-1])
-                print(newloc)
                 checkMovement(newloc, reach)
-                print(valid_locs)
             # code during piece pickup
             if width*0.1 + height*0.025 < mouseX < width*0.5 - height*0.025 and height*0.205 < mouseY < height*0.805:
 
@@ -188,7 +186,6 @@ def gridify(loc):
 
 # validate movement
 def checkMovement(loc, reach = 1):
-    global valid_locs
     if reach > 0:
         column = loc[0]
         row = loc[1]
@@ -239,6 +236,7 @@ def checkMovement(loc, reach = 1):
             checkIfValid(reach, 'h' + str(int(row - 0.5)))
 
 def checkIfValid(reach, loc):
+    global valid_locs
     if loc in field_names:
         result = True
         for piece in piece_locs:
