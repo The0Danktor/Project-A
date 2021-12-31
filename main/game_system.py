@@ -1,4 +1,5 @@
 import nameinput_system as n_sys
+import token_system as t_sys
 
 fields = {}        # a list of all fields on the board
 field_names = ('a1', 'a2', 'a3', 'a4', 'a5', 'a6', 'a7',
@@ -22,8 +23,9 @@ choosing_info = {} # required info for after the player has chosen
 
 # creates an unused background piece used to counter empty list issues
 def createPieces():
-    global piece_locs
+    global piece_locs, current
     piece_locs = [[0, 0, 0, 'unused', 'unused']]
+    current = 0
     
 # updates choosing in game_display
 def updateChoosing():
@@ -65,45 +67,55 @@ def mousePressed_(turn):
                     current = pos[2]
         
         # piece creation system
-        pCount = n_sys.update_t_dis()['pCount']
-        if (pCount == 2 and turn == 1) or (pCount == 4 and (turn == 1 or turn == 2)):
-            turn_locs = ['b8', 'd8', 'f8', 'h8']
-            field = 'h8'
-        else:
-            turn_locs = ['b1', 'd1', 'f1', 'h1']
-            field = 'h1'
-        for loc in turn_locs:
-            distance = sqrt((fields[loc + 'x'] - mouseX)**2 + (fields[loc + 'y'] - mouseY)**2)
-            if distance < saved:
-                saved = distance
-                field = loc
-        result = True
-        for piece in piece_locs:
-            if round(piece[0], 2) == round(fields[field + 'x'], 2) and round(piece[1], 2) == round(fields[field + 'y'], 2):
-                result = False
-        if result == True:
-            if ((mouseX - fields[field + "x"])**2 + (mouseY - fields[field + "y"])**2 < (width*0.018)**2):
-                if turn == 1:
-                    colour = 'red'
-                elif turn == 2:
-                    colour = 'green'
-                elif turn == 3:
-                    colour = 'blue'
-                else:
-                    colour = 'yellow'
-                choosing_info['field'] = field
-                choosing_info['colour'] = colour
-                choosing = True
+        if t_sys.get_pelotons(turn) > 0 or t_sys.get_autos(turn) > 0 or t_sys.get_tanks(turn) > 0:
+            pCount = n_sys.update_t_dis()['pCount']
+            if (pCount == 2 and turn == 1) or (pCount == 4 and (turn == 1 or turn == 2)):
+                turn_locs = ['b8', 'd8', 'f8', 'h8']
+                field = 'h8'
+            else:
+                turn_locs = ['b1', 'd1', 'f1', 'h1']
+                field = 'h1'
+            for loc in turn_locs:
+                distance = sqrt((fields[loc + 'x'] - mouseX)**2 + (fields[loc + 'y'] - mouseY)**2)
+                if distance < saved:
+                    saved = distance
+                    field = loc
+            result = True
+            for piece in piece_locs:
+                if round(piece[0], 2) == round(fields[field + 'x'], 2) and round(piece[1], 2) == round(fields[field + 'y'], 2):
+                    result = False
+            if result == True:
+                if ((mouseX - fields[field + "x"])**2 + (mouseY - fields[field + "y"])**2 < (width*0.018)**2):
+                    if turn == 1:
+                        colour = 'red'
+                    elif turn == 2:
+                        colour = 'green'
+                    elif turn == 3:
+                        colour = 'blue'
+                    else:
+                        colour = 'yellow'
+                    choosing_info['field'] = field
+                    choosing_info['colour'] = colour
+                    choosing = True
     else:
         if width*0.285 < mouseX < width*0.315 and height*0.400 < mouseY < height*0.450:
-            choosing = False
-            createPiece(choosing_info['field'], 's', choosing_info['colour'])
+            if t_sys.get_pelotons(turn) > 0 and t_sys.get_tokens(turn) > 4:
+                choosing = False
+                createPiece(choosing_info['field'], 's', choosing_info['colour'])
+                t_sys.pelotons_remove(turn)
+                t_sys.tokens_remove(turn, 4)
         elif width*0.285 < mouseX < width*0.315 and height*0.475 < mouseY < height*0.525:
-            choosing = False
-            createPiece(choosing_info['field'], 'c', choosing_info['colour'])
+            if t_sys.get_autos(turn) > 0 and t_sys.get_tokens(turn) > 6:
+                choosing = False
+                createPiece(choosing_info['field'], 'c', choosing_info['colour'])
+                t_sys.autos_remove(turn)
+                t_sys.tokens_remove(turn, 6)
         elif width*0.285 < mouseX < width*0.315 and height*0.550 < mouseY < height*0.600:
-            choosing = False
-            createPiece(choosing_info['field'], 't', choosing_info['colour'])
+            if t_sys.get_tanks(turn) > 0 and t_sys.get_tokens(turn) > 9:
+                choosing = False
+                createPiece(choosing_info['field'], 't', choosing_info['colour'])
+                t_sys.tanks_remove(turn)
+                t_sys.tokens_remove(turn, 9)
         elif (mouseX < width*0.275 or mouseX > width*0.325) or (mouseY < height*0.375 or mouseY > height*0.625):
             choosing = False
 

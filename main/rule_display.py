@@ -32,7 +32,7 @@ def displayScreen(images):
     
     if page != 1:
         image(images['back_img'],width*0.03, height*0.84, width*0.03, height*0.05)
-    if page != 6:
+    if page != 7:
         image(images['forward_img'],width*0.94, height*0.84, width*0.03, height*0.05)
 
 def mousePressed_():

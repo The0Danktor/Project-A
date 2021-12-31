@@ -92,7 +92,7 @@ def playerCount():
 # change mode on request
 def changeMode():
     global mode, modeSpecs
-    if mode == 3:
+    if mode == 4:
         mode = 1
         modeSpecs = {
              'speeltijd' : '15m - 30m',
@@ -118,4 +118,13 @@ def changeMode():
              'pelotons'  : 8,
              'autos'     : 4,
              'tanks'     : 2
+        }
+    elif mode == 3:
+        mode = 4
+        modeSpecs = {
+             'speeltijd' : '??m - ??m',
+             'tokens'    : 999,
+             'pelotons'  : 999,
+             'autos'     : 999,
+             'tanks'     : 999
         }

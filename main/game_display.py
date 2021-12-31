@@ -60,9 +60,14 @@ def displayScreen(players, turn, images, fields, mousePressed_):
     fill(50)
     rect(width*0.7, height*0.24, width*0.2, height*0.38, 10)
     fill(255)
-    text('Turns: ' + str(game_turn), f.center('Turns: ' + str(game_turn), width*0.19, height*0.1, 1) - (width / 2) + width*0.8, height*0.60)
-    
-    text('Tokens: ' + str(t_sys.get_tokens(turn)), f.center('Tokens: ' + str(t_sys.get_tokens(turn)), width*0.19, height*0.1, 1) - (width / 2) + width*0.8, height*0.50)
+    text("Tokens: " + str(t_sys.get_tokens(turn)), f.center("Tokens: " + str(t_sys.get_tokens(turn)), width*0.19, height*0.1, 1) - (width / 2) + width*0.8, height*0.30)
+    text("Pelotons: " + str(t_sys.get_pelotons(turn)), f.center("Pelotons: " + str(t_sys.get_pelotons(turn)), width*0.19, height*0.1, 1) - (width / 2) + width*0.8, height*0.37)
+    text("Auto's: " + str(t_sys.get_autos(turn)), f.center("Auto's: " + str(t_sys.get_autos(turn)), width*0.19, height*0.1, 1) - (width / 2) + width*0.8, height*0.44)
+    text("Tanks: " + str(t_sys.get_tanks(turn)), f.center("Tanks: " + str(t_sys.get_tanks(turn)), width*0.19, height*0.1, 1) - (width / 2) + width*0.8, height*0.51)
+    text("Income per turn: " + str(t_sys.calculateIncome(turn)), f.center("Income per turn: " + str(t_sys.calculateIncome(turn)), width*0.19, height*0.1, 1) - (width / 2) + width*0.8, height*0.58)
+
+    fill(100)
+    text('Turn: ' + str(game_turn), f.center('Turn: ' + str(game_turn), width*0.10, height*0.1, 1) - (width / 2) + width*0.8, height*0.87)
 
     noStroke()
     fill('#FF0000')
@@ -98,28 +103,29 @@ def displayScreen(players, turn, images, fields, mousePressed_):
     imageMode(CENTER)
     
     fields = g_sys.getFields()
-    if pCount == 2 and mouse_down == False:
-        if turn == 2:
-            checkSpot('b1', images)
-            checkSpot('d1', images)
-            checkSpot('f1', images)
-            checkSpot('h1', images)
-        else: 
-            checkSpot('b8', images)
-            checkSpot('d8', images)
-            checkSpot('f8', images)
-            checkSpot('h8', images)
-    elif pCount == 4 and mouse_down == False:
-        if turn == 1 or turn == 2:
-            checkSpot('b8', images)
-            checkSpot('d8', images)
-            checkSpot('f8', images)
-            checkSpot('h8', images)
-        else:
-            checkSpot('b1', images)
-            checkSpot('d1', images)
-            checkSpot('f1', images)
-            checkSpot('h1', images)
+    if t_sys.get_pelotons(turn) > 0 or t_sys.get_autos(turn) > 0 or t_sys.get_tanks(turn) > 0:
+        if pCount == 2 and mouse_down == False:
+            if turn == 2:
+                checkSpot('b1', images)
+                checkSpot('d1', images)
+                checkSpot('f1', images)
+                checkSpot('h1', images)
+            else: 
+                checkSpot('b8', images)
+                checkSpot('d8', images)
+                checkSpot('f8', images)
+                checkSpot('h8', images)
+        elif pCount == 4 and mouse_down == False:
+            if turn == 1 or turn == 2:
+                checkSpot('b8', images)
+                checkSpot('d8', images)
+                checkSpot('f8', images)
+                checkSpot('h8', images)
+            else:
+                checkSpot('b1', images)
+                checkSpot('d1', images)
+                checkSpot('f1', images)
+                checkSpot('h1', images)
             
     for piece in piece_locs:
         if piece[4] != 'unused':
@@ -140,10 +146,28 @@ def displayScreen(players, turn, images, fields, mousePressed_):
             colour = 'blue'
         else:
             colour = 'yellow'
-        image(images[colour + '_s_img'], width*0.285, height*0.400, width*0.03, height*0.05)
-        image(images[colour + '_c_img'], width*0.285, height*0.475, width*0.03, height*0.05)
-        image(images[colour + '_t_img'], width*0.285, height*0.550, width*0.03, height*0.05)
-    
+        fill(255)
+        if t_sys.get_pelotons(turn) > 0:
+            if t_sys.get_tokens(turn) > 4:
+                image(images[colour + '_s_img'], width*0.285, height*0.400, width*0.03, height*0.05)
+            else:
+                image(images['gray_s_img'], width*0.285, height*0.400, width*0.03, height*0.05)
+            text('4 Tokens', f.center('4 Tokens', width*0.029, height*0.1, 1) - (width / 2) + width*0.300, height*0.450)
+        else:
+            text('none left', f.center('none left', width*0.029, height*0.1, 1) - (width / 2) + width*0.300, height*0.430)
+        if t_sys.get_autos(turn) > 0:
+            if t_sys.get_tokens(turn) > 6:
+                image(images[colour + '_c_img'], width*0.285, height*0.475, width*0.03, height*0.05)
+            else:
+                image(images['gray_c_img'], width*0.285, height*0.475, width*0.03, height*0.05)
+            text('6 Tokens', f.center('6 Tokens', width*0.029, height*0.1, 1) - (width / 2) + width*0.300, height*0.525)
+        if t_sys.get_tanks(turn) > 0:
+            if t_sys.get_tokens(turn) > 9:
+                image(images[colour + '_t_img'], width*0.285, height*0.550, width*0.03, height*0.05)
+            else:
+                image(images['gray_t_img'], width*0.285, height*0.550, width*0.03, height*0.05)
+            text('9 Tokens', f.center('9 Tokens', width*0.029, height*0.1, 1) - (width / 2) + width*0.300, height*0.600)
+        
 def checkSpot(field, images):
     piece_locs = g_sys.getPieces()
     fields = g_sys.getFields()
@@ -164,7 +188,6 @@ def mousePressed_(players, turn):
             game_turn += 1    
         if game_turn > 1:
             t_sys.token_per_turn(turn)
-        print(turn)
         return turn
     if width*0.1 < mouseX < width*0.2 and height*0.85 < mouseY < height*0.95:
         return -6
