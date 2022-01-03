@@ -148,7 +148,7 @@ def displayScreen(players, turn, images, fields, mousePressed_):
             colour = 'yellow'
         fill(255)
         if t_sys.get_pelotons(turn) > 0:
-            if t_sys.get_tokens(turn) > 4:
+            if t_sys.get_tokens(turn) >= 4:
                 image(images[colour + '_s_img'], width*0.285, height*0.400, width*0.03, height*0.05)
             else:
                 image(images['gray_s_img'], width*0.285, height*0.400, width*0.03, height*0.05)
@@ -156,13 +156,13 @@ def displayScreen(players, turn, images, fields, mousePressed_):
         else:
             text('none left', f.center('none left', width*0.029, height*0.1, 1) - (width / 2) + width*0.300, height*0.430)
         if t_sys.get_autos(turn) > 0:
-            if t_sys.get_tokens(turn) > 6:
+            if t_sys.get_tokens(turn) >= 6:
                 image(images[colour + '_c_img'], width*0.285, height*0.475, width*0.03, height*0.05)
             else:
                 image(images['gray_c_img'], width*0.285, height*0.475, width*0.03, height*0.05)
             text('6 Tokens', f.center('6 Tokens', width*0.029, height*0.1, 1) - (width / 2) + width*0.300, height*0.525)
         if t_sys.get_tanks(turn) > 0:
-            if t_sys.get_tokens(turn) > 9:
+            if t_sys.get_tokens(turn) >= 9:
                 image(images[colour + '_t_img'], width*0.285, height*0.550, width*0.03, height*0.05)
             else:
                 image(images['gray_t_img'], width*0.285, height*0.550, width*0.03, height*0.05)
