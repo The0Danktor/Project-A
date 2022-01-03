@@ -99,19 +99,19 @@ def mousePressed_(turn):
                     choosing = True
     else:
         if width*0.285 < mouseX < width*0.315 and height*0.400 < mouseY < height*0.450:
-            if t_sys.get_pelotons(turn) > 0 and t_sys.get_tokens(turn) > 4:
+            if t_sys.get_pelotons(turn) > 0 and t_sys.get_tokens(turn) >= 4:
                 choosing = False
                 createPiece(choosing_info['field'], 's', choosing_info['colour'])
                 t_sys.pelotons_remove(turn)
                 t_sys.tokens_remove(turn, 4)
         elif width*0.285 < mouseX < width*0.315 and height*0.475 < mouseY < height*0.525:
-            if t_sys.get_autos(turn) > 0 and t_sys.get_tokens(turn) > 6:
+            if t_sys.get_autos(turn) > 0 and t_sys.get_tokens(turn) >= 6:
                 choosing = False
                 createPiece(choosing_info['field'], 'c', choosing_info['colour'])
                 t_sys.autos_remove(turn)
                 t_sys.tokens_remove(turn, 6)
         elif width*0.285 < mouseX < width*0.315 and height*0.550 < mouseY < height*0.600:
-            if t_sys.get_tanks(turn) > 0 and t_sys.get_tokens(turn) > 9:
+            if t_sys.get_tanks(turn) > 0 and t_sys.get_tokens(turn) >= 9:
                 choosing = False
                 createPiece(choosing_info['field'], 't', choosing_info['colour'])
                 t_sys.tanks_remove(turn)
