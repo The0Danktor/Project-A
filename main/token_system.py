@@ -2,7 +2,12 @@ import nameinput_system as n_sys
 import functions as f
 import game_system as g_sys
 
-tokens_eco = 3
+tokens_eco = {
+    'tokensecoP1': 3,
+    'tokensecoP2': 3,
+    'tokensecoP3': 3,
+    'tokensecoP4': 3
+    }
 tokens = {}
 pelotons = {}
 autos = {}
@@ -101,7 +106,7 @@ def calculateIncome(turn):
                 income += 3
             elif piece[3] == 't':
                 income += 4
-    return income + tokens_eco
+    return income + tokens_eco['tokenseco'+str(turn)]
                 
 def tokens_remove(turn, amount):
     global tokens
@@ -110,6 +115,10 @@ def tokens_remove(turn, amount):
 def tokens_add(turn, amount):
     global tokens
     tokens['tokensP' + str(turn)] += amount
+
+def tokens_upgrade(turn, amount):
+    global tokens
+    tokens_eco['tokensecoP' + str(turn)] = amount
     
 def pelotons_remove(turn, amount=1):
     global pelotons
