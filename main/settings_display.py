@@ -84,7 +84,7 @@ def slider2(mousePressed):
     ellipse(x2,y2,20,20)
     print(x2-660)
 
-def background_():
+def soundeffects_():
     fill(0,((x2-660)//6))
     rect(0,0,width,height)
     
@@ -100,10 +100,11 @@ def languageButton1(mousePressed):
     #if #mousePressed and (mouseButton == LEFT):
     fill(200)
     #rect(660, 350, 100, 100)
-    f.textBox(600, 350, 100, 100, 'NL')
+    f.textBox(700, 350, 100, 100, 'NL')
+    strokeweight(10)
     fill(0)
     #text('Nederlands', 660, 350, 100, 100)
-    if 660 < mouseX < 500 and 450 < mouseY < 400:
+    if 700 < mouseX < 500 and 450 < mouseY < 400:
         print('Nederlands')
     #elif mousePressed and (mouseButton == RIGHT):
         #fill(255)
@@ -117,10 +118,11 @@ def languageButton2(mousePressed):
     global taal2
     fill(200)
     #rect(1010, 350, 100, 100)
-    f.textBox(1010, 350, 100, 100, 'EN')
+    f.textBox(1110, 350, 100, 100, 'EN')
+    strokeweight(10)
     fill(0)
     #text('English', 1010, 350, 100, 100)
-    if 1010 < mouseX < 1400 and 450 < mouseY < 400:
+    if 1110 < mouseX < 1400 and 450 < mouseY < 400:
         print('English')
     #if mousePressed and (mouseButton == LEFT):
 
