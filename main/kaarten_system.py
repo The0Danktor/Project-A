@@ -31,41 +31,53 @@ selectedCardNum = -1
 
 
 
-def displayScreen(images):
+def displayScreen(images, turn, players):
     global chosenPlayer
 
         
-def loadScreen(images):
+def loadScreen(images, turn, players):
     image(images['menu_img'], 0, 0, width, height)
     
     global chosenPlayer
-
+    
     f.textBox(width/2-width/8, height/3, width/8*2, height/14, 'Dobbelen')
-    if chosenPlayer == 1:
-        f.textBox(width*1/5-width/24, height/10, width/12.1, height/9.8, 'Player 1', 100)
-        f.textBox(width*2/5-width/24, height/10, width/12.1, height/9.8, 'Player 2')
-        f.textBox(width*3/5-width/24, height/10, width/12.1, height/9.8, 'Player 3')
-        f.textBox(width*4/5-width/24, height/10, width/12.1, height/9.8, 'Player 4')
-    elif chosenPlayer == 2:
-        f.textBox(width*1/5-width/24, height/10, width/12.1, height/9.8, 'Player 1')
-        f.textBox(width*2/5-width/24, height/10, width/12.1, height/9.8, 'Player 2', 100)
-        f.textBox(width*3/5-width/24, height/10, width/12.1, height/9.8, 'Player 3')
-        f.textBox(width*4/5-width/24, height/10, width/12.1, height/9.8, 'Player 4')
-    elif chosenPlayer == 3:
-        f.textBox(width*1/5-width/24, height/10, width/12.1, height/9.8, 'Player 1')
-        f.textBox(width*2/5-width/24, height/10, width/12.1, height/9.8, 'Player 2')
-        f.textBox(width*3/5-width/24, height/10, width/12.1, height/9.8, 'Player 3', 100)
-        f.textBox(width*4/5-width/24, height/10, width/12.1, height/9.8, 'Player 4')
-    elif chosenPlayer == 4:
-        f.textBox(width*1/5-width/24, height/10, width/12.1, height/9.8, 'Player 1')
-        f.textBox(width*2/5-width/24, height/10, width/12.1, height/9.8, 'Player 2')
-        f.textBox(width*3/5-width/24, height/10, width/12.1, height/9.8, 'Player 3')
-        f.textBox(width*4/5-width/24, height/10, width/12.1, height/9.8, 'Player 4', 100)
-    else:
-        f.textBox(width*1/5-width/24, height/10, width/12.1, height/9.8, 'Player 1')
-        f.textBox(width*2/5-width/24, height/10, width/12.1, height/9.8, 'Player 2')
-        f.textBox(width*3/5-width/24, height/10, width/12.1, height/9.8, 'Player 3')
-        f.textBox(width*4/5-width/24, height/10, width/12.1, height/9.8, 'Player 4')
+    
+    if playerCount == 4:
+        if chosenPlayer == 1:
+            f.textBox(width*1/5-width/24, height/10, width/12.1, height/9.8, players[player1], 100)
+            f.textBox(width*2/5-width/24, height/10, width/12.1, height/9.8, players[player2])
+            f.textBox(width*3/5-width/24, height/10, width/12.1, height/9.8, players[player3])
+            f.textBox(width*4/5-width/24, height/10, width/12.1, height/9.8, players[player4])
+        elif chosenPlayer == 2:
+            f.textBox(width*1/5-width/24, height/10, width/12.1, height/9.8, players[player1])
+            f.textBox(width*2/5-width/24, height/10, width/12.1, height/9.8, players[player2], 100)
+            f.textBox(width*3/5-width/24, height/10, width/12.1, height/9.8, players[player3])
+            f.textBox(width*4/5-width/24, height/10, width/12.1, height/9.8, players[player4])
+        elif chosenPlayer == 3:
+            f.textBox(width*1/5-width/24, height/10, width/12.1, height/9.8, players[player1])
+            f.textBox(width*2/5-width/24, height/10, width/12.1, height/9.8, players[player2])
+            f.textBox(width*3/5-width/24, height/10, width/12.1, height/9.8, players[player3], 100)
+            f.textBox(width*4/5-width/24, height/10, width/12.1, height/9.8, players[player4])
+        elif chosenPlayer == 4:
+            f.textBox(width*1/5-width/24, height/10, width/12.1, height/9.8, players[player1])
+            f.textBox(width*2/5-width/24, height/10, width/12.1, height/9.8, players[player2])
+            f.textBox(width*3/5-width/24, height/10, width/12.1, height/9.8, players[player3])
+            f.textBox(width*4/5-width/24, height/10, width/12.1, height/9.8, players[player4], 100)
+        else:
+            f.textBox(width*1/5-width/24, height/10, width/12.1, height/9.8, players[player1])
+            f.textBox(width*2/5-width/24, height/10, width/12.1, height/9.8, players[player2])
+            f.textBox(width*3/5-width/24, height/10, width/12.1, height/9.8, players[player3])
+            f.textBox(width*4/5-width/24, height/10, width/12.1, height/9.8, players[player4])
+    elif playerCount == 2:
+        if chosenPlayer == 1
+            f.textBox(width*2/5-width/24, height/10, width/12.1, height/9.8, players[player1], 100)
+            f.textBox(width*3/5-width/24, height/10, width/12.1, height/9.8, players[player2])               
+        elif chosenPlayer == 2:
+            f.textBox(width*2/5-width/24, height/10, width/12.1, height/9.8, players[player1])
+            f.textBox(width*3/5-width/24, height/10, width/12.1, height/9.8, players[player2], 100)
+       else:
+            f.textBox(width*2/5-width/24, height/10, width/12.1, height/9.8, players[player1])
+            f.textBox(width*3/5-width/24, height/10, width/12.1, height/9.8, players[player2])                    
 
 
 
@@ -73,175 +85,32 @@ def mousePressed_():
     global cardsNeg, cardsListNeg, cardsPos, cardsListPos, inv1, inv2, inv3, inv4, cardAmount1, cardAmount2, cardAmount3, cardAmount4, chosenPlayer, cardsNegPulled, cardsPosPulled, chosenPlayerInv, selectedCard, cardState, selectedCardNum
     import functions as f
     
-    if width*1/5-width/24 < mouseX < width*1/5+width/24.2 and height/10 < mouseY < height/10+height/9.8:    #Select P1
-        reset()
-        chosenPlayerInv = 1
-        f.textBox(width*1/5-width/24, height/10, width/12.1, height/9.8, 'Player 1', 150)
-        f.textBox(width*2/5-width/24, height/10, width/12.1, height/9.8, 'Player 2')
-        f.textBox(width*3/5-width/24, height/10, width/12.1, height/9.8, 'Player 3')
-        f.textBox(width*4/5-width/24, height/10, width/12.1, height/9.8, 'Player 4')
+    if playerCount == 4:
+        if width/2-width/8 < mouseX < width/2+width/8 and height/3 < mouseY < height/3+height/14 and chosenPlayer < 5:     #Rollen voor alle spelers
+            if chosenPlayer == 1:
+                roll(inv1, cardAmount1)
 
-    if width*2/5-width/24 < mouseX < width*2/5+width/24.2 and height/10 < mouseY < height/10+height/9.8:     #Select P2
-        reset()
-        chosenPlayerInv = 2
-        f.textBox(width*1/5-width/24, height/10, width/12.1, height/9.8, 'Player 1')
-        f.textBox(width*2/5-width/24, height/10, width/12.1, height/9.8, 'Player 2', 150)
-        f.textBox(width*3/5-width/24, height/10, width/12.1, height/9.8, 'Player 3')
-        f.textBox(width*4/5-width/24, height/10, width/12.1, height/9.8, 'Player 4')
-    
-    if width*3/5-width/24 < mouseX < width*3/5+width/24.2 and height/10 < mouseY < height/10+height/9.8:       #Select P3
-        reset()
-        chosenPlayerInv = 3
-        f.textBox(width*1/5-width/24, height/10, width/12.1, height/9.8, 'Player 1')
-        f.textBox(width*2/5-width/24, height/10, width/12.1, height/9.8, 'Player 2')
-        f.textBox(width*3/5-width/24, height/10, width/12.1, height/9.8, 'Player 3', 150)
-        f.textBox(width*4/5-width/24, height/10, width/12.1, height/9.8, 'Player 4')
-    
-    if width*4/5-width/24 < mouseX < width*4/5+width/24.2 and height/10 < mouseY < height/10+height/9.8:         #Select P4
-        reset()
-        chosenPlayerInv = 4
-        f.textBox(width*1/5-width/24, height/10, width/12.1, height/9.8, 'Player 1')
-        f.textBox(width*2/5-width/24, height/10, width/12.1, height/9.8, 'Player 2')
-        f.textBox(width*3/5-width/24, height/10, width/12.1, height/9.8, 'Player 3')
-        f.textBox(width*4/5-width/24, height/10, width/12.1, height/9.8, 'Player 4', 150)
+            elif chosenPlayer == 2:
+                roll(inv2, cardAmount2)
 
-    if width/2-width/8 < mouseX < width/2+width/8 and height/3 < mouseY < height/3+height/14 and chosenPlayer < 5:     #Rollen voor alle spelers
-        if chosenPlayer == 1:
-            roll(inv1, cardAmount1)
-
-        elif chosenPlayer == 2:
-            roll(inv2, cardAmount2)
-
-        elif chosenPlayer == 3:
-            roll(inv3, cardAmount3)
+            elif chosenPlayer == 3:
+                roll(inv3, cardAmount3)
             
-        elif chosenPlayer == 4:
-            roll(inv4, cardAmount4)
+            elif chosenPlayer == 4:
+                roll(inv4, cardAmount4)
             
-        elif chosenPlayer != 1 or 2 or 3 or 4 or 5:
-            f.textBox(width/2-200, height*3.5/8, 400, 90, "Kies een speler")
-        
-    if chosenPlayer == 5 and width*1/5-width/24 < mouseX < width*1/5+width/24.2 and height/10 < mouseY < height/10+height/9.8:    #Zorgen dat je de kaarten van gekozen speler kan displayen
-        f.textBox(width/2-width/8, height*6/8, width/8*2, height/14, "Kaarten Laten Zien")
-        cardState = 0
-    elif chosenPlayer == 5 and width*2/5-width/24 < mouseX < width*2/5+width/24.2 and height/10 < mouseY < height/10+height/9.8:
-        f.textBox(width/2-width/8, height*6/8, width/8*2, height/14, "Kaarten Laten Zien")
-        cardState = 0
-    elif chosenPlayer == 5 and width*3/5-width/24 < mouseX < width*3/5+width/24.2 and height/10 < mouseY < height/10+height/9.8:
-        f.textBox(width/2-width/8, height*6/8, width/8*2, height/14, "Kaarten Laten Zien")
-        cardState = 0
-    elif chosenPlayer == 5 and width*4/5-width/24 < mouseX < width*4/5+width/24.2 and height/10 < mouseY < height/10+height/9.8:
-        f.textBox(width/2-width/8, height*6/8, width/8*2, height/14, "Kaarten Laten Zien")
-        cardState = 0
+            elif chosenPlayer != 1 or 2 or 3 or 4 or 5:
+                f.textBox(width/2-200, height*3.5/8, 400, 90, "Kies een speler")
+    elif playerCount == 2:
+        if width/2-width/8 < mouseX < width/2+width/8 and height/3 < mouseY < height/3+height/14 and chosenPlayer < 3:     #Rollen voor alle spelers
+            if chosenPlayer == 1:
+                roll(inv1, cardAmount1)
 
-    if width/2-width/8 < mouseX < width/2+width/8 and height*6/8 < mouseY < height*6/8+height/14 and chosenPlayer == 5 and cardState == 0:
-        reset()
-        displayCards()
-        cardState = 1
-        
-        #================#
-         #Later Nodig!!!
-        #================#
+            elif chosenPlayer == 2:
+                roll(inv2, cardAmount2)
 
-    if width/2-width/8 < mouseX < width/2+width/8 and height*6/8 < mouseY < height*6/8+height/12 and cardState == 1:          #Kaarten gebruiken (Later nodig om effecten toe te passen)
-        #Gekozen kaart verwijderen uit inventory van gekozen speler
-        if chosenPlayerInv == 1 and selectedCardNum > -1:
-            useCard(inv1)
-        elif chosenPlayerInv == 2 and selectedCardNum > -1:
-            useCard(inv2)
-        elif chosenPlayerInv == 3 and selectedCardNum > -1:
-            useCard(inv3)
-        elif chosenPlayerInv == 4 and selectedCardNum > -1:
-            useCard(inv4)
-
-    if chosenPlayerInv == 1:       #Display en knoppen door middel van loop (Maximum display aan te passen door "i < 11" aan te passen)
-        i = 1
-        while len(inv1) >= i and i < 11:
-            cardDisplay1(i, inv1)
-            i += 1
-
-    if chosenPlayerInv == 2:
-        i = 1
-        while len(inv2) >= i and i < 11:
-            cardDisplay1(i, inv2)
-            i += 1
-
-    if chosenPlayerInv == 3:
-        i = 1
-        while len(inv3) >= i and i < 11:
-            cardDisplay1(i, inv3)
-            i += 1
-        
-    if chosenPlayerInv == 4:
-        i = 1
-        while len(inv4) >= i and i < 11:
-            cardDisplay1(i, inv4)
-            i += 1
-
-def useCard(inv):
-    global cardsNeg, cardsListNeg, cardsPos, cardsListPos, inv1, inv2, inv3, inv4, cardAmount1, cardAmount2, cardAmount3, cardAmount4, chosenPlayer, cardsNegPulled, cardsPosPulled, chosenPlayerInv, selectedCard, selectedCardNum, cardState
-    f.textBox(width/2-width/8, height*3/8, width/8*2, height/14, inv[selectedCardNum] + " is gebruikt")
-    del inv[selectedCardNum]
-    selectedCardNum = -1
-
-def cardDisplay1(num, inv):
-    global cardsNeg, cardsListNeg, cardsPos, cardsListPos, inv1, inv2, inv3, inv4, cardAmount1, cardAmount2, cardAmount3, cardAmount4, chosenPlayer, cardsNegPulled, cardsPosPulled, chosenPlayerInv, selectedCard, selectedCardNum, cardState
-    num -= 1
-    x1 = width/12 + width/12 * num
-    x2 = x1+width/14
-    if x1 < mouseX < x2 and height-height/8 < mouseY < height:
-        pos = width/12
-        card = 0
-        for cards in inv:
-            f.textBox(pos, height-height/8, width/14, height/8, inv[card])
-            pos += width/12
-            card += 1
-        f.textBox(x1, height-height/8, width/14, height/8, inv[num], 100)
-        selectedCard = inv[num]
-        selectedCardNum = num
-        f.textBox(width/2-width/8, height*6/8, width/8*2, height/12, "Kaart Gebruiken")
-        cardState = 1
-        if selectedCard in cardsListNeg:
-            f.textBox(width/8, height*5/8, width/8*6, 70, cardsNeg[selectedCard])
-        else:
-            f.textBox(width/8, height*5/8, width/8*6, 70, cardsPos[selectedCard])    
-        
-def cardInv():
-    i = 1
-            
-def reset():
-    #fullScreen()
-    bg = loadImage("camo.png")
-    image(bg,0,0,width,height)
-    
-    if chosenPlayer < 5:
-        f.textBox(width/2-width/8, height/3, width/8*2, height/14, 'Dobbelen')
-    
-    if chosenPlayer == 1:
-        f.textBox(width*1/5-width/24, height/10, width/12.1, height/9.8, 'Player 1', 100)
-        f.textBox(width*2/5-width/24, height/10, width/12.1, height/9.8, 'Player 2')
-        f.textBox(width*3/5-width/24, height/10, width/12.1, height/9.8, 'Player 3')
-        f.textBox(width*4/5-width/24, height/10, width/12.1, height/9.8, 'Player 4')
-    elif chosenPlayer == 2:
-        f.textBox(width*1/5-width/24, height/10, width/12.1, height/9.8, 'Player 1')
-        f.textBox(width*2/5-width/24, height/10, width/12.1, height/9.8, 'Player 2', 100)
-        f.textBox(width*3/5-width/24, height/10, width/12.1, height/9.8, 'Player 3')
-        f.textBox(width*4/5-width/24, height/10, width/12.1, height/9.8, 'Player 4')
-    elif chosenPlayer == 3:
-        f.textBox(width*1/5-width/24, height/10, width/12.1, height/9.8, 'Player 1')
-        f.textBox(width*2/5-width/24, height/10, width/12.1, height/9.8, 'Player 2')
-        f.textBox(width*3/5-width/24, height/10, width/12.1, height/9.8, 'Player 3', 100)
-        f.textBox(width*4/5-width/24, height/10, width/12.1, height/9.8, 'Player 4')
-    elif chosenPlayer == 4:
-        f.textBox(width*1/5-width/24, height/10, width/12.1, height/9.8, 'Player 1')
-        f.textBox(width*2/5-width/24, height/10, width/12.1, height/9.8, 'Player 2')
-        f.textBox(width*3/5-width/24, height/10, width/12.1, height/9.8, 'Player 3')
-        f.textBox(width*4/5-width/24, height/10, width/12.1, height/9.8, 'Player 4', 100)
-    else:
-        f.textBox(width*1/5-width/24, height/10, width/12.1, height/9.8, 'Player 1')
-        f.textBox(width*2/5-width/24, height/10, width/12.1, height/9.8, 'Player 2')
-        f.textBox(width*3/5-width/24, height/10, width/12.1, height/9.8, 'Player 3')
-        f.textBox(width*4/5-width/24, height/10, width/12.1, height/9.8, 'Player 4')
+            elif chosenPlayer != 1 or 2 or 3 or 4 or 5:
+                f.textBox(width/2-200, height*3.5/8, 400, 90, "Kies een speler")
 
 def cardCheck():
     global cardsNeg, cardsListNeg, cardsPos, cardsListPos, inv1, inv2, inv3, inv4, cardAmount1, cardAmount2, cardAmount3, cardAmount4, chosenPlayer, cardsNegPulled, cardsPosPulled
@@ -270,40 +139,6 @@ def pulledCardCheck():
     cardsNegPulled = list(dict.fromkeys(cardsNegPulled))
     cardsPosPulled = list(dict.fromkeys(cardsPosPulled))
 
-def displayCards():
-    global cardsNeg, cardsListNeg, cardsPos, cardsListPos, inv1, inv2, inv3, inv4, cardAmount1, cardAmount2, cardAmount3, cardAmount4, chosenPlayer, cardsNegPulled, cardsPosPulled, chosenPlayerInv
-    if chosenPlayerInv == 1:
-        pos = width/12
-        card = 0
-        for cards in inv1:
-            f.textBox(pos, height-height/8, width/14, height/8, inv1[card])
-            pos += width/12
-            card += 1
-
-    elif chosenPlayerInv == 2:
-        pos = width/12
-        card = 0
-        for cards in inv2:
-            f.textBox(pos, height-height/8, width/14, height/8, inv2[card])
-            pos += width/12
-            card += 1
-
-    elif chosenPlayerInv == 3:
-        pos = width/12
-        card = 0
-        for cards in inv3:
-            f.textBox(pos, height-height/8, width/14, height/8, inv3[card])
-            pos += width/12
-            card += 1
-
-    elif chosenPlayerInv == 4:
-        pos = width/12
-        card = 0
-        for cards in inv4:
-            f.textBox(pos, height-height/8, width/14, height/8, inv4[card])
-            pos += width/12
-            card += 1
-
 def roll(inv, cardAmount):
     global cardsNeg, cardsListNeg, cardsPos, cardsListPos, inv1, inv2, inv3, inv4, cardAmount1, cardAmount2, cardAmount3, cardAmount4, chosenPlayer, cardsNegPulled, cardsPosPulled, chosenPlayerInv
     
@@ -322,8 +157,7 @@ def roll(inv, cardAmount):
         pulledCardCheck()
         cardAmount += 1
         chosenPlayer += 1
-        cardInv()
-        reset()
+        loadScreen(images, turn, players)
         f.textBox(width/2-20, height/4, 40, 40, str(dice), 255, 0)
         fill(255)
         f.textBox(width/2-width/6, height/6*2.6, width*2/6, height/10, randomCard, red, 0)
@@ -338,15 +172,14 @@ def roll(inv, cardAmount):
         pulledCardCheck()
         cardAmount += 1
         chosenPlayer += 1
-        cardInv()
-        reset()
+        loadScreen(images, turn, players)
         f.textBox(width/2-20, height/4, 40, 40, str(dice), 255, 0)
         fill(255)
         f.textBox(width/2-width/6, height/6*2.6, width*2/6, height/10, randomCard, green, 0)
         f.textBox(width/2-width/5, height*4.3/8, width*2/5, height/10, cardDesc)
     else:
         chosenPlayer += 1
-        reset()
+        loadScreen(images, turn, players)
         fill(0)
         f.textBox(width/2-width/5, height*3.5/8, width/5*2, height/10, "Je mag geen kaart pakken")
     f.textBox(width/2-20, height/4, 40, 40, str(dice), 255, 0)

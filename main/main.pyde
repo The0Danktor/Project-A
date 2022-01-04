@@ -44,7 +44,7 @@ ruleweb = ''
 # state 6 = dice
 # state 7 = esc menu
 # state 8 = game active
-# state 9 = card
+# state 9 = card pull
 # state 10 = card display / use
 # state 11 = rulebook
 # state 12 = upgrade
@@ -148,7 +148,7 @@ def draw():
         g_dis.displayScreen(players, turn, images, fields, mousePressed)
         g_sys.draw_(mousePressed, turn)
     elif state == 9:
-        k_sys.displayScreen(images)
+        k_sys.displayScreen(images, turn, players)
     elif state == 10:
         cd_sys.displayScreen(turn, players)
     elif state == 11:
@@ -229,7 +229,7 @@ def refresh():
     elif state == 8:
         g_dis.loadScreen(images)
     elif state == 9:
-        k_sys.loadScreen(images)
+        k_sys.loadScreen(images, turn, players)
     elif state == 10:
         cd_sys.loadScreen(images, turn, players)
     elif state == 11:
