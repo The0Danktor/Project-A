@@ -11,6 +11,7 @@ import menu_display as m_dis
 import esc_display as e_dis
 import game_display as g_dis
 import rule_display as r_dis
+import upgrades_display as u_dis
 import nameinput_system as n_sys
 import dice_system as d_sys
 import game_system as g_sys
@@ -46,6 +47,7 @@ ruleweb = ''
 # state 9 = card
 # state 10 = card display / use
 # state 11 = rulebook
+# state 12 = upgrade
 # ==================================================
 
 # setup function
