@@ -1,5 +1,6 @@
 import functions as f
 import random as r
+import nameinput_system as n_sys
 cardsNeg = {"Trench Feet": "Je pelotons bewegen de volgende ronde 1 stap minder",
 "Hongersnood": "Pelotons op het slagveld kunnen 1 ronde niet bewegen en aanvallen",
 "Rat Attack": "Eerstvolgende gevecht doe je 1 schade minder",
@@ -28,6 +29,7 @@ chosenPlayer = 1
 chosenPlayerInv = 0
 cardState = 0
 selectedCardNum = -1
+playerCount = n_sys.update_t_dis()['pCount']
 
 
 
@@ -38,7 +40,7 @@ def displayScreen(images, turn, players):
 def loadScreen(images, turn, players):
     image(images['menu_img'], 0, 0, width, height)
     
-    global chosenPlayer
+    global chosenPlayer, playerCount
     
     f.textBox(width/2-width/8, height/3, width/8*2, height/14, 'Dobbelen')
     
@@ -82,7 +84,7 @@ def loadScreen(images, turn, players):
 
 
 def mousePressed_():
-    global cardsNeg, cardsListNeg, cardsPos, cardsListPos, inv1, inv2, inv3, inv4, cardAmount1, cardAmount2, cardAmount3, cardAmount4, chosenPlayer, cardsNegPulled, cardsPosPulled, chosenPlayerInv, selectedCard, cardState, selectedCardNum
+    global cardsNeg, cardsListNeg, cardsPos, cardsListPos, inv1, inv2, inv3, inv4, cardAmount1, cardAmount2, cardAmount3, cardAmount4, chosenPlayer, cardsNegPulled, cardsPosPulled, chosenPlayerInv, selectedCard, cardState, selectedCardNum, playerCount
     import functions as f
     
     if playerCount == 4:
