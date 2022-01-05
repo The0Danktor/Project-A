@@ -153,6 +153,9 @@ def draw():
         cd_sys.displayScreen(turn, players)
     elif state == 11:
         r_dis.displayScreen(images)
+    elif state == 12:
+        u_dis.displayScreen()
+        
     #==============================================
     #rules button
     #r_dis.displayScreen(images,mousePressed,ruleweb)
@@ -243,7 +246,7 @@ def keyPressed():
     global backup_state
     if key == ESC:
         this.key = NO_ESCAPE
-        if state != 0:
+        if state != 0 and state != 12:
             if state != 7:
                 fill(0, 100)
                 rectMode(CORNER)
@@ -253,6 +256,9 @@ def keyPressed():
             else:
                 state = backup_state
                 refresh()
+        if state == 12:
+            state = 8
+            refresh()
     global state, players
         
     # nameinput_system key input

@@ -69,13 +69,13 @@ def loadScreen(images, turn, players):
             f.textBox(width*3/5-width/24, height/10, width/12.1, height/9.8, players[player3])
             f.textBox(width*4/5-width/24, height/10, width/12.1, height/9.8, players[player4])
     elif playerCount == 2:
-        if chosenPlayer == 1
+        if chosenPlayer == 1:
             f.textBox(width*2/5-width/24, height/10, width/12.1, height/9.8, players[player1], 100)
             f.textBox(width*3/5-width/24, height/10, width/12.1, height/9.8, players[player2])               
         elif chosenPlayer == 2:
             f.textBox(width*2/5-width/24, height/10, width/12.1, height/9.8, players[player1])
             f.textBox(width*3/5-width/24, height/10, width/12.1, height/9.8, players[player2], 100)
-       else:
+        else:
             f.textBox(width*2/5-width/24, height/10, width/12.1, height/9.8, players[player1])
             f.textBox(width*3/5-width/24, height/10, width/12.1, height/9.8, players[player2])                    
 

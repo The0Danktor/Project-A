@@ -22,7 +22,7 @@ def displayScreen():
     fill(50)
     stroke(0)
     strokeWeight(7)
-    rect(width*0.275, height*0.375, width*0.05, height*0.25, 20)
+    rect(width*0.2, height*0.175, width*0.6, height*0.65, 20)
 
 def get_eco(turn):
     global eco
