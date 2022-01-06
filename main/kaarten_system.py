@@ -43,6 +43,7 @@ def loadScreen(images, turn, players):
     global chosenPlayer, playerCount
     
     f.textBox(width/2-width/8, height/3, width/8*2, height/14, 'Dobbelen')
+    f.textBox(width/2-width/8, height/2, width/8*2, height/14, str(playerCount))    #==Alleen voor test==#
     
     if playerCount == 2:
         if chosenPlayer == 1:
