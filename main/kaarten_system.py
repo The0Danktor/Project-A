@@ -29,7 +29,6 @@ chosenPlayer = 1
 chosenPlayerInv = 0
 cardState = 0
 selectedCardNum = -1
-playerCount = n_sys.update_t_dis()['pCount']
 
 
 
@@ -39,11 +38,10 @@ def displayScreen(images, turn, players):
         
 def loadScreen(images, turn, players):
     image(images['menu_img'], 0, 0, width, height)
-    
+    playerCount = n_sys.update_t_dis()['pCount']
     global chosenPlayer, playerCount
     
     f.textBox(width/2-width/8, height/3, width/8*2, height/14, 'Dobbelen')
-    f.textBox(width/2-width/8, height/2, width/8*2, height/14, str(playerCount))    #==Alleen voor test==#
     
     if playerCount == 2:
         if chosenPlayer == 1:
