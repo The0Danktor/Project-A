@@ -154,7 +154,7 @@ def draw():
     elif state == 11:
         r_dis.displayScreen(images)
     elif state == 12:
-        u_dis.displayScreen()
+        u_dis.displayScreen(turn)
         
     #==============================================
     #rules button
@@ -208,6 +208,8 @@ def mousePressed():
         state = cd_sys.mousePressed_(images, turn, players)
     elif state == 11:
         state = r_dis.mousePressed_()
+    elif state == 12: 
+        u_dis.mousePressed_(turn)
         
     if saved_state != state:
         refresh()
