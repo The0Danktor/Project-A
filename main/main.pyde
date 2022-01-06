@@ -203,7 +203,7 @@ def mousePressed():
         else:
             state = ret * -1
     elif state == 9:
-        k_sys.mousePressed_()
+        state = k_sys.mousePressed_(images, turn, players)
     elif state == 10:
         state = cd_sys.mousePressed_(images, turn, players)
     elif state == 11:

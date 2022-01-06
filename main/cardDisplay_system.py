@@ -20,7 +20,7 @@ cardsPosPulled = []
 cardsListPos = ["Keep Digging", "Kabiem!!!", "Body Armor", "Spotted", "Op Volle Toeren", "Gasmasker"]
 inv1 = ["Trench Feet", "Hongersnood", "Rat Attack", "Freeze", "Hongersnood", "Rat Attack", "Freeze", "Rat Attack"]        #======Temporary Fill======#
 inv2 = ["Trench Feet", "Hongersnood", "Rat Attack", "Freeze", "Trench Feet", "Hongersnood", "Rat Attack"]                 #======Temporary Fill======#
-inv3 = []
+inv3 = ["Hongersnood", "Rat Attack", "Freeze", "Trench Feet", "Hongersnood", "Rat Attack"]
 inv4 = []
 cardState = 0
 selectedCardNum = -1
@@ -54,10 +54,29 @@ def loadScreen(images, turn, players):
     
 def mousePressed_(images, turn, players):
     global cardsNeg, cardsListNeg, cardsPos, cardsListPos, inv1, inv2, inv3, inv4, cardAmount1, cardAmount2, cardAmount3, cardAmount4, chosenPlayer, cardsNegPulled, cardsPosPulled, chosenPlayerInv, cardState
-    if 0 < chosenPlayer < 5:       #Display en knoppen door middel van loop (Maximum display aan te passen door "i < 11" aan te passen)
+    
+    if chosenPlayer == 1:       #Display en knoppen door middel van loop (Maximum display aan te passen door "i < 11" aan te passen)
         i = 1
         while len(inv1) >= i and i < 11:
             cardButton(i, inv1)
+            i += 1
+    
+    if chosenPlayer == 2:
+        i = 1
+        while len(inv2) >= i and i < 11:
+            cardButton(i, inv2)
+            i += 1
+    
+    if chosenPlayer == 3:
+        i = 1
+        while len(inv3) >= i and i < 11:
+            cardButton(i, inv3)
+            i += 1
+    
+    if chosenPlayer == 4:
+        i = 1
+        while len(inv4) >= i and i < 11:
+            cardButton(i, inv4)
             i += 1
     
     if width/6*2 < mouseX < width/6*4 and height/10*6 < mouseY < height/10*6+height/6 and chosenPlayer == 1 and cardState == 1:
