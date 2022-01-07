@@ -105,8 +105,8 @@ def setup():
               'eco_lvl3'      : loadImage("economie_lvl3.png"),
               'generaal_lvl1' : loadImage("generaal_lvl1.png"),
               'generaal_lvl2' : loadImage("generaal_lvl2.png"),
-              'art_lvl1'      : loadImage("artillerie_lvl1.png"),
-              'art_lvl2'      : loadImage("artillerie_lvl2.png")
+              'art_lvl1'      : loadImage("artillerie_lvl2.png"),
+              'art_lvl2'      : loadImage("artillerie_lvl1.png")
     }
     fields = g_sys.createField()
     g_sys.createPieces()
@@ -162,7 +162,7 @@ def draw():
     elif state == 11:
         r_dis.displayScreen(images)
     elif state == 12:
-        u_dis.displayScreen(turn)
+        u_dis.displayScreen(turn,images)
         
     #==============================================
     #rules button
@@ -217,7 +217,7 @@ def mousePressed():
     elif state == 11:
         state = r_dis.mousePressed_()
     elif state == 12: 
-        u_dis.mousePressed_(turn)
+        state = u_dis.mousePressed_(turn)
         
     if saved_state != state:
         refresh()

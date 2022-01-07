@@ -2,6 +2,7 @@
 import functions as f
 import nameinput_system as n_sys
 import token_system as t_sys
+import upgrades_display as u_dis
 
 req_refresh = False
 
@@ -26,6 +27,7 @@ def displayScreen(player1, player2, player3, player4, images):
     modeSpecs = n_sys.update_t_dis()['modeSpecs']
     
     t_sys.tokenbegin_Refresh()
+    u_dis.upgrade_refresh()
     
     stroke(0)
     strokeWeight(7)
