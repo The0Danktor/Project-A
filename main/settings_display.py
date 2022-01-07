@@ -30,6 +30,7 @@ def menu(mousePressed):
     slider1(mousePressed)
     slider2(mousePressed)
     volume()
+    soundeffects_()
 
 
 
@@ -85,8 +86,10 @@ def slider2(mousePressed):
     print(x2-660)
 
 def soundeffects_():
-    fill(0,((x2-660)//6))
-    rect(0,0,width,height)
+    #fill(0,((x2-660)//6))
+    soundeffects = ((x2-660)/6)-50
+    sfx2_volume = ((x2-660)/6)-50
+    return soundeffects
     
     
 
