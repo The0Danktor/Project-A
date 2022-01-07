@@ -104,8 +104,8 @@ def languageButton1(mousePressed):
     fill(200)
     #rect(660, 350, 100, 100)
     f.textBox(700, 350, 100, 100, 'NL')
-    strokeweight(10)
     fill(0)
+    strokeweight(10)
     #text('Nederlands', 660, 350, 100, 100)
     if 700 < mouseX < 500 and 450 < mouseY < 400:
         print('Nederlands')
