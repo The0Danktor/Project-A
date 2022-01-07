@@ -98,7 +98,15 @@ def setup():
               'rule_page_4'   : loadImage("regelboekje4.png"),
               'rule_page_5'   : loadImage("regelboekje5.png"),
               'rule_page_6'   : loadImage("regelboekje6.png"),
-              'rule_page_7'   : loadImage("regelboekje7.png")
+              'rule_page_7'   : loadImage("regelboekje7.png"),
+              
+              'eco_lvl1'      : loadImage("economie_lvl1.png"),
+              'eco_lvl2'      : loadImage("economie_lvl2.png"),
+              'eco_lvl3'      : loadImage("economie_lvl3.png"),
+              'generaal_lvl1' : loadImage("generaal_lvl1.png"),
+              'generaal_lvl2' : loadImage("generaal_lvl2.png"),
+              'art_lvl1'      : loadImage("artillerie_lvl1.png"),
+              'art_lvl2'      : loadImage("artillerie_lvl2.png")
     }
     fields = g_sys.createField()
     g_sys.createPieces()
