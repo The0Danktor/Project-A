@@ -56,6 +56,7 @@ def displayScreen(players, turn, images, fields, mousePressed_):
     f.textBox(width*0.7, height*0.7, width*0.2, height*0.2, '--->', 200, 0)
     f.textBox(width*0.1, height*0.85, width*0.1, height*0.1, 'Dice', 200, 0)
     f.textBox(width*0.25, height*0.85, width*0.1, height*0.1, 'Cards', 200, 0)
+    f.textBox(width*0.4, height*0.85, width*0.1, height*0.1, 'upgrade', 200, 0)
     
     fill(50)
     rect(width*0.7, height*0.24, width*0.2, height*0.38, 10)
@@ -192,6 +193,9 @@ def mousePressed_(players, turn):
     if width*0.1 < mouseX < width*0.2 and height*0.85 < mouseY < height*0.95:
         return -6
     if width*0.25 < mouseX < width*0.35 and height*0.85 < mouseY < height*0.95:
-        return -10
+        return -9
+    if width*0.4 < mouseX < width*0.5 and height*0.85 < mouseY < height*0.95:
+        return -12
+    
     noStroke()
     return -8

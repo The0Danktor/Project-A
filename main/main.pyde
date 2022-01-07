@@ -44,7 +44,7 @@ ruleweb = ''
 # state 6 = dice
 # state 7 = esc menu
 # state 8 = game active
-# state 9 = card
+# state 9 = card pull
 # state 10 = card display / use
 # state 11 = rulebook
 # state 12 = upgrade
@@ -156,11 +156,14 @@ def draw():
         g_dis.displayScreen(players, turn, images, fields, mousePressed)
         g_sys.draw_(mousePressed, turn)
     elif state == 9:
-        k_sys.displayScreen(images)
+        k_sys.displayScreen(images, turn, players)
     elif state == 10:
         cd_sys.displayScreen(turn, players)
     elif state == 11:
         r_dis.displayScreen(images)
+    elif state == 12:
+        u_dis.displayScreen(turn)
+        
     #==============================================
     #rules button
     #r_dis.displayScreen(images,mousePressed,ruleweb)
@@ -208,11 +211,13 @@ def mousePressed():
         else:
             state = ret * -1
     elif state == 9:
-        k_sys.mousePressed_()
+        state = k_sys.mousePressed_(images, turn, players)
     elif state == 10:
         state = cd_sys.mousePressed_(images, turn, players)
     elif state == 11:
         state = r_dis.mousePressed_()
+    elif state == 12: 
+        u_dis.mousePressed_(turn)
         
     if saved_state != state:
         refresh()
@@ -237,7 +242,7 @@ def refresh():
     elif state == 8:
         g_dis.loadScreen(images)
     elif state == 9:
-        k_sys.loadScreen(images)
+        k_sys.loadScreen(images, turn, players)
     elif state == 10:
         cd_sys.loadScreen(images, turn, players)
     elif state == 11:
@@ -251,7 +256,7 @@ def keyPressed():
     global backup_state
     if key == ESC:
         this.key = NO_ESCAPE
-        if state != 0:
+        if state != 0 and state != 12:
             if state != 7:
                 fill(0, 100)
                 rectMode(CORNER)
@@ -261,6 +266,9 @@ def keyPressed():
             else:
                 state = backup_state
                 refresh()
+        if state == 12:
+            state = 8
+            refresh()
     global state, players
         
     # nameinput_system key input
