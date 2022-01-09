@@ -48,6 +48,7 @@ ruleweb = ''
 # state 10 = card display / use
 # state 11 = rulebook
 # state 12 = upgrade
+# state 13 = back_up
 # ==================================================
 
 # setup function
@@ -163,6 +164,8 @@ def draw():
         r_dis.displayScreen(images)
     elif state == 12:
         u_dis.displayScreen(turn,images)
+    elif state == 13:
+        
         
     #==============================================
     #rules button
