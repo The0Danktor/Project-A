@@ -5,6 +5,7 @@
 # imports for other files
 import webbrowser
 import os
+import back_up as b_u
 import title_display as t_dis
 import nameinput_display as n_dis
 import menu_display as m_dis
@@ -165,7 +166,7 @@ def draw():
     elif state == 12:
         u_dis.displayScreen(turn,images)
     elif state == 13:
-        
+        b_u.displayScreen(mousePressed,)
         
     #==============================================
     #rules button
@@ -228,7 +229,7 @@ def mousePressed():
 def mouseReleased():
     global clicked
     clicked = False
-    
+    b_u.mouseReleased_()
     d_sys.mouseReleased_()
     g_sys.mouseReleased_()
     
