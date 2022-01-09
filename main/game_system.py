@@ -51,7 +51,15 @@ def getValids():
 def createPiece(field = 'b1', type = 's', colour='green'):
     global piece_locs
     piece_locs.append([fields[field + 'x'], fields[field + 'y'], len(piece_locs), type, colour])
-
+    
+# returns all pieces attacking another piece
+def getAttackingPieces(loc, reach):
+    global valid_locs
+    
+    valid_locs = []
+    newloc = gridify(loc[:-1])
+    checkMovement(newloc, reach, True)
+                
 # mousePressed() imported from main
 def mousePressed_(turn):
     global current, mouse_down, choosing, choosing_info
@@ -170,6 +178,50 @@ def draw_(mouse_pressed, turn):
                 piece_locs[current][1] = height*0.205
             if mouseY > height*0.805:             # check if the mouse is on the bottom side of the board
                 piece_locs[current][1] = height*0.805
+        else:
+            loc = 'a7x'
+            for k in [word for word in fields.keys() if word.endswith("x")]:
+                if round(piece_locs[current][0], 2) == round(fields[k], 2) and round(piece_locs[current][1], 2) == round(fields[k[:-1] + 'y'], 2):
+                    loc = k
+            reach = 1
+            getAttackingPieces(loc, reach)
+            dices = []
+            
+            if turn == 1:
+                colour = 'red'
+            elif turn == 2:
+                colour = 'green'
+            elif turn == 3:
+                colour = 'blue'
+            else:
+                colour = 'yellow'
+                
+            if turn == 1:
+                team_colour = 'green'
+            elif turn == 2:
+                team_colour = 'red'
+            elif turn == 3:
+                team_colour = 'yellow'
+            else:
+                team_colour = 'blue'
+                
+            if piece_locs[current][4] == team_colour:
+                return
+            
+            for field in valid_locs:
+                for piece in piece_locs:
+                    if round(piece[0], 2) == round(fields[field + 'x'], 2) and round(piece[1], 2) == round(fields[field + 'y'], 2):
+                        pCount = n_sys.update_t_dis()['pCount']
+                        if piece[4] == colour or (pCount == 4 and piece[4] == team_colour):
+                            if piece[3] == 's':
+                                dices.append('d6')
+                            if piece[3] == 'c':
+                                dices.append('d4')
+                            if piece[3] == 't':
+                                dices.append('d10')
+            print(dices)
+            #hier kan je je functie callen
+                        
 
 # mouseReleased() imported from main
 def mouseReleased_():
@@ -208,63 +260,65 @@ def gridify(loc):
     return [column, row]
 
 # validate movement
-def checkMovement(loc, reach = 1):
+def checkMovement(loc, reach = 1, inverse = False):
     if reach > 0:
         column = loc[0]
         row = loc[1]
         #up/down
-        checkIfValid(reach, column + str(int(row + 1)))
-        checkIfValid(reach, column + str(int(row - 1)))
+        checkIfValid(reach, column + str(int(row + 1)),inverse)
+        checkIfValid(reach, column + str(int(row - 1)),inverse)
         #left/right
         if column == 'a':
-            checkIfValid(reach, 'b' + str(int(row + 0.5)))
-            checkIfValid(reach, 'b' + str(int(row - 0.5)))
+            checkIfValid(reach, 'b' + str(int(row + 0.5)),inverse)
+            checkIfValid(reach, 'b' + str(int(row - 0.5)),inverse)
         elif column == 'b':
-            checkIfValid(reach, 'a' + str(int(row + 0.5)))
-            checkIfValid(reach, 'a' + str(int(row - 0.5)))
-            checkIfValid(reach, 'c' + str(int(row + 0.5)))
-            checkIfValid(reach, 'c' + str(int(row - 0.5)))
+            checkIfValid(reach, 'a' + str(int(row + 0.5)),inverse)
+            checkIfValid(reach, 'a' + str(int(row - 0.5)),inverse)
+            checkIfValid(reach, 'c' + str(int(row + 0.5)),inverse)
+            checkIfValid(reach, 'c' + str(int(row - 0.5)),inverse)
         elif column == 'c':
-            checkIfValid(reach, 'b' + str(int(row + 0.5)))
-            checkIfValid(reach, 'b' + str(int(row - 0.5)))
-            checkIfValid(reach, 'd' + str(int(row + 0.5)))
-            checkIfValid(reach, 'd' + str(int(row - 0.5)))
+            checkIfValid(reach, 'b' + str(int(row + 0.5)),inverse)
+            checkIfValid(reach, 'b' + str(int(row - 0.5)),inverse)
+            checkIfValid(reach, 'd' + str(int(row + 0.5)),inverse)
+            checkIfValid(reach, 'd' + str(int(row - 0.5)),inverse)
         elif column == 'd':
-            checkIfValid(reach, 'c' + str(int(row + 0.5)))
-            checkIfValid(reach, 'c' + str(int(row - 0.5)))
-            checkIfValid(reach, 'e' + str(int(row + 0.5)))
-            checkIfValid(reach, 'e' + str(int(row - 0.5)))
+            checkIfValid(reach, 'c' + str(int(row + 0.5)),inverse)
+            checkIfValid(reach, 'c' + str(int(row - 0.5)),inverse)
+            checkIfValid(reach, 'e' + str(int(row + 0.5)),inverse)
+            checkIfValid(reach, 'e' + str(int(row - 0.5)),inverse)
         elif column == 'e':
-            checkIfValid(reach, 'd' + str(int(row + 0.5)))
-            checkIfValid(reach, 'd' + str(int(row - 0.5)))
-            checkIfValid(reach, 'f' + str(int(row + 0.5)))
-            checkIfValid(reach, 'f' + str(int(row - 0.5)))
+            checkIfValid(reach, 'd' + str(int(row + 0.5)),inverse)
+            checkIfValid(reach, 'd' + str(int(row - 0.5)),inverse)
+            checkIfValid(reach, 'f' + str(int(row + 0.5)),inverse)
+            checkIfValid(reach, 'f' + str(int(row - 0.5)),inverse)
         elif column == 'f':
-            checkIfValid(reach, 'e' + str(int(row + 0.5)))
-            checkIfValid(reach, 'e' + str(int(row - 0.5)))
-            checkIfValid(reach, 'g' + str(int(row + 0.5)))
-            checkIfValid(reach, 'g' + str(int(row - 0.5)))
+            checkIfValid(reach, 'e' + str(int(row + 0.5)),inverse)
+            checkIfValid(reach, 'e' + str(int(row - 0.5)),inverse)
+            checkIfValid(reach, 'g' + str(int(row + 0.5)),inverse)
+            checkIfValid(reach, 'g' + str(int(row - 0.5)),inverse)
         elif column == 'g':
-            checkIfValid(reach, 'f' + str(int(row + 0.5)))
-            checkIfValid(reach, 'f' + str(int(row - 0.5)))
-            checkIfValid(reach, 'h' + str(int(row + 0.5)))
-            checkIfValid(reach, 'h' + str(int(row - 0.5)))
+            checkIfValid(reach, 'f' + str(int(row + 0.5)),inverse)
+            checkIfValid(reach, 'f' + str(int(row - 0.5)),inverse)
+            checkIfValid(reach, 'h' + str(int(row + 0.5)),inverse)
+            checkIfValid(reach, 'h' + str(int(row - 0.5)),inverse)
         elif column == 'h':
-            checkIfValid(reach, 'g' + str(int(row + 0.5)))
-            checkIfValid(reach, 'g' + str(int(row - 0.5)))
-            checkIfValid(reach, 'i' + str(int(row + 0.5)))
-            checkIfValid(reach, 'i' + str(int(row - 0.5)))
+            checkIfValid(reach, 'g' + str(int(row + 0.5)),inverse)
+            checkIfValid(reach, 'g' + str(int(row - 0.5)),inverse)
+            checkIfValid(reach, 'i' + str(int(row + 0.5)),inverse)
+            checkIfValid(reach, 'i' + str(int(row - 0.5)),inverse)
         elif column == 'i':
-            checkIfValid(reach, 'h' + str(int(row + 0.5)))
-            checkIfValid(reach, 'h' + str(int(row - 0.5)))
+            checkIfValid(reach, 'h' + str(int(row + 0.5)),inverse)
+            checkIfValid(reach, 'h' + str(int(row - 0.5)),inverse)
 
-def checkIfValid(reach, loc):
+def checkIfValid(reach, loc, inverse):
     global valid_locs
     if loc in field_names:
         result = True
         for piece in piece_locs:
             if round(piece[0], 2) == round(fields[loc + 'x'], 2) and round(piece[1], 2) == round(fields[loc + 'y'], 2):
                 result = False
+        if inverse == True:
+            result = not result
         if result == True:
             if not loc in valid_locs:
                 valid_locs.append(loc)
