@@ -634,7 +634,7 @@ def knop(sfx_files,mousePressed,mode,kleur,rectX1,rectX2,rectY1,rectY2,textbreed
     w = (width - w) //textbreedte
     text('dobbelen', w , texthoogte)
     if mousePressed and (rectX1 < mouseX < rectX2)and(rectY1 < mouseY < rectY2 ) and pressed :
-        b_u.play_sfx(sfx_files,"dobbel")
+        b_u.play_sfx("dobbel")
         old_numbers(2.56, height/2.6 ,2.04,height/2.6 ,1.66,height/2.6)
         diceD4(amountD4)
         diceD6(amountD6)

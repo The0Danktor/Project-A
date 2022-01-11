@@ -130,7 +130,8 @@ def setup():
     minim = Minim(this)
     music = minim.loadFile("music1.mp3")
     sfx_files = {
-        "dobbel" : minim.loadFile("dobbel.mp3")
+        "dobbel" : minim.loadFile("dobbel.mp3"),
+        "draw"   : minim.loadFile("draw.mp3")
     }
     music.play()
     b_u.get_sfx(sfx_files)
