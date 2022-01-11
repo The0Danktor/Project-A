@@ -36,7 +36,7 @@ def displayScreen(images, turn, players):
     global chosenPlayer
 
 def update_k_dis():
-    global inv1, inv2, inv3, inv4
+    global inv1, inv2, inv3, inv4, cardsPosPulled, cardsNegPulled
     invs = {"inv1" : inv1,
             "inv2" : inv2,
             "inv3" : inv3,

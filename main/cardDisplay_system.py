@@ -1,5 +1,7 @@
 import functions as f
 import random as r
+import kaarten_system as k_sys
+import back_up as b
 add_library("minim")
 global cardsNeg, cardsListNeg, cardsPos, cardsListPos, inv1, inv2, inv3, inv4, cardAmount1, cardAmount2, cardAmount3, cardAmount4, chosenPlayer, cardsNegPulled, cardsPosPulled, chosenPlayerInv
 cardsNeg = {"Trench Feet": "Je pelotons bewegen de volgende ronde 1 stap minder",
@@ -35,6 +37,7 @@ def loadScreen(images, turn, players):
     cardsNegPulled = k_sys.update_k_dis()['cardsNegPulled']
     cardsPosPulled = k_sys.update_k_dis()['cardsNegPulled']
     
+    global inv1, inv2, inv3, inv4, cardsNegPulled, cardsPosPulled
     
     chosenPlayer = turn
     name = 'player' + str(turn)
@@ -135,7 +138,6 @@ def cardButton(num, inv):
         selectedCard = inv[num]
         selectedCardNum = num
         f.textBox(width/6*2, height/10*6, width/3, height/6, "Kaart Gebruiken")
-        f.textBox(width/6*2, height/10*8, width/3, height/6, selectedCard)
         if selectedCard in cardsListNeg:
             f.textBox(width/6, height/10*9, width/6*4, height/9, cardsNeg[selectedCard])
         else:
@@ -144,6 +146,7 @@ def cardButton(num, inv):
 
 def useCard(inv):
     global cardsNeg, cardsListNeg, cardsPos, cardsListPos, inv1, inv2, inv3, inv4, cardAmount1, cardAmount2, cardAmount3, cardAmount4, chosenPlayer, cardsNegPulled, cardsPosPulled, chosenPlayerInv, selectedCard, selectedCardNum, cardState
+    b.play_sfx("draw")
     if selectedCard in cardsListPos:
         cardsPosPulled.append(selectedCard)
     else:
