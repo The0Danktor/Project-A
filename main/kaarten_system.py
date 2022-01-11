@@ -41,10 +41,10 @@ def update_k_dis():
             "inv2" : inv2,
             "inv3" : inv3,
             "inv4" : inv4,
-            "cardsPosPulled" : cardsPosPulled
+            "cardsPosPulled" : cardsPosPulled,
             "cardsNegPulled" : cardsNegPulled
             }
-    retrun invs
+    return invs
 
 def loadScreen(images, turn, players):
     image(images['menu_img'], 0, 0, width, height)
