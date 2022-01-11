@@ -5,7 +5,7 @@ taal1 = True
 taal2 = True
 
 
-x = 960
+x = 860
 x2 = 960
 mouse_down = False
 mouse_down2 = False
