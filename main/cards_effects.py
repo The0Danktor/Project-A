@@ -20,7 +20,7 @@ def kabiem(attackRange):
 def bodyArmor(damageTaken):
     damageTaken = damageTaken / 2
 
-def spotted(field):
+def spotted(field):         #Zorgen dat deze als optie komt zodra je aangevallen word
     letter = field[1:]
 
     pos = field[1:]
@@ -52,7 +52,7 @@ def gasmasker(field, gasfield):
 
 def trenchFeet(selectedTroop, stepRange):
     if selectedTroop == "peloton":
-        stepRange -= 1
+        reach -= 1
 
 def hongersnood(selectedTroop):
     a = 1
@@ -68,17 +68,45 @@ def freeze(selectedTroop):
 def haversack(teams, turn, field):
     if player in team1:
         if a in field:
-            field = field
+            field = "a" + field[1:]
         if b in field:
             field = "a" + field[1:]
         if c in field:
             field = "a" + field[1:]
-        #etc en andersom
+        if d in field:
+            field = "b" + field[1:]
+        if e in field:
+            field = "c" + field[1:]
+        if f in field:
+            field = "d" + field[1:]
+        if g in field:
+            field = "e" + field[1:]
+        if h in field:
+            field = "f" + field[1:]
+        if i in field:
+            field = "g" + field[1:]
+    elif player in team2:
+        if a in field:
+            field = "c" + field[1:]
+        if b in field:
+            field = "d" + field[1:]
+        if c in field:
+            field = "e" + field[1:]
+        if d in field:
+            field = "f" + field[1:]
+        if e in field:
+            field = "g" + field[1:]
+        if f in field:
+            field = "h" + field[1:]
+        if g in field:
+            field = "i" + field[1:]
+        if h in field:
+            field = "i" + field[1:]
+        if i in field:
+            field = "i" + field[1:]
 
 def shellshock(shellshockCounter):
     if selectedTroop == "peloton" and attacked == True and shellshockCounter > 0:
         damageTaken = 99
     #Zorgen dan peloton niet bewogen kan worden
     shellshockCounter -= 1
-    
-#Waarschijnlijk kloppen de variabelen niet, maar dat fix ik later. Dit is even een opzetje

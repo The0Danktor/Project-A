@@ -35,7 +35,17 @@ selectedCardNum = -1
 def displayScreen(images, turn, players):
     global chosenPlayer
 
-        
+def update_k_dis():
+    global inv1, inv2, inv3, inv4
+    invs = {"inv1" : inv1,
+            "inv2" : inv2,
+            "inv3" : inv3,
+            "inv4" : inv4,
+            "cardsPosPulled" : cardsPosPulled
+            "cardsNegPulled" : cardsNegPulled
+            }
+    retrun invs
+
 def loadScreen(images, turn, players):
     image(images['menu_img'], 0, 0, width, height)
     playerCount = n_sys.update_t_dis()['pCount']
