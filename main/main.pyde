@@ -133,7 +133,7 @@ def setup():
         "dobbel" : minim.loadFile("dobbel.mp3")
     }
     music.play()
-    
+    b_u.get_sfx(sfx_files)
     mainFont = createFont("SpecialElite-Regular.ttf", 18)
     textFont(mainFont)
 

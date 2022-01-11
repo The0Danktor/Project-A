@@ -1,4 +1,5 @@
 import functions as f
+add_library("minim")
 
 taal1 = True
 taal2 = True
@@ -9,6 +10,7 @@ x2 = 660
 mouse_down = False
 mouse_down2 = False
 
+sfx_files = ''
 
 
 def displayScreen(mousePressed,):
@@ -57,7 +59,7 @@ def slider1(mousePressed):
 def volume():
     music_volume = ((x-660)/6)-50
     return music_volume
-def sfx():
+def sfx_gain():
     sfx_volume = ((x2-660)/6)-50
     return sfx_volume
           
@@ -85,12 +87,17 @@ def slider2(mousePressed):
     textSize(36)
     fill(0)
     text('sfx :',660,220)
+def get_sfx(sfx_filess):
+    global sfx_files
+    sfx_files = sfx_filess
+    return sfx_files
 
-def play_sfx(sfx_files,sound):
+
+def play_sfx(sound):
     sfx = sfx_files[sound]
-    sfx.play()
-    sfx_volume = b_u.sfx()
+    sfx_volume = sfx_gain()
     sfx.setGain(sfx_volume)
+    sfx.play()
     sfx.rewind()
 
 def mouseReleased_():
