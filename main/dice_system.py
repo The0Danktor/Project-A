@@ -459,7 +459,30 @@ def totalCounter(mode,kleur,breedte,hoogte,textbreedte,texthoogte):
         if totaal > 0:
             getelt = True
     
+def newBattle(dice,images):
+    x=[]
+    y=[]
+    for i in range(len(dice))
+    if dice[i] == 'D6':
+        newD6(images,x[i],y[i])
+    elif dice[i] == 'D10':
+        newD10(images,x[i],y[i])
+    elif dice[i] == 'D4':
+        newD4(images,x[i],y[i])
+    
         
+
+def newD6(images,x,y):
+    cijferD6 = random.randint(1,6)
+    image(images["D6-"+str(cijferD6)]x,y,100,100,)
+    
+def newD4(images,x,y):
+    cijferD4 = random.randint(1,4)
+    image(images["D6-"+str(cijferD4)]x,y,100,100,)
+    
+def newD10(images,x,y):
+    cijferD10 = random.randint(1,10)
+    image(images["D6-"+str(cijferD10)]x,y,100,100,)        
     
     
 def diceD6(amount):
