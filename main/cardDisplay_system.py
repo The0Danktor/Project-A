@@ -135,6 +135,7 @@ def cardButton(num, inv):
         selectedCard = inv[num]
         selectedCardNum = num
         f.textBox(width/6*2, height/10*6, width/3, height/6, "Kaart Gebruiken")
+        f.textBox(width/6*2, height/10*8, width/3, height/6, selectedCard)
         if selectedCard in cardsListNeg:
             f.textBox(width/6, height/10*9, width/6*4, height/9, cardsNeg[selectedCard])
         else:
