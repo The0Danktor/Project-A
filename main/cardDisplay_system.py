@@ -8,7 +8,6 @@ cardsNeg = {"Trench Feet": "Je pelotons bewegen de volgende ronde 1 stap minder"
 "Freeze": "Alle auto's en tanks kunnen 1 ronde niet bewegen",
 "Verloren Haversack": "De laatst gebruikte troep moet 2 stappen terug zetten",
 "Shellshock": "Je peloton kan 2 ronden niet bewegen, aanvallen of verdedigen"}
-cardsNegPulled = []
 cardsListNeg = ["Trench Feet", "Hongersnood", "Rat Attack", "Freeze", "Verloren Haversack", "Shellshock"]
 cardsPos = {"Keep Digging": "Je volgende aanval doet 1 extra schade",
 "Kabiem!!!": "Je kan 1 keer aanvallen op een afstand van 2 vakken",
@@ -16,12 +15,7 @@ cardsPos = {"Keep Digging": "Je volgende aanval doet 1 extra schade",
 "Spotted": "Je kunt 1 aanval ontwijken door 2 stappen opzij te gaan",
 "Op Volle Toeren": "Komende 3 rondes heb je dubbel inkomen",
 "Gasmasker": "Je bent voor 1 ronde beschermd tegen een gasaanval"}
-cardsPosPulled = []
 cardsListPos = ["Keep Digging", "Kabiem!!!", "Body Armor", "Spotted", "Op Volle Toeren", "Gasmasker"]
-inv1 = ["Trench Feet", "Hongersnood", "Rat Attack", "Freeze", "Hongersnood", "Rat Attack", "Freeze", "Rat Attack"]        #======Temporary Fill======#
-inv2 = ["Trench Feet", "Hongersnood", "Rat Attack", "Freeze", "Trench Feet", "Hongersnood", "Rat Attack"]                 #======Temporary Fill======#
-inv3 = ["Hongersnood", "Rat Attack", "Freeze", "Trench Feet", "Hongersnood", "Rat Attack"]
-inv4 = []
 cardState = 0
 selectedCardNum = -1
 name = ''
@@ -31,9 +25,17 @@ def displayScreen(turn, players):
     
     chosenPlayer = turn
 
-
 def loadScreen(images, turn, players):
     global chosenPlayer, chosenPlayerInv, cardState, name
+    
+    inv1 = k_sys.update_k_dis()['inv1']
+    inv2 = k_sys.update_k_dis()['inv2']
+    inv3 = k_sys.update_k_dis()['inv3']
+    inv4 = k_sys.update_k_dis()['inv4']
+    cardsNegPulled = k_sys.update_k_dis()['cardsNegPulled']
+    cardsPosPulled = k_sys.update_k_dis()['cardsNegPulled']
+    
+    
     chosenPlayer = turn
     name = 'player' + str(turn)
     name = players[name]
