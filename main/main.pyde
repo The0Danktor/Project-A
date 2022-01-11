@@ -37,6 +37,8 @@ fields = {}
 clicked = False
 NO_ESCAPE = '0'
 ruleweb = ''
+music = ''
+sfx_files = ''
 
 # ==================================================
 # state 0 = menu
@@ -55,7 +57,7 @@ ruleweb = ''
 # setup function
 def setup():
     # Import dictonaries
-    global images, fields,ruleweb
+    global images, fields,ruleweb , music,sfx_files
     # searches the path for the rule book and makes a link out of it
     #rulepath = find_files("rules.pdf",r"C:\Users")[0]
     #ruleweb =  'file:///' + (rulepath.replace("\\","/"))
@@ -126,8 +128,11 @@ def setup():
     # menu & music
     m_dis.loadScreen(images)
     minim = Minim(this)
-    sf = minim.loadFile("music1.mp3")
-    sf.play()
+    music = minim.loadFile("music1.mp3")
+    sfx_files = {
+        "dobbel" : minim.loadFile("dobbel.mp3")
+    }
+    music.play()
     
     mainFont = createFont("SpecialElite-Regular.ttf", 18)
     textFont(mainFont)
@@ -137,7 +142,9 @@ def setup():
 
 # draw function
 def draw():
-    global state, players
+    global state, players , music
+    music_volume = b_u.volume()
+    music.setGain(music_volume)
     
     # display all screens except start
     if state != 0:
@@ -151,7 +158,7 @@ def draw():
     elif state == 5:
         t_dis.displayScreen(players['player1'], players['player2'], players['player3'], players['player4'], images)
     elif state == 6:
-        d_sys.dice_systeem(mousePressed, players, turn)
+        d_sys.dice_systeem(sfx_files,mousePressed, players, turn)
     elif state == 7:
         e_dis.displayScreen()
     elif state == 8:

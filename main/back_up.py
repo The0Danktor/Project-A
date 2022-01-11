@@ -56,8 +56,10 @@ def slider1(mousePressed):
     text('music :',660,120)
 def volume():
     music_volume = ((x-660)/6)-50
-    sfx_volume = ((x-660)/6)-50
     return music_volume
+def sfx():
+    sfx_volume = ((x2-660)/6)-50
+    return sfx_volume
           
     # de slider
 def slider2(mousePressed):
@@ -83,6 +85,13 @@ def slider2(mousePressed):
     textSize(36)
     fill(0)
     text('sfx :',660,220)
+
+def play_sfx(sfx_files,sound):
+    sfx = sfx_files[sound]
+    sfx.play()
+    sfx_volume = b_u.sfx()
+    sfx.setGain(sfx_volume)
+    sfx.rewind()
 
 def mouseReleased_():
     global mouse_down, mouse_down2
