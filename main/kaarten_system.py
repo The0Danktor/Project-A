@@ -1,6 +1,7 @@
 import functions as f
 import random as r
 import nameinput_system as n_sys
+import back_up as b
 cardsNeg = {"Trench Feet": "Je pelotons bewegen de volgende ronde 1 stap minder",
 "Hongersnood": "Pelotons op het slagveld kunnen 1 ronde niet bewegen en aanvallen",
 "Rat Attack": "Eerstvolgende gevecht doe je 1 schade minder",
@@ -25,11 +26,10 @@ cardAmount1 = 0
 cardAmount2 = 0
 cardAmount3 = 0
 cardAmount4 = 0
-chosenPlayer = 1
 chosenPlayerInv = 0
 cardState = 0
 selectedCardNum = -1
-
+chosenPlayer = 1
 
 
 def displayScreen(images, turn, players):
@@ -47,6 +47,7 @@ def update_k_dis():
     return invs
 
 def loadScreen(images, turn, players):
+
     image(images['menu_img'], 0, 0, width, height)
     playerCount = n_sys.update_t_dis()['pCount']
     global chosenPlayer, playerCount
@@ -178,6 +179,7 @@ def roll(inv, cardAmount, images, turn, players):
     red = color(255, 0, 0)
     
     dice = int(random(1,7))
+    b.play_sfx("dobbel")
     cardCheck()
     if dice == 1 or dice == 2:
         cardGen = int(random(0, len(cardsListNeg)))
@@ -194,6 +196,7 @@ def roll(inv, cardAmount, images, turn, players):
         fill(255)
         f.textBox(width/2-width/6, height/6*2.6, width*2/6, height/10, randomCard, red, 0)
         f.textBox(width/2-width/5, height*4.3/8, width*2/5, height/10, cardDesc)
+        b.play_sfx("draw")
     elif dice == 5 or dice == 6:
         cardGen = int(random(0, len(cardsListPos)))
         randomCard = cardsListPos[cardGen]
@@ -209,6 +212,7 @@ def roll(inv, cardAmount, images, turn, players):
         fill(255)
         f.textBox(width/2-width/6, height/6*2.6, width*2/6, height/10, randomCard, green, 0)
         f.textBox(width/2-width/5, height*4.3/8, width*2/5, height/10, cardDesc)
+        b.play_sfx("draw")
     else:
         chosenPlayer += 1
         loadScreen(images, turn, players)
