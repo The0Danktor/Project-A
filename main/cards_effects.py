@@ -67,46 +67,108 @@ def freeze(selectedTroop):
     
 def haversack(teams, turn, field):
     if player in team1:
-        if a in field:
+        if "a" in field:
             field = "a" + field[1:]
-        if b in field:
+        if "b" in field:
             field = "a" + field[1:]
-        if c in field:
+        if "c" in field:
             field = "a" + field[1:]
-        if d in field:
+        if "d" in field:
             field = "b" + field[1:]
-        if e in field:
+        if "e" in field:
             field = "c" + field[1:]
-        if f in field:
+        if "f" in field:
             field = "d" + field[1:]
-        if g in field:
+        if "g" in field:
             field = "e" + field[1:]
-        if h in field:
+        if "h" in field:
             field = "f" + field[1:]
-        if i in field:
+        if "i" in field:
             field = "g" + field[1:]
     elif player in team2:
-        if a in field:
+        if "a" in field:
             field = "c" + field[1:]
-        if b in field:
+        if "b" in field:
             field = "d" + field[1:]
-        if c in field:
+        if "c" in field:
             field = "e" + field[1:]
-        if d in field:
+        if "d" in field:
             field = "f" + field[1:]
-        if e in field:
+        if "e" in field:
             field = "g" + field[1:]
-        if f in field:
+        if "f" in field:
             field = "h" + field[1:]
-        if g in field:
+        if "g" in field:
             field = "i" + field[1:]
-        if h in field:
+        if "h" in field:
             field = "i" + field[1:]
-        if i in field:
+        if "i" in field:
             field = "i" + field[1:]
 
 def shellshock(shellshockCounter):
-    if selectedTroop == "peloton" and attacked == True and shellshockCounter > 0:
-        damageTaken = 99
+    if selectedTroop == "peloton":
         reach = 0
-    shellshockCounter -= 1
+        if attacked == True:
+            damageTaken = 99
+
+    
+    ############
+    # Na Beurt #
+    ############
+
+inv1_dict = k_sys.update_k_dis()['inv1_dict']       #Ook allemaal nodg voor het uitvoeren van beide functies
+inv2_dict = k_sys.update_k_dis()['inv2_dict']
+inv3_dict = k_sys.update_k_dis()['inv3_dict']
+inv4_dict = k_sys.update_k_dis()['inv4_dict']
+
+cardsNegPulled = k_sys.update_k_dis()['cardsNegPulled']
+cardsPosPulled = k_sys.update_k_dis()['cardsNegPulled']
+
+inv1 = k_sys.update_k_dis()['inv1']
+inv2 = k_sys.update_k_dis()['inv2']
+inv3 = k_sys.update_k_dis()['inv3']
+inv4 = k_sys.update_k_dis()['inv4']
+
+def naBeurtKaart(inv_dict, inv):            #Moet 4x bij het switchen van ronde, 1x voor elke inv_dict       gebruikte inv_dict moet zelfde zijn als gebruikte inv       naBeurtKaart(inv1_dict, inv1)
+    global cardsPosPulled, cardsNegPulled
+    
+    if inv_dict["TrenchFeet"] == 1:
+        inv_dict["TrenchFeet"] = 0
+        inv.remove("Trench Feet")
+        
+    if inv_dict["Hongersnood"] == 1:
+        inv_dict["Hongersnood"] = 0
+        inv.remove("Hongersnood")
+        cardsNegPulled.append("Hongersnood")
+    if inv_dict["RatAttack"] == 1:
+        inv_dict["RatAttack"] = 0
+        inv.remove("Rat Attack")
+        cardsNegPulled.append("Rat Attack")
+    if inv_dict["Freeze"] == 1:
+        inv_dict["Freeze"] = 0
+        inv.remove("Freeze")
+        cardsNegPulled.append("Freeze")
+    if inv_dict["Shellshock"] > 0:
+        inv_dict["Shellshock"] -= 1
+        if inv_dict["Shellshock"] == 0:
+            inv.remove("Shellshock")
+            cardsNegPulled.append("Shellshock")
+    if inv_dict["VolleToeren"] > 0:
+        inv_dict["VolleToeren"] -= 1
+        if inv_dict["VolleToeren"] == 0:
+            inv.remove("Op Volle Toeren")
+            cardsPosPulled.append("Op Volle Toeren")
+            
+    ##############
+    # Na Gevecht #
+    ##############
+
+def naVechtKaart(inv_dict, inv):          #4x na gevecht
+    if inv_dict["KeepDigging"] = 1:
+        inv_dict["KeepDigging"] = 0
+        inv.remove("Keep Digging")
+        cardsPosPulled.append("Keep Digging")
+    if inv_dict["BodyArmor"] == 1:
+        inv_dict["BodyArmor"] = 0
+        inv.remove("Body Armor")
+        cardsPosPulled.append("Body Armor")

@@ -11,6 +11,7 @@ cardsNeg = {"Trench Feet": "Je pelotons bewegen de volgende ronde 1 stap minder"
 "Verloren Haversack": "De laatst gebruikte troep moet 2 stappen terug zetten",
 "Shellshock": "Je peloton kan 2 ronden niet bewegen, aanvallen of verdedigen"}
 cardsListNeg = ["Trench Feet", "Hongersnood", "Rat Attack", "Freeze", "Verloren Haversack", "Shellshock"]
+posTestList = ["Trench Feet", "Hongersnood", "Rat Attack", "Freeze", "Verloren Haversack", "Shellshock"]
 cardsPos = {"Keep Digging": "Je volgende aanval doet 1 extra schade",
 "Kabiem!!!": "Je kan 1 keer aanvallen op een afstand van 2 vakken",
 "Body Armor": "Eerstvolgende gevecht nemen je troepen 50% schade",
@@ -18,6 +19,7 @@ cardsPos = {"Keep Digging": "Je volgende aanval doet 1 extra schade",
 "Op Volle Toeren": "Komende 3 rondes heb je dubbel inkomen",
 "Gasmasker": "Je bent voor 1 ronde beschermd tegen een gasaanval"}
 cardsListPos = ["Keep Digging", "Kabiem!!!", "Body Armor", "Spotted", "Op Volle Toeren", "Gasmasker"]
+negTestList = ["Keep Digging", "Kabiem!!!", "Body Armor", "Spotted", "Op Volle Toeren", "Gasmasker"]
 cardState = 0
 selectedCardNum = -1
 name = ''
@@ -37,6 +39,10 @@ def loadScreen(images, turn, players):
     inv4 = k_sys.update_k_dis()['inv4']
     cardsNegPulled = k_sys.update_k_dis()['cardsNegPulled']
     cardsPosPulled = k_sys.update_k_dis()['cardsNegPulled']
+    inv1_dict = k_sys.update_k_dis()['inv1_dict']
+    inv2_dict = k_sys.update_k_dis()['inv2_dict']
+    inv3_dict = k_sys.update_k_dis()['inv3_dict']
+    inv4_dict = k_sys.update_k_dis()['inv4_dict']
     
     chosenPlayer = turn
     name = 'player' + str(turn)
@@ -56,23 +62,6 @@ def loadScreen(images, turn, players):
         displayCards(inv4)
     
     cardState = 0
-
-def reset():
-    global name, inv1, inv2, inv3, inv4, cardState, im
-    
-    image(im, 0, 0, width, height)
-    
-    f.textBox(width/5, -5, width/5*3, height/10, name)
-    f.textBox(width-height/10, 0, height/10, height/10, "Terug")
-    
-    if chosenPlayer == 1:
-        displayCards(inv1)
-    elif chosenPlayer == 2:
-        displayCards(inv2)
-    elif chosenPlayer == 3:
-        displayCards(inv3)
-    elif chosenPlayer == 4:
-        displayCards(inv4)
     
 def mousePressed_(images, turn, players):
     global cardsNeg, cardsListNeg, cardsPos, cardsListPos, inv1, inv2, inv3, inv4, cardAmount1, cardAmount2, cardAmount3, cardAmount4, chosenPlayer, cardsNegPulled, cardsPosPulled, chosenPlayerInv, cardState
@@ -168,7 +157,7 @@ def cardButton(num, inv):
 def useCard(inv):
     global cardsNeg, cardsListNeg, cardsPos, cardsListPos, inv1, inv2, inv3, inv4, cardAmount1, cardAmount2, cardAmount3, cardAmount4, chosenPlayer, cardsNegPulled, cardsPosPulled, chosenPlayerInv, selectedCard, selectedCardNum, cardState
     b.play_sfx("draw")
-    if selectedCard in cardsListPos:
+    if selectedCard in posTestList:
         cardsPosPulled.append(selectedCard)
     else:
         cardsNegPulled.append(selectedCard)
