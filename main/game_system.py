@@ -265,7 +265,7 @@ def draw_(mouse_pressed, turn,images):
                 print(dices)
                 if len(dices) != 0:
                     plays -= 1
-                    d_sys.newBattle(dices,images)
+                    d_sys.newBattle(dices,images,'d4')
                     #hier kan je je functie callen
                         
 
