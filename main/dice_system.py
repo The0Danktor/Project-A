@@ -454,30 +454,50 @@ def totalCounter(mode,kleur,breedte,hoogte,textbreedte,texthoogte):
         if totaal > 0:
             getelt = True
     
-def newBattle(dice,images):
+def newBattle(dice,images, victim_dice):
     x=[width/1.92,width/1.67,width/1.92,width/1.67,width/1.92,width/1.67,width/1.92,width/1.67,width/1.92,width/1.67]
     y=[height/5.68,height/5.68,height/3.18,height/3.18,height/2.20,height/2.20,height/1.69,height/1.69,height/1.37,height/1.37]
+
+    cijfers = []
     for i in range(len(dice)):
         if dice[i] == 'd6':
-            newD6(images,x[i],y[i])
+            cijfers.append(newD6(images,x[i],y[i]))
         elif dice[i] == 'd10':
-            newD10(images,x[i],y[i])
+             cijfers.append(newD10(images,x[i],y[i]))
         elif dice[i] == 'd4':
-            newD4(images,x[i],y[i])
+             cijfers.append(newD4(images,x[i],y[i]))
+    if  victim_dice == 'd6':
+        victim_cijfer = newD6(images,width/38.4,height/5.68)
+    elif  victim_dice == 'd10':
+        victim_cijfer = newD10(images,width/38.4,height/5.68)
+    elif  victim_dice == 'd4':
+        victim_cijfer = newD4(images,width/38.4,height/5.68)
+    totaal = 0
+    for i in cijfers:
+            totaal += i
+    if totaal > victim_cijfer:
+        win = "attacker"
+    elif totaal < victim_cijfer:
+        win = "defender"
+    else:
+        win = "draw"
+    return win
     
-
 def newD6(images,x,y):
     cijferD6 = random.randint(1,6)
     image(images["D6-"+str(cijferD6)],x,y,100,100,)
+    return cijferD6
 
     
 def newD4(images,x,y):
     cijferD4 = random.randint(1,4)
     image(images["D4-"+str(cijferD4)],x,y,100,100,)
+    return cijferD4
 
 def newD10(images,x,y):
     cijferD10 = random.randint(1,10)
-    image(images["D10-"+str(cijferD10)],x,y,100,100,)        
+    image(images["D10-"+str(cijferD10)],x,y,100,100,)    
+    return cijferD10  
 
     
 def diceD6(amount):
