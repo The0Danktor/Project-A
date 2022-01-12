@@ -37,6 +37,8 @@ fields = {}
 clicked = False
 NO_ESCAPE = '0'
 ruleweb = ''
+music = ''
+sfx_files = ''
 
 # ==================================================
 # state 0 = menu
@@ -55,7 +57,7 @@ ruleweb = ''
 # setup function
 def setup():
     # Import dictonaries
-    global images, fields,ruleweb
+    global images, fields,ruleweb , music,sfx_files
     # searches the path for the rule book and makes a link out of it
     #rulepath = find_files("rules.pdf",r"C:\Users")[0]
     #ruleweb =  'file:///' + (rulepath.replace("\\","/"))
@@ -108,7 +110,30 @@ def setup():
               'generaal_lvl1' : loadImage("generaal_lvl1.png"),
               'generaal_lvl2' : loadImage("generaal_lvl2.png"),
               'art_lvl1'      : loadImage("artillerie_lvl2.png"),
-              'art_lvl2'      : loadImage("artillerie_lvl1.png")
+              'art_lvl2'      : loadImage("artillerie_lvl1.png"),
+              
+              'D4-1'          : loadImage("D4-1.png"),
+              'D4-2'          : loadImage("D4-2.png"),
+              'D4-3'          : loadImage("D4-3.png"),
+              'D4-4'          : loadImage("D4-4.png"),
+              
+              'D6-1'          : loadImage("D6-1.png"),
+              'D6-2'          : loadImage("D6-2.png"),
+              'D6-3'          : loadImage("D6-3.png"),
+              'D6-4'          : loadImage("D6-4.png"),
+              'D6-5'          : loadImage("D6-5.png"),
+              'D6-6'          : loadImage("D6-6.png"),
+              
+              'D10-1'          : loadImage("D10-1.png"),
+              'D10-2'          : loadImage("D10-2.png"),
+              'D10-3'          : loadImage("D10-3.png"),
+              'D10-4'          : loadImage("D10-4.png"),
+              'D10-5'          : loadImage("D10-5.png"),
+              'D10-6'          : loadImage("D10-6.png"),
+              'D10-7'          : loadImage("D10-7.png"),
+              'D10-8'          : loadImage("D10-8.png"),
+              'D10-9'          : loadImage("D10-9.png"),
+              'D10-10'         : loadImage("D10-10.png")
     }
     fields = g_sys.createField()
     g_sys.createPieces()
@@ -126,9 +151,13 @@ def setup():
     # menu & music
     m_dis.loadScreen(images)
     minim = Minim(this)
-    sf = minim.loadFile("music1.mp3")
-    sf.play()
-    
+    music = minim.loadFile("music1.mp3")
+    sfx_files = {
+        "dobbel" : minim.loadFile("dobbel.mp3"),
+        "draw"   : minim.loadFile("draw.mp3")
+    }
+    music.play()
+    b_u.get_sfx(sfx_files)
     mainFont = createFont("SpecialElite-Regular.ttf", 18)
     textFont(mainFont)
 
@@ -137,7 +166,9 @@ def setup():
 
 # draw function
 def draw():
-    global state, players
+    global state, players , music
+    music_volume = b_u.volume()
+    music.setGain(music_volume)
     
     # display all screens except start
     if state != 0:
@@ -151,7 +182,7 @@ def draw():
     elif state == 5:
         t_dis.displayScreen(players['player1'], players['player2'], players['player3'], players['player4'], images)
     elif state == 6:
-        d_sys.dice_systeem(mousePressed, players, turn)
+        d_sys.dice_systeem(sfx_files,mousePressed, players, turn)
     elif state == 7:
         e_dis.displayScreen()
     elif state == 8:
@@ -242,7 +273,7 @@ def refresh():
     elif state == 5:
         t_dis.loadScreen(images)
     elif state == 6:
-        d_sys.loadScreen()
+        d_sys.loadScreen(images)
     elif state == 8:
         g_dis.loadScreen(images)
     elif state == 9:

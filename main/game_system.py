@@ -1,6 +1,7 @@
 import nameinput_system as n_sys
 import token_system as t_sys
 import upgrades_display as u_dis
+import dice_system as d_sys
 
 fields = {}        # a list of all fields on the board
 field_names = ('a1', 'a2', 'a3', 'a4', 'a5', 'a6', 'a7',
