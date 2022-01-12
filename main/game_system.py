@@ -2,6 +2,7 @@ import nameinput_system as n_sys
 import token_system as t_sys
 import upgrades_display as u_dis
 import dice_system as d_sys
+import back_up as b_u
 
 fields = {}        # a list of all fields on the board
 field_names = ('a1', 'a2', 'a3', 'a4', 'a5', 'a6', 'a7',
@@ -299,6 +300,7 @@ def draw_(mouse_pressed, turn,images):
                 
                 piece_locs[current][0] = mouseX
                 piece_locs[current][1] = mouseY
+                b_u.play_sfx("moving")
                 if mouseX < width*0.1 + height*0.025: # check if the mouse is on the left side of the board
                     piece_locs[current][0] = width*0.1 + height*0.025
                 if mouseX > width*0.5 - height*0.025: # check if the mouse is on the right side of the board
@@ -386,6 +388,7 @@ def draw_(mouse_pressed, turn,images):
                 elif len(dices) != 0:
                     plays -= 1
                     result = d_sys.newBattle(dices, images, dice)
+                    b_u.play_sfx('dobbel')
                     if result == 'attacker':
                         removePiece(piece_locs[current][2])
                     if result == 'defender':

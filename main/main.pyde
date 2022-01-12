@@ -156,7 +156,9 @@ def setup():
     music = minim.loadFile("music1.mp3")
     sfx_files = {
         "dobbel" : minim.loadFile("dobbel.mp3"),
-        "draw"   : minim.loadFile("draw.mp3")
+        "draw"   : minim.loadFile("draw.mp3"),
+        "buy"    : minim.loadFile("buying.mp3"),
+        "moving" : minim.loadFile("piece_moving.mp3")
     }
     music.play()
     b_u.get_sfx(sfx_files)
@@ -195,7 +197,7 @@ def draw():
     elif state == 5:
         t_dis.displayScreen(players['player1'], players['player2'], players['player3'], players['player4'], images)
     elif state == 6:
-        d_sys.dice_systeem(sfx_files,mousePressed, players, turn)
+        d_sys.dice_systeem(sfx_files,mousePressed, players, turn,images)
     elif state == 7:
         e_dis.displayScreen()
     elif state == 8:

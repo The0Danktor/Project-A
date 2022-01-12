@@ -21,9 +21,9 @@ loaded = False
 target = 1
 # ==================================================
 #de main die gecalled wordt door de draw
-def dice_systeem(sfx_files,mousePressed,players,turn):
+def dice_systeem(sfx_files,mousePressed,players,turn,images):
     if state == -1:
-         select_target(mousePressed,players,turn)
+         select_target(mousePressed,players,turn,images)
     elif state < 2:
         stroke(0)
         strokeWeight(5)
@@ -52,7 +52,7 @@ def loadScreen(images):
 # ==================================================
 # systeem on je tegenstander te kiezen
 
-def select_target(mousePressed,players,turn):
+def select_target(mousePressed,players,turn,images):
     strokeWeight(5)
     global target
     global state
@@ -117,7 +117,7 @@ def select_target(mousePressed,players,turn):
             if (( width/2.45 > mouseX > width/3.265) and ( height/1.812 > mouseY > height/2.227) and mousePressed):
                 target = 3
                 state += 1
-                background('#5493BF')
+                image(images['background_img'], 0, 0, width, height)
             
             # speler 2
             # if (( width/1.811 > mouseX > width/2.217) and ( height/1.812 > mouseY > height/2.227)and mousePressed):
@@ -129,7 +129,7 @@ def select_target(mousePressed,players,turn):
             if (( width/1.435 > mouseX > width/1.681) and (height/1.812 > mouseY > height/2.227)and mousePressed):
                 target = 4
                 state += 1
-                background('#5493BF')
+                image(images['background_img'], 0, 0, width, height)
             stroke(0)
  
 # als het speler 2 zijn beurt is               
@@ -179,7 +179,7 @@ def select_target(mousePressed,players,turn):
             if (( width/2.45 > mouseX > width/3.265) and ( height/1.812 > mouseY > height/2.227) and mousePressed):
                 target = 3
                 state += 1
-                background('#5493BF')
+                image(images['background_img'], 0, 0, width, height)
             
             # #speler 1
             # if (( width/1.811 > mouseX > width/2.217) and ( height/1.812 > mouseY > height/2.227)and mousePressed):
@@ -191,7 +191,7 @@ def select_target(mousePressed,players,turn):
             if (( width/1.435 > mouseX > width/1.681) and (height/1.812 > mouseY > height/2.227)and mousePressed):
                 target = 4
                 state += 1
-                background('#5493BF')
+                image(images['background_img'], 0, 0, width, height)
             stroke(0)
 
 # als speler 3 aan beurt is            
@@ -241,7 +241,7 @@ def select_target(mousePressed,players,turn):
             if (( width/2.45 > mouseX > width/3.265) and ( height/1.812 > mouseY > height/2.227) and mousePressed):
                 target = 1
                 state += 1
-                background('#5493BF')
+                image(images['background_img'], 0, 0, width, height)
             
             # # speler 4
             # if (( width/1.811 > mouseX > width/2.217) and ( height/1.812 > mouseY > height/2.227)and mousePressed):
@@ -253,7 +253,7 @@ def select_target(mousePressed,players,turn):
             if (( width/1.435 > mouseX > width/1.681) and (height/1.812 > mouseY > height/2.227)and mousePressed):
                 target = 2
                 state += 1
-                background('#5493BF')
+                image(images['background_img'], 0, 0, width, height)
             stroke(0)
         
 # als speler 4 aan de beurt is        
@@ -303,7 +303,7 @@ def select_target(mousePressed,players,turn):
             if (( width/2.45 > mouseX > width/3.265) and ( height/1.812 > mouseY > height/2.227) and mousePressed):
                 target = 1
                 state += 1
-                background('#5493BF')
+                image(images['background_img'], 0, 0, width, height)
             
             # # speler 3
             # if (( width/1.811 > mouseX > width/2.217) and ( height/1.812 > mouseY > height/2.227)and mousePressed):
@@ -315,7 +315,7 @@ def select_target(mousePressed,players,turn):
             if (( width/1.435 > mouseX > width/1.681) and (height/1.812 > mouseY > height/2.227)and mousePressed):
                 target = 2
                 state += 1
-                background('#5493BF')
+                image(images['background_img'], 0, 0, width, height)
             stroke(0)
 
 def mouseReleased_():
@@ -434,7 +434,7 @@ def next(mousePressed):
         if state == 1:
             noStroke()
             rectMode(CENTER)
-            fill('#5493BF')
+            fill('#e5f7e4')
             rect(width/2,height/2,1000,400)
     
 def totalCounter(mode,kleur,breedte,hoogte,textbreedte,texthoogte):
