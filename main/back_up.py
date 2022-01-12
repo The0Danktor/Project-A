@@ -89,6 +89,7 @@ def slider2(mousePressed):
     textSize(36)
     fill(0)
     text('sfx :',660,220)
+    
 
 
 def languageButton1(mousePressed):
