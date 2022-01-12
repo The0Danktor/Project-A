@@ -138,10 +138,10 @@ def shellshock(shellshockCounter):
     # Na Beurt #
     ############
 
-inv1_dict = k_sys.update_k_dis()['inv1_dict']       #Ook allemaal nodg voor het uitvoeren van beide functies
-inv2_dict = k_sys.update_k_dis()['inv2_dict']
-inv3_dict = k_sys.update_k_dis()['inv3_dict']
-inv4_dict = k_sys.update_k_dis()['inv4_dict']
+inv1_dict = k_sys.update_k_dis()['inv_dict1']       #Ook allemaal nodg voor het uitvoeren van beide functies
+inv2_dict = k_sys.update_k_dis()['inv_dict2']
+inv3_dict = k_sys.update_k_dis()['inv_dict3']
+inv4_dict = k_sys.update_k_dis()['inv_dict4']
 
 cardsNegPulled = k_sys.update_k_dis()['cardsNegPulled']
 cardsPosPulled = k_sys.update_k_dis()['cardsNegPulled']

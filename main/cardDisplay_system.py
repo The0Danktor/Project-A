@@ -39,10 +39,10 @@ def loadScreen(images, turn, players):
     inv4 = k_sys.update_k_dis()['inv4']
     cardsNegPulled = k_sys.update_k_dis()['cardsNegPulled']
     cardsPosPulled = k_sys.update_k_dis()['cardsNegPulled']
-    inv1_dict = k_sys.update_k_dis()['inv1_dict']
-    inv2_dict = k_sys.update_k_dis()['inv2_dict']
-    inv3_dict = k_sys.update_k_dis()['inv3_dict']
-    inv4_dict = k_sys.update_k_dis()['inv4_dict']
+    inv1_dict = k_sys.update_k_dis()['inv_dict1']
+    inv2_dict = k_sys.update_k_dis()['inv_dict2']
+    inv3_dict = k_sys.update_k_dis()['inv_dict3']
+    inv4_dict = k_sys.update_k_dis()['inv_dict4']
     
     chosenPlayer = turn
     name = 'player' + str(turn)

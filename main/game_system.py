@@ -3,6 +3,7 @@ import token_system as t_sys
 import upgrades_display as u_dis
 import dice_system as d_sys
 import back_up as b_u
+import game_display as g_dis
 
 fields = {}        # a list of all fields on the board
 field_names = ('a1', 'a2', 'a3', 'a4', 'a5', 'a6', 'a7',
@@ -386,6 +387,7 @@ def draw_(mouse_pressed, turn,images):
                     choosing = True
                     print(choosing_info)
                 elif len(dices) != 0:
+                    g_dis.loadScreen(images)
                     plays -= 1
                     result = d_sys.newBattle(dices, images, dice,piece_locs[current][4],turn)
                     b_u.play_sfx('dobbel')
