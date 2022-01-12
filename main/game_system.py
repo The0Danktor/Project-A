@@ -32,6 +32,58 @@ def createPieces():
     piece_locs = [[0, 0, 0, 'unused', 'unused']]
     current = 0
     
+def removePiece(id):
+    global piece_locs
+    piece_locs[id] = [0, 0, id, 'unused', 'unused']
+    print(piece_locs)
+    
+def checkIfLost(turn):
+    lost = False
+    
+    pCount = n_sys.update_t_dis()['pCount']
+    if t_sys.get_pelotons(turn) == 0 and t_sys.get_autos(turn) == 0 and t_sys.get_tanks(turn) == 0:
+        if turn == 1:
+            colour = 'red'
+        elif turn == 2:
+            colour = 'green'
+        elif turn == 3:
+            colour = 'blue'
+        else:
+            colour = 'yellow'
+            
+        result = True
+        for piece in piece_locs:
+            if piece[4] == colour:
+                result = False
+                
+        if result == True:
+            lost = 'No troops left'
+    else:
+        if pCount == 2 and turn == 1:
+            enemy_colour = ['green']
+        elif pCount == 2 and turn == 2:
+            enemy_colour = ['red']
+        elif pCount == 4 and (turn == 1 or turn == 2):
+            enemy_colour = ['blue', 'yellow']
+        else:
+            enemy_colour = ['red', 'green']
+            
+        pCount = n_sys.update_t_dis()['pCount']
+        if (pCount == 2 and turn == 1) or (pCount == 4 and (turn == 1 or turn == 2)):
+            trench_locs = ['b8', 'd8', 'f8', 'h8']
+        else:
+            trench_locs = ['b1', 'd1', 'f1', 'h1']
+            
+        c = 0
+        for field in trench_locs:
+            for piece in piece_locs:
+                if round(piece[0], 2) == round(fields[field + 'x'], 2) and round(piece[1], 2) == round(fields[field + 'y'], 2):
+                    if piece[4] in enemy_colour:
+                        c += 1
+        if c == 4:
+            lost = 'Trench has been infiltrated'
+    return lost
+        
 def resetTurn(turn):
     global plays, trained
     plays = 2 + u_dis.get_generaal(turn)
@@ -81,7 +133,7 @@ def getAttackingPieces(loc, reach):
     checkMovement(newloc, reach, True)
                 
 # mousePressed() imported from main
-def mousePressed_(turn):
+def mousePressed_(turn, images):
     global current, mouse_down, choosing, choosing_info, plays, trained
     
     if choosing == False:
@@ -125,51 +177,86 @@ def mousePressed_(turn):
                             colour = 'yellow'
                         choosing_info['field'] = field
                         choosing_info['colour'] = colour
+                        choosing_info['attack'] = False
                         choosing = True
     else:
         if width*0.285 < mouseX < width*0.315 and height*0.400 < mouseY < height*0.450:
             if t_sys.get_pelotons(turn) > 0 and t_sys.get_tokens(turn) >= 4:
                 choosing = False
-                createPiece(choosing_info['field'], 's', choosing_info['colour'])
-                t_sys.pelotons_remove(turn)
-                t_sys.tokens_remove(turn, 4)
-                
-                trained += 1
-                if trained == 1:
+                if choosing_info['attack'] == True:
+                    result = newPieceFight(images, 'd6')
+                else:
+                    result = 'attacker'
+                if result == 'defender'or result == 'draw':
                     plays -= 1
-                elif trained == 4:
-                    plays -= 1
+                if result == 'attacker':
+                    createPiece(choosing_info['field'], 's', choosing_info['colour'])
+                    t_sys.pelotons_remove(turn)
+                    t_sys.tokens_remove(turn, 4)
+                    
+                    trained += 1
+                    if trained == 1:
+                        plays -= 1
+                    elif trained == 4:
+                        plays -= 1
         elif width*0.285 < mouseX < width*0.315 and height*0.475 < mouseY < height*0.525:
             if t_sys.get_autos(turn) > 0 and t_sys.get_tokens(turn) >= 6:
                 choosing = False
-                createPiece(choosing_info['field'], 'c', choosing_info['colour'])
-                t_sys.autos_remove(turn)
-                t_sys.tokens_remove(turn, 6)
-                
-                trained += 1
-                if trained == 1:
+                if choosing_info['attack'] == True:
+                    result = newPieceFight(images, 'd4')
+                else:
+                    result = 'attacker'
+                if result == 'defender'or result == 'draw':
                     plays -= 1
-                elif trained == 4:
-                    plays -= 1
+                if result == 'attacker':
+                    createPiece(choosing_info['field'], 'c', choosing_info['colour'])
+                    t_sys.autos_remove(turn)
+                    t_sys.tokens_remove(turn, 6)
+                    
+                    trained += 1
+                    if trained == 1:
+                        plays -= 1
+                    elif trained == 4:
+                        plays -= 1
         elif width*0.285 < mouseX < width*0.315 and height*0.550 < mouseY < height*0.600:
             if t_sys.get_tanks(turn) > 0 and t_sys.get_tokens(turn) >= 9:
                 choosing = False
-                createPiece(choosing_info['field'], 't', choosing_info['colour'])
-                t_sys.tanks_remove(turn)
-                t_sys.tokens_remove(turn, 9)
-                
-                trained += 1
-                if trained == 1:
+                if choosing_info['attack'] == True:
+                    result = newPieceFight(images, 'd10')
+                else:
+                    result = 'attacker'
+                if result == 'defender'or result == 'draw':
                     plays -= 1
-                elif trained == 4:
-                    plays -= 1
+                if result == 'attacker':
+                    createPiece(choosing_info['field'], 't', choosing_info['colour'])
+                    t_sys.tanks_remove(turn)
+                    t_sys.tokens_remove(turn, 9)
+                    
+                    trained += 1
+                    if trained == 1:
+                        plays -= 1
+                    elif trained == 4:
+                        plays -= 1
         elif (mouseX < width*0.275 or mouseX > width*0.325) or (mouseY < height*0.375 or mouseY > height*0.625):
             choosing = False
 
+def newPieceFight(images, extra):
+    global choosing_info
+    
+    choosing_info['dices'].append(extra)
+    print(choosing_info['dices'])
+    result = d_sys.newBattle(choosing_info['dices'], images, choosing_info['victim_dice'])
+    if result == 'defender':
+        for i in choosing_info['attackers']:
+            removePiece(i)
+    if result == 'attacker':
+        removePiece(choosing_info['victim_id'])
+    return result
+    
 # draw() imported from main
 
 def draw_(mouse_pressed, turn,images):
-    global piece_locs, mouse_down, current, backupx, backupy, valid_locs, choosing, plays, clicked
+    global piece_locs, mouse_down, current, backupx, backupy, valid_locs, choosing, plays, clicked, choosing, choosing_info
     
     # returns if the player is choosing
     if choosing == True:
@@ -251,6 +338,7 @@ def draw_(mouse_pressed, turn,images):
                 if piece_locs[current][4] == team_colour and pCount == 4:
                     return
                 
+                attackers = []
                 for field in valid_locs:
                     for piece in piece_locs:
                         if round(piece[0], 2) == round(fields[field + 'x'], 2) and round(piece[1], 2) == round(fields[field + 'y'], 2):
@@ -262,11 +350,47 @@ def draw_(mouse_pressed, turn,images):
                                     dices.append('d4')
                                 if piece[3] == 't':
                                     dices.append('d10')
-                print(dices)
-                if len(dices) != 0:
+                                attackers.append(piece[2])
+                                    
+                if piece_locs[current][3] == 's':
+                    dice = 'd6'
+                elif piece_locs[current][3] == 'c':
+                    dice = 'd4'
+                else:
+                    dice = 'd10'
+
+                if (pCount == 2 and turn == 1) or (pCount == 4 and (turn == 1 or turn == 2)):
+                    input_locs = ['b8', 'd8', 'f8', 'h8']
+                else:
+                    input_locs = ['b1', 'd1', 'f1', 'h1']
+                print(input_locs, loc[:-1])
+                if loc[:-1] in input_locs:
+                    if turn == 1:
+                        colour = 'red'
+                    elif turn == 2:
+                        colour = 'green'
+                    elif turn == 3:
+                        colour = 'blue'
+                    else:
+                        colour = 'yellow'
+                        
+                    choosing_info['field'] = loc[:-1]
+                    choosing_info['colour'] = colour
+                    choosing_info['attack'] = True
+                    choosing_info['dices'] = dices
+                    choosing_info['victim_id'] = piece_locs[current][2]
+                    choosing_info['victim_dice'] = dice
+                    choosing_info['attackers'] = attackers
+                    choosing = True
+                    print(choosing_info)
+                elif len(dices) != 0:
                     plays -= 1
-                    d_sys.newBattle(dices,images,'d4')
-                    #hier kan je je functie callen
+                    result = d_sys.newBattle(dices, images, dice)
+                    if result == 'attacker':
+                        removePiece(piece_locs[current][2])
+                    if result == 'defender':
+                        for i in attackers:
+                            removePiece(i)
                         
 
 # mouseReleased() imported from main

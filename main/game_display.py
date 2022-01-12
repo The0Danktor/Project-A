@@ -5,6 +5,7 @@ import token_system as t_sys
 import dice_system as d_sys
 
 game_turn = 1
+lostreason = 'none'
 
 # game background image loader
 def loadScreen(images):
@@ -182,10 +183,22 @@ def checkSpot(field, images):
     if result == True:
         image(images['add_button_img'], fields[field + 'x'], fields[field + 'y'], height*0.05, height*0.05)
     
+def getLostReason():
+    global lostreason
+    return lostreason 
+
+def setLostReason(reason):
+    global lostreason
+    lostreason = reason
+
 # button click system
 def mousePressed_(players, turn):
-    global game_turn
+    global game_turn, lostreason
     if width*0.7 < mouseX < width*0.9 and height*0.7 < mouseY < height*0.9:
+        lost = g_sys.checkIfLost(turn)
+        if lost != False:
+            lostreason = lost
+            return -0
         turn += 1
         if turn > n_sys.update_t_dis()['pCount']:
             turn = 1

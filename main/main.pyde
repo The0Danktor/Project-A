@@ -19,6 +19,7 @@ import game_system as g_sys
 import token_system as t_sys
 import kaarten_system as k_sys
 import cardDisplay_system as cd_sys
+import functions as f
 add_library("minim")
 import webbrowser
 
@@ -35,6 +36,7 @@ turn = 1
 images = {}
 fields = {}
 clicked = False
+lostreason = 'none'
 NO_ESCAPE = '0'
 ruleweb = ''
 music = ''
@@ -124,16 +126,16 @@ def setup():
               'D6-5'          : loadImage("D6-5.png"),
               'D6-6'          : loadImage("D6-6.png"),
               
-              'D10-1'          : loadImage("D10-1.png"),
-              'D10-2'          : loadImage("D10-2.png"),
-              'D10-3'          : loadImage("D10-3.png"),
-              'D10-4'          : loadImage("D10-4.png"),
-              'D10-5'          : loadImage("D10-5.png"),
-              'D10-6'          : loadImage("D10-6.png"),
-              'D10-7'          : loadImage("D10-7.png"),
-              'D10-8'          : loadImage("D10-8.png"),
-              'D10-9'          : loadImage("D10-9.png"),
-              'D10-10'         : loadImage("D10-10.png")
+              'D10-1'         : loadImage("D10-1.png"),
+              'D10-2'         : loadImage("D10-2.png"),
+              'D10-3'         : loadImage("D10-3.png"),
+              'D10-4'         : loadImage("D10-4.png"),
+              'D10-5'         : loadImage("D10-5.png"),
+              'D10-6'         : loadImage("D10-6.png"),
+              'D10-7'         : loadImage("D10-7.png"),
+              'D10-8'         : loadImage("D10-8.png"),
+              'D10-9'         : loadImage("D10-9.png"),
+              'D10-10'        : loadImage("D10-10.png")
     }
     fields = g_sys.createField()
     g_sys.createPieces()
@@ -166,7 +168,7 @@ def setup():
 
 # draw function
 def draw():
-    global state, players , music
+    global state, players , music, lostreason
     music_volume = b_u.volume()
     music.setGain(music_volume)
     
@@ -177,6 +179,17 @@ def draw():
     # display loader
     if state == 0:
         m_dis.displayScreen(images)
+        
+        lostreason = g_dis.getLostReason()
+        if lostreason != 'none':
+            fill(50)
+            stroke(0)
+            rect(width*0.2, height*0.2, width*0.6, height*0.6, 50)
+            fill(255)
+            text(players['player' + str(turn)] + ' heeft verloren', f.center(lostreason, width*0.6, height*0.1, 1) - (width / 2) + width*0.5, height*0.5)
+            text('(' + lostreason + ')', f.center('(' + lostreason + ')', width*0.6, height*0.1, 1) - (width / 2) + width*0.5, height*0.7)
+            noStroke()
+        
     elif 1 <= state <= 4:
         n_dis.displayScreen(state, images)
     elif state == 5:
@@ -209,7 +222,10 @@ def draw():
 
 # mouse press function
 def mousePressed():
-    global clicked, players, state, turn
+    global clicked, players, state, turn, lostreason
+    if lostreason != 'none':
+        g_dis.setLostReason('none')
+        image(images['main_img'], 0, 0, width, height)
     if clicked == True:
         return
     else:
@@ -238,7 +254,7 @@ def mousePressed():
         if state == -1:
             state = backup_state
     elif state == 8:
-        g_sys.mousePressed_(turn)
+        g_sys.mousePressed_(turn, images)
         ret = g_dis.mousePressed_(players, turn)
         
         if ret > 0:
