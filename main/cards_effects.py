@@ -9,16 +9,34 @@
 
 
 import random as r
+import kaarten_system as k_sys
 
 
-def keepDigging(damageGiven):
-    damageGiven += 1
+def keepDigging(turn):
+    inv = k_sys.update_k_dis()['inv' + str(turn)]
+    if inv['KeepDigging'] == 1:
+        return True
+    else:
+        return False
 
 def kabiem(attackRange):
     attackRange += 1
 
-def bodyArmor(damageTaken):
-    damageTaken = damageTaken / 2
+def bodyArmor(victim):
+    if victim == 'red':
+        turn = 1
+    elif victim == 'green':
+        turn = 2
+    elif victim == 'blue':
+        turn = 3
+    elif victim == 'yellow':
+        turn = 4
+    
+    inv = k_sys.update_k_dis()['inv' + str(turn)]
+    if inv['BodyArmor'] == 1:
+        return True
+    else:
+        return False
 
 def spotted(field):         #Zorgen dat deze als optie komt zodra je aangevallen word
     letter = field[1:]
@@ -37,10 +55,11 @@ def spotted(field):         #Zorgen dat deze als optie komt zodra je aangevallen
     
     field = letter + str(pos)
 
-def opVolleToeren(toerenCounter, income):
-    if toerenTeller > 0:
+
+def opVolleToeren(inv_dict, income):
+    if inv_dict["VolleToeren"] > 0:
         income = income * 2
-        toerenCounter -= 1
+        inv_dict["VolleToeren"] -= 1
 
 def gasmasker(field, gasfield):
     if field in gasfield:
@@ -58,8 +77,12 @@ def hongersnood(selectedTroop):
     a = 1
     #Zorgen dat peloton niet bewogen kan worden en niet kan aanvallen
 
-def ratAttack(damageGiven):
-    damageGiven -= 1
+def ratAttack(turn):
+    inv = k_sys.update_k_dis()['inv' + str(turn)]
+    if inv['RatAttack'] == 1:
+        return True
+    else:
+        return False
 
 def freeze(selectedTroop):
     if selectedTroop == "auto" or selectedTroop == "Tank":
@@ -164,7 +187,7 @@ def naBeurtKaart(inv_dict, inv):            #Moet 4x bij het switchen van ronde,
     ##############
 
 def naVechtKaart(inv_dict, inv):          #4x na gevecht
-    if inv_dict["KeepDigging"] = 1:
+    if inv_dict["KeepDigging"] == 1:
         inv_dict["KeepDigging"] = 0
         inv.remove("Keep Digging")
         cardsPosPulled.append("Keep Digging")
