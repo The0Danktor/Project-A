@@ -187,6 +187,7 @@ def draw():
 # mouse press function
 def mousePressed():
     global clicked, players, state, turn
+    print(mouseX,mouseY)
     if clicked == True:
         return
     else:
@@ -250,7 +251,7 @@ def refresh():
     elif state == 5:
         t_dis.loadScreen(images)
     elif state == 6:
-        d_sys.loadScreen()
+        d_sys.loadScreen(images)
     elif state == 8:
         g_dis.loadScreen(images)
     elif state == 9:

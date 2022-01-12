@@ -39,16 +39,16 @@ def dice_systeem(sfx_files,mousePressed,players,turn):
 # ==================================================
 # loadSceen fuction on de achtergrond 1 keer te laden    
         
-def loadScreen():
+def loadScreen(images):
     pCount = n_sys.update_t_dis()['pCount']
     if pCount == 4:
         if state == -1:
             background(100)
         
         else:
-            background('#5493BF')
+            image(images['background_img'], 0, 0, width, height)
     elif pCount  ==2:
-        background('#5493BF')
+        image(images['background_img'], 0, 0, width, height)
 # ==================================================
 # systeem on je tegenstander te kiezen
 
@@ -460,30 +460,30 @@ def totalCounter(mode,kleur,breedte,hoogte,textbreedte,texthoogte):
             getelt = True
     
 def newBattle(dice,images):
-    x=[]
-    y=[]
-    for i in range(len(dice))
-    if dice[i] == 'D6':
-        newD6(images,x[i],y[i])
-    elif dice[i] == 'D10':
-        newD10(images,x[i],y[i])
-    elif dice[i] == 'D4':
-        newD4(images,x[i],y[i])
+    x=[1000,1150,1000,1150,1000,1150,1000,1150]
+    y=[190,190,365,365,515,515,715,715]
+    for i in range(len(dice)):
+        if dice[i] == 'D6':
+            newD6(images,x[i],y[i])
+        elif dice[i] == 'D10':
+            newD10(images,x[i],y[i])
+        elif dice[i] == 'D4':
+            newD4(images,x[i],y[i])
     
-        
 
 def newD6(images,x,y):
     cijferD6 = random.randint(1,6)
-    image(images["D6-"+str(cijferD6)]x,y,100,100,)
+    #image(images["D6-"+str(cijferD6)],x,y,100,100,)
+    rect(x,y,100,100)
     
 def newD4(images,x,y):
     cijferD4 = random.randint(1,4)
-    image(images["D6-"+str(cijferD4)]x,y,100,100,)
-    
+    #image(images["D6-"+str(cijferD4)],x,y,100,100,)
+    rect(x,y,100,100)
 def newD10(images,x,y):
     cijferD10 = random.randint(1,10)
-    image(images["D6-"+str(cijferD10)]x,y,100,100,)        
-    
+    #image(images["D6-"+str(cijferD10)],x,y,100,100,)        
+    rect(x,y,100,100)
     
 def diceD6(amount):
     global cijferD6
