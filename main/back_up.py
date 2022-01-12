@@ -1,23 +1,26 @@
 import functions as f
+add_library("minim")
 
 taal1 = True
 taal2 = True
 
 
 x = 1060
-x2 = 660
+x = 860
+x2 = 960
 mouse_down = False
 mouse_down2 = False
 
+sfx_files = ''
 
 
 def displayScreen(mousePressed,):
     #het menu wordt hier getekend
     menu(mousePressed)
 
-    
-    
-    
+
+
+
 def menu(mousePressed):
     stroke(0)
     strokeWeight(10)
@@ -58,9 +61,11 @@ def slider1(mousePressed):
     text('music :',660,120)
 def volume():
     music_volume = ((x-660)/6)-50
-    sfx_volume = ((x-660)/6)-50
     return music_volume
-          
+def sfx_gain():
+    sfx_volume = ((x2-660)/6)-50
+    return sfx_volume
+
     # de slider
 def slider2(mousePressed):
     global x2,mouse_down2
@@ -85,13 +90,14 @@ def slider2(mousePressed):
     textSize(36)
     fill(0)
     text('sfx :',660,220)
-    
+
+
 def languageButton1(mousePressed):
     fill(255)
     f.textBox(660, 350, 150, 150, 'NL')
     fill(0)
     strokeWeight(10)
-    
+
     if 660 < mouseX < 500 and 200 < mouseY < 300:
         print('NL')
 
@@ -100,14 +106,28 @@ def languageButton2(mousePressed):
     f.textBox(1110, 350, 150, 150, 'EN')
     fill(0)
     strokeWeight(10)
-    
+
     if 1010 < mouseX < 500 and 200 < mouseY < 300:
         print('EN')
-    
-    
-    
-    
-    
+
+
+
+
+
+
+def get_sfx(sfx_filess):
+    global sfx_files
+    sfx_files = sfx_filess
+    return sfx_files
+
+
+def play_sfx(sound):
+    sfx = sfx_files[sound]
+    sfx_volume = sfx_gain()
+    sfx.setGain(sfx_volume)
+    sfx.play()
+    sfx.rewind()
+
 
 def mouseReleased_():
     global mouse_down, mouse_down2

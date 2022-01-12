@@ -1,6 +1,7 @@
 import functions as f
 import random
 import nameinput_system as n_sys
+import back_up as b_u
 # ==================================================
 # alle global variable
 pressed = True
@@ -20,13 +21,13 @@ loaded = False
 target = 1
 # ==================================================
 #de main die gecalled wordt door de draw
-def dice_systeem(mousePressed,players,turn):
+def dice_systeem(sfx_files,mousePressed,players,turn):
     if state == -1:
          select_target(mousePressed,players,turn)
     elif state < 2:
         stroke(0)
         strokeWeight(5)
-        knop(mousePressed,CORNERS,'#EA9C88',width/2.68,width/1.6,height/1.27,height/1.14,2,height/1.17)
+        knop(sfx_files,mousePressed,CORNERS,'#EA9C88',width/2.68,width/1.6,height/1.27,height/1.14,2,height/1.17)
         adddiceD6(mousePressed)
         adddiceD4(mousePressed)
         adddiceD10(mousePressed)
@@ -458,7 +459,30 @@ def totalCounter(mode,kleur,breedte,hoogte,textbreedte,texthoogte):
         if totaal > 0:
             getelt = True
     
+def newBattle(dice,images):
+    x=[]
+    y=[]
+    for i in range(len(dice))
+    if dice[i] == 'D6':
+        newD6(images,x[i],y[i])
+    elif dice[i] == 'D10':
+        newD10(images,x[i],y[i])
+    elif dice[i] == 'D4':
+        newD4(images,x[i],y[i])
+    
         
+
+def newD6(images,x,y):
+    cijferD6 = random.randint(1,6)
+    image(images["D6-"+str(cijferD6)]x,y,100,100,)
+    
+def newD4(images,x,y):
+    cijferD4 = random.randint(1,4)
+    image(images["D6-"+str(cijferD4)]x,y,100,100,)
+    
+def newD10(images,x,y):
+    cijferD10 = random.randint(1,10)
+    image(images["D6-"+str(cijferD10)]x,y,100,100,)        
     
     
 def diceD6(amount):
@@ -611,7 +635,7 @@ def adddiceD4(mousePressed):
         pressed = False
         
     
-def knop(mousePressed,mode,kleur,rectX1,rectX2,rectY1,rectY2,textbreedte,texthoogte):
+def knop(sfx_files,mousePressed,mode,kleur,rectX1,rectX2,rectY1,rectY2,textbreedte,texthoogte):
     global pressed
     global amountD4
     global amountD6
@@ -633,6 +657,7 @@ def knop(mousePressed,mode,kleur,rectX1,rectX2,rectY1,rectY2,textbreedte,texthoo
     w = (width - w) //textbreedte
     text('dobbelen', w , texthoogte)
     if mousePressed and (rectX1 < mouseX < rectX2)and(rectY1 < mouseY < rectY2 ) and pressed :
+        b_u.play_sfx("dobbel")
         old_numbers(2.56, height/2.6 ,2.04,height/2.6 ,1.66,height/2.6)
         diceD4(amountD4)
         diceD6(amountD6)
