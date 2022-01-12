@@ -19,8 +19,8 @@ cardsPos = {"Keep Digging": "Je volgende aanval doet 1 extra schade",
 "Gasmasker": "Je bent voor 1 ronde beschermd tegen een gasaanval"}
 cardsPosPulled = []
 cardsListPos = ["Keep Digging", "Kabiem!!!", "Body Armor", "Spotted", "Op Volle Toeren", "Gasmasker"]
-inv1 = ["Trench Feet", "Hongersnood", "Rat Attack", "Freeze", "Trench Feet", "Hongersnood", "Kabiem!!!", "Spotted"]
-inv2 = ["Trench Feet", "Hongersnood", "Rat Attack", "Freeze", "Trench Feet", "Hongersnood", "Rat Attack", "Freeze", "Rat Attack"]
+inv1 = []
+inv2 = []
 inv3 = []
 inv4 = []
 inv1_dict = {"TrenchFeet" : 0, "Hongersnood" : 0, "RatAttack" : 0, "Freeze" : 0, "Haversack" : 0, "Shellshock" : 0, "KeepDigging" : 0, "BodyArmor" : 0, "VolleToeren" : 0}
@@ -54,7 +54,7 @@ def update_k_dis():
     return invs
 
 def loadScreen(images, turn, players):
-    image(images['menu_img'], 0, 0, width, height)
+    image(images['background_img'], 0, 0, width, height)
     playerCount = n_sys.update_t_dis()['pCount']
     global chosenPlayer, playerCount
     
@@ -105,7 +105,7 @@ def loadScreen(images, turn, players):
         f.textBox(width/2-width/5, height*6.5/8, width/5*2, height/10, "Terug naar menu")
 
 def reset(images, turn, players):
-    image(images['menu_img'], 0, 0, width, height)
+    image(images['background_img'], 0, 0, width, height)
     playerCount = n_sys.update_t_dis()['pCount']
     global chosenPlayer, playerCount
     

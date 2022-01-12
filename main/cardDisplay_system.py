@@ -47,7 +47,7 @@ def loadScreen(images, turn, players):
     chosenPlayer = turn
     name = 'player' + str(turn)
     name = players[name]
-    image(images['menu_img'], 0, 0, width, height)
+    image(images['background_img'], 0, 0, width, height)
     im = images['menu_img']
     f.textBox(width/5, -5, width/5*3, height/10, name)
     f.textBox(width-height/10, 0, height/10, height/10, "Terug")
