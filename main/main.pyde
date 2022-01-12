@@ -273,7 +273,7 @@ def refresh():
     elif state == 5:
         t_dis.loadScreen(images)
     elif state == 6:
-        d_sys.loadScreen()
+        d_sys.loadScreen(images)
     elif state == 8:
         g_dis.loadScreen(images)
     elif state == 9:
