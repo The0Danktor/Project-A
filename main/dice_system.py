@@ -455,7 +455,7 @@ def totalCounter(mode,kleur,breedte,hoogte,textbreedte,texthoogte):
         if totaal > 0:
             getelt = True
     
-def newBattle(dice,images, victim_dice,victim):
+def newBattle(dice,images, victim_dice,victim,turn):
     x=[width/1.92,width/1.67,width/1.92,width/1.67,width/1.92,width/1.67,width/1.92,width/1.67,width/1.92,width/1.67]
     y=[height/5.68,height/5.68,height/3.18,height/3.18,height/2.20,height/2.20,height/1.69,height/1.69,height/1.37,height/1.37]
 

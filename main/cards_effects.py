@@ -13,7 +13,7 @@ import kaarten_system as k_sys
 
 
 def keepDigging(turn):
-    inv = k_sys.update_k_dis()['inv' + str(turn)]
+    inv = k_sys.update_k_dis()['inv_dict' + str(turn)]
     if inv['KeepDigging'] == 1:
         return True
     else:
@@ -32,7 +32,7 @@ def bodyArmor(victim):
     elif victim == 'yellow':
         turn = 4
     
-    inv = k_sys.update_k_dis()['inv' + str(turn)]
+    inv = k_sys.update_k_dis()['inv_dict' + str(turn)]
     if inv['BodyArmor'] == 1:
         return True
     else:
@@ -77,7 +77,7 @@ def hongersnood(selectedTroop):
     #Zorgen dat peloton niet bewogen kan worden en niet kan aanvallen
 
 def ratAttack(turn):
-    inv = k_sys.update_k_dis()['inv' + str(turn)]
+    inv = k_sys.update_k_dis()['inv_dict' + str(turn)]
     if inv['RatAttack'] == 1:
         return True
     else:
