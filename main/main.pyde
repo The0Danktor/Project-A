@@ -295,6 +295,7 @@ def refresh():
     elif state == 8:
         g_dis.loadScreen(images)
     elif state == 9:
+        k_sys.reset(images, turn, players)
         k_sys.loadScreen(images, turn, players)
     elif state == 10:
         cd_sys.loadScreen(images, turn, players)

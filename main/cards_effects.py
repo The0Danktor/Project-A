@@ -37,10 +37,10 @@ def spotted(field):         #Zorgen dat deze als optie komt zodra je aangevallen
     
     field = letter + str(pos)
 
-def opVolleToeren(toerenCounter, income):
-    if toerenTeller > 0:
+def opVolleToeren(inv, income):
+    if inv_dict["VolleToeren"] > 0:
         income = income * 2
-        toerenCounter -= 1
+        inv_dict["VolleToeren"] -= 1
 
 def gasmasker(field, gasfield):
     if field in gasfield:

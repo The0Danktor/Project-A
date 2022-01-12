@@ -11,6 +11,7 @@ lostreason = 'none'
 def loadScreen(images):
     image(images['background_img'], 0, 0, width, height)
 
+
 # game display function [displays the game screen]
 def displayScreen(players, turn, images, fields, mousePressed_):
     
@@ -206,6 +207,8 @@ def mousePressed_(players, turn):
         if game_turn > 1:
             t_sys.token_per_turn(turn)
         g_sys.resetTurn(turn)
+        if game_turn % 2 == 0:
+            return -9
         return turn
     if width*0.1 < mouseX < width*0.2 and height*0.85 < mouseY < height*0.95:
         return -6
