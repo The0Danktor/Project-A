@@ -23,6 +23,10 @@ inv1 = ["Trench Feet", "Hongersnood", "Rat Attack", "Freeze", "Trench Feet", "Ho
 inv2 = ["Trench Feet", "Hongersnood", "Rat Attack", "Freeze", "Trench Feet", "Hongersnood", "Rat Attack", "Freeze", "Rat Attack"]
 inv3 = []
 inv4 = []
+inv1_dict = {"TrenchFeet" : 0, "Hongersnood" : 0, "RatAttack" : 0, "Freeze" : 0, "Haversack" : 0, "Shellshock" : 0, "KeepDigging" : 0, "BodyArmor" : 0, "VolleToeren" : 0}
+inv2_dict = {"TrenchFeet" : 0, "Hongersnood" : 0, "RatAttack" : 0, "Freeze" : 0, "Haversack" : 0, "Shellshock" : 0, "KeepDigging" : 0, "BodyArmor" : 0, "VolleToeren" : 0}
+inv3_dict = {"TrenchFeet" : 0, "Hongersnood" : 0, "RatAttack" : 0, "Freeze" : 0, "Haversack" : 0, "Shellshock" : 0, "KeepDigging" : 0, "BodyArmor" : 0, "VolleToeren" : 0}
+inv4_dict = {"TrenchFeet" : 0, "Hongersnood" : 0, "RatAttack" : 0, "Freeze" : 0, "Haversack" : 0, "Shellshock" : 0, "KeepDigging" : 0, "BodyArmor" : 0, "VolleToeren" : 0}
 cardAmount1 = 0
 cardAmount2 = 0
 cardAmount3 = 0
@@ -43,7 +47,11 @@ def update_k_dis():
             "inv3" : inv3,
             "inv4" : inv4,
             "cardsPosPulled" : cardsPosPulled,
-            "cardsNegPulled" : cardsNegPulled
+            "cardsNegPulled" : cardsNegPulled,
+            "inv1_dict" : inv1_dict
+            "inv2_dict" : inv2_dict
+            "inv3_dict" : inv3_dict
+            "inv4_dict" : inv4_dict
             }
     return invs
 
@@ -107,16 +115,16 @@ def mousePressed_(images, turn, players):
     if playerCount == 4:
         if width/2-width/8 < mouseX < width/2+width/8 and height/3 < mouseY < height/3+height/14 and chosenPlayer < 5:     #Rollen voor alle spelers
             if chosenPlayer == 1:
-                roll(inv1, cardAmount1, images, turn, players)
+                roll(inv1, cardAmount1, images, turn, players, inv1_dict)
 
             elif chosenPlayer == 2:
-                roll(inv2, cardAmount2, images, turn, players)
+                roll(inv2, cardAmount2, images, turn, players, inv2_dict)
 
             elif chosenPlayer == 3:
-                roll(inv3, cardAmount3, images, turn, players)
+                roll(inv3, cardAmount3, images, turn, players, inv3_dict)
             
             elif chosenPlayer == 4:
-                roll(inv4, cardAmount4, images, turn, players)
+                roll(inv4, cardAmount4, images, turn, players, inv4_dict)
             
             elif chosenPlayer != 1 or 2 or 3 or 4 or 5:
                 f.textBox(width/2-200, height*3.5/8, 400, 90, "Kies een speler")
@@ -124,10 +132,10 @@ def mousePressed_(images, turn, players):
     elif playerCount == 2:
         if width/2-width/8 < mouseX < width/2+width/8 and height/3 < mouseY < height/3+height/14 and chosenPlayer < 3:     #Rollen voor alle spelers
             if chosenPlayer == 1:
-                roll(inv1, cardAmount1, images, turn, players)
+                roll(inv1, cardAmount1, images, turn, players, inv1_dict)
 
             elif chosenPlayer == 2:
-                roll(inv2, cardAmount2, images, turn, players)
+                roll(inv2, cardAmount2, images, turn, players, inv2_dict)
 
             elif chosenPlayer != 1 or 2 or 3 or 4 or 5:
                 f.textBox(width/2-200, height*3.5/8, 400, 90, "Kies een speler")
@@ -173,7 +181,7 @@ def pulledCardCheck(images, turn, players):
     cardsNegPulled = list(dict.fromkeys(cardsNegPulled))
     cardsPosPulled = list(dict.fromkeys(cardsPosPulled))
 
-def roll(inv, cardAmount, images, turn, players):
+def roll(inv, cardAmount, images, turn, players, inv_dict):
     global cardsNeg, cardsListNeg, cardsPos, cardsListPos, inv1, inv2, inv3, inv4, cardAmount1, cardAmount2, cardAmount3, cardAmount4, chosenPlayer, cardsNegPulled, cardsPosPulled, chosenPlayerInv
     
     green = color(77, 189, 51)
@@ -198,6 +206,20 @@ def roll(inv, cardAmount, images, turn, players):
         f.textBox(width/2-width/6, height/6*2.6, width*2/6, height/10, randomCard, red, 0)
         f.textBox(width/2-width/5, height*4.3/8, width*2/5, height/10, cardDesc)
         b.play_sfx("draw")
+        
+        if randomCard == "Trench Feet":
+            inv_dict["TrenchFeet"] = 1
+        if randomCard == "Hongersnood":
+            inv_dict["Hongersnood"] = 1
+        if randomCard == "Rat Attack":
+            inv_dict["RatAttack"] = 1
+        if randomCard == "Freeze":
+            inv_dict["Freeze"] = 1
+        if randomCard == "Verloren Haversack":
+            inv_dict["Haversack"] = 1
+        if randomCard == "Shellshock":
+            inv_dict["Shellshock"] = 2
+            
     elif dice == 5 or dice == 6:
         cardGen = int(random(0, len(cardsListPos)))
         randomCard = cardsListPos[cardGen]
@@ -213,6 +235,16 @@ def roll(inv, cardAmount, images, turn, players):
         fill(255)
         f.textBox(width/2-width/6, height/6*2.6, width*2/6, height/10, randomCard, green, 0)
         f.textBox(width/2-width/5, height*4.3/8, width*2/5, height/10, cardDesc)
+        
+        if randomCard == "Keep Digging":
+            inv_dict["KeepDigging"] = 1
+        if randomCard == "Body Armor":
+            inv_dict["BodyArmor"] = 1
+        if randomCard == "Op Volle Toeren":
+            inv_dict["VolleToeren"] = 3
+        if randomCard == "Gas Masker":
+            inv_dict["GasMasker"] = 1
+        
         b.play_sfx("draw")
     else:
         chosenPlayer += 1
