@@ -387,7 +387,7 @@ def draw_(mouse_pressed, turn,images):
                     print(choosing_info)
                 elif len(dices) != 0:
                     plays -= 1
-                    result = d_sys.newBattle(dices, images, dice,piece_locs[current][4])
+                    result = d_sys.newBattle(dices, images, dice,piece_locs[current][4],turn)
                     b_u.play_sfx('dobbel')
                     if result == 'attacker':
                         removePiece(piece_locs[current][2])
