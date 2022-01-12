@@ -28,7 +28,8 @@ def displayScreen(turn, players):
     chosenPlayer = turn
 
 def loadScreen(images, turn, players):
-    global chosenPlayer, chosenPlayerInv, cardState, name
+    global chosenPlayer, chosenPlayerInv, cardState, name, im
+    global inv1, inv2, inv3, inv4, cardsNegPulled, cardsPosPulled
     
     inv1 = k_sys.update_k_dis()['inv1']
     inv2 = k_sys.update_k_dis()['inv2']
@@ -37,12 +38,11 @@ def loadScreen(images, turn, players):
     cardsNegPulled = k_sys.update_k_dis()['cardsNegPulled']
     cardsPosPulled = k_sys.update_k_dis()['cardsNegPulled']
     
-    global inv1, inv2, inv3, inv4, cardsNegPulled, cardsPosPulled
-    
     chosenPlayer = turn
     name = 'player' + str(turn)
     name = players[name]
     image(images['menu_img'], 0, 0, width, height)
+    im = images['menu_img']
     f.textBox(width/5, -5, width/5*3, height/10, name)
     f.textBox(width-height/10, 0, height/10, height/10, "Terug")
     
@@ -56,6 +56,23 @@ def loadScreen(images, turn, players):
         displayCards(inv4)
     
     cardState = 0
+
+def reset():
+    global name, inv1, inv2, inv3, inv4, cardState, im
+    
+    image(im, 0, 0, width, height)
+    
+    f.textBox(width/5, -5, width/5*3, height/10, name)
+    f.textBox(width-height/10, 0, height/10, height/10, "Terug")
+    
+    if chosenPlayer == 1:
+        displayCards(inv1)
+    elif chosenPlayer == 2:
+        displayCards(inv2)
+    elif chosenPlayer == 3:
+        displayCards(inv3)
+    elif chosenPlayer == 4:
+        displayCards(inv4)
     
 def mousePressed_(images, turn, players):
     global cardsNeg, cardsListNeg, cardsPos, cardsListPos, inv1, inv2, inv3, inv4, cardAmount1, cardAmount2, cardAmount3, cardAmount4, chosenPlayer, cardsNegPulled, cardsPosPulled, chosenPlayerInv, cardState
@@ -84,19 +101,19 @@ def mousePressed_(images, turn, players):
             cardButton(i, inv4)
             i += 1
     
-    if width/6*2 < mouseX < width/6*4 and height/10*6 < mouseY < height/10*6+height/6 and chosenPlayer == 1 and cardState == 1:
+    if width/6*2 < mouseX < width/6*4 and height/10*6 < mouseY < height/10*6+height/6 and chosenPlayer == 1 and cardState == 1 and (selectedCard == "Spotted" or selectedCard == "Kabiem!!!"):
         useCard(inv1)
         loadScreen(images, turn, players)
     
-    if width/6*2 < mouseX < width/6*4 and height/10*6 < mouseY < height/10*6+height/6 and chosenPlayer == 2 and cardState == 1:
+    if width/6*2 < mouseX < width/6*4 and height/10*6 < mouseY < height/10*6+height/6 and chosenPlayer == 2 and cardState == 1 and (selectedCard == "Spotted" or selectedCard == "Kabiem!!!"):
         useCard(inv2)
         loadScreen(images, turn, players)
 
-    if width/6*2 < mouseX < width/6*4 and height/10*6 < mouseY < height/10*6+height/6 and chosenPlayer == 3 and cardState == 1:
+    if width/6*2 < mouseX < width/6*4 and height/10*6 < mouseY < height/10*6+height/6 and chosenPlayer == 3 and cardState == 1 and (selectedCard == "Spotted" or selectedCard == "Kabiem!!!"):
         useCard(inv3)
         loadScreen(images, turn, players)
 
-    if width/6*2 < mouseX < width/6*4 and height/10*6 < mouseY < height/10*6+height/6 and chosenPlayer == 4 and cardState == 1:
+    if width/6*2 < mouseX < width/6*4 and height/10*6 < mouseY < height/10*6+height/6 and chosenPlayer == 4 and cardState == 1 and (selectedCard == "Spotted" or selectedCard == "Kabiem!!!"):
         useCard(inv4)
         loadScreen(images, turn, players)
     
@@ -107,7 +124,7 @@ def mousePressed_(images, turn, players):
 
 def displayCards(inv):
     global cardsNeg, cardsListNeg, cardsPos, cardsListPos, inv1, inv2, inv3, inv4, cardAmount1, cardAmount2, cardAmount3, cardAmount4, chosenPlayer, cardsNegPulled, cardsPosPulled, chosenPlayerInv
-
+    
     a = 11-len(inv)
     b = 1 + a * 0.8333
     pos = b*width/20
@@ -121,6 +138,7 @@ def displayCards(inv):
 
 def cardButton(num, inv):
     global selectedCardNum, cardState, selectedCard
+    
     num -= 1
     a = 11-len(inv)
     b = 1 + a * 0.8333
@@ -137,7 +155,10 @@ def cardButton(num, inv):
         f.textBox(x1, height/2-height/8, width/14, height/8, inv[num], 30)
         selectedCard = inv[num]
         selectedCardNum = num
-        f.textBox(width/6*2, height/10*6, width/3, height/6, "Kaart Gebruiken")
+        if selectedCard == "Spotted" or selectedCard == "Kabiem!!!":
+            f.textBox(width/6*2, height/10*6, width/3, height/6, "Kaart Gebruiken")
+        else:
+            f.textBox(width/6*2, height/10*6, width/3, height/6, "Kaart is actief")
         if selectedCard in cardsListNeg:
             f.textBox(width/6, height/10*9, width/6*4, height/9, cardsNeg[selectedCard])
         else:
