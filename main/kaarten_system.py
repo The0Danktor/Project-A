@@ -2,6 +2,7 @@ import functions as f
 import random as r
 import nameinput_system as n_sys
 import back_up as b
+import cardDisplay_system as cd_sys
 cardsNeg = {"Trench Feet": "Je pelotons bewegen de volgende ronde 1 stap minder",
 "Hongersnood": "Pelotons op het slagveld kunnen 1 ronde niet bewegen en aanvallen",
 "Rat Attack": "Eerstvolgende gevecht doe je 1 schade minder",
@@ -18,7 +19,7 @@ cardsPos = {"Keep Digging": "Je volgende aanval doet 1 extra schade",
 "Gasmasker": "Je bent voor 1 ronde beschermd tegen een gasaanval"}
 cardsPosPulled = []
 cardsListPos = ["Keep Digging", "Kabiem!!!", "Body Armor", "Spotted", "Op Volle Toeren", "Gasmasker"]
-inv1 = ["Trench Feet", "Hongersnood", "Rat Attack", "Freeze", "Trench Feet", "Hongersnood", "Rat Attack", "Freeze", "Rat Attack"]
+inv1 = ["Trench Feet", "Hongersnood", "Rat Attack", "Freeze", "Trench Feet", "Hongersnood", "Kabiem!!!", "Spotted"]
 inv2 = ["Trench Feet", "Hongersnood", "Rat Attack", "Freeze", "Trench Feet", "Hongersnood", "Rat Attack", "Freeze", "Rat Attack"]
 inv3 = []
 inv4 = []

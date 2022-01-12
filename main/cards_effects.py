@@ -62,8 +62,8 @@ def ratAttack(damageGiven):
     damageGiven -= 1
 
 def freeze(selectedTroop):
-    #zorgen dat auto en tank niet kan bewegen
-    a = 1
+    if selectedTroop == "auto" or selectedTroop == "Tank":
+        reach = 0
     
 def haversack(teams, turn, field):
     if player in team1:
@@ -108,5 +108,5 @@ def haversack(teams, turn, field):
 def shellshock(shellshockCounter):
     if selectedTroop == "peloton" and attacked == True and shellshockCounter > 0:
         damageTaken = 99
-    #Zorgen dan peloton niet bewogen kan worden
+        reach = 0
     shellshockCounter -= 1
