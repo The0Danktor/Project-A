@@ -1,6 +1,7 @@
 import nameinput_system as n_sys
 import functions as f
 import game_system as g_sys
+import back_up as b_u
 
 tokens_eco = {
     'tokensecoP1': 3,
@@ -111,6 +112,7 @@ def calculateIncome(turn):
 def tokens_remove(turn, amount):
     global tokens
     tokens['tokensP' + str(turn)] -= amount
+    b_u.play_sfx("buy")
 
 def tokens_add(turn, amount):
     global tokens

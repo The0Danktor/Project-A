@@ -48,9 +48,9 @@ def update_k_dis():
             "inv4" : inv4,
             "cardsPosPulled" : cardsPosPulled,
             "cardsNegPulled" : cardsNegPulled,
-            "inv1_dict" : inv1_dict
-            "inv2_dict" : inv2_dict
-            "inv3_dict" : inv3_dict
+            "inv1_dict" : inv1_dict,
+            "inv2_dict" : inv2_dict,
+            "inv3_dict" : inv3_dict,
             "inv4_dict" : inv4_dict
             }
     return invs
