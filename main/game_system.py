@@ -24,6 +24,7 @@ choosing = False   # indicates rather the player is choosing a new piece or not
 choosing_info = {} # required info for after the player has chosen
 plays = 2          # amount of actions left for the turn
 trained = 0        # amount of troops trained/entered during the turn
+clicked = False
 
 # creates an unused background piece used to counter empty list issues
 def createPieces():
@@ -167,7 +168,7 @@ def mousePressed_(turn):
 
 # draw() imported from main
 def draw_(mouse_pressed, turn):
-    global piece_locs, mouse_down, current, backupx, backupy, valid_locs, choosing, plays
+    global piece_locs, mouse_down, current, backupx, backupy, valid_locs, choosing, plays, clicked
     
     # returns if the player is choosing
     if choosing == True:
@@ -176,7 +177,8 @@ def draw_(mouse_pressed, turn):
     # piece pickup/movement system
     if plays > 0:
         pCount = n_sys.update_t_dis()['pCount']
-        if (((mouseX - piece_locs[current][0])**2 + (mouseY - piece_locs[current][1])**2 < (width*0.018)**2) and mouse_pressed) or (mouse_down == True):
+        if ((((mouseX - piece_locs[current][0])**2 + (mouseY - piece_locs[current][1])**2 < (width*0.018)**2) and mouse_pressed) or (mouse_down == True)) and clicked == False:
+            clicked = True
             # check if the piece belongs to the current player
             if (turn == 1 and piece_locs[current][4] == 'red')\
             or (turn == 2 and piece_locs[current][4] == 'green')\
@@ -267,7 +269,9 @@ def draw_(mouse_pressed, turn):
 
 # mouseReleased() imported from main
 def mouseReleased_():
-    global piece_loc, mouse_down, current, fields, backupx, backupy, valid_locs, choosing, plays
+    global piece_loc, mouse_down, current, fields, backupx, backupy, valid_locs, choosing, plays, clicked
+    
+    clicked == False
     
     # returns if the player is choosing
     if choosing == True:
