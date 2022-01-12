@@ -1,5 +1,6 @@
 import nameinput_system as n_sys
 import token_system as t_sys
+import upgrades_display as u_dis
 
 fields = {}        # a list of all fields on the board
 field_names = ('a1', 'a2', 'a3', 'a4', 'a5', 'a6', 'a7',
@@ -20,12 +21,24 @@ backupx = 0        # stores origional x location of a piece being moved for retu
 backupy = 0        # stores origional y location of a piece being moved for return
 choosing = False   # indicates rather the player is choosing a new piece or not
 choosing_info = {} # required info for after the player has chosen
+plays = 2          # amount of actions left for the turn
+trained = 0        # amount of troops trained/entered during the turn
 
 # creates an unused background piece used to counter empty list issues
 def createPieces():
     global piece_locs, current
     piece_locs = [[0, 0, 0, 'unused', 'unused']]
     current = 0
+    
+def resetTurn(turn):
+    global plays, trained
+    plays = 2 + u_dis.get_generaal(turn)
+    # print(plays, u_dis.get_generaal(turn), turn)
+    trained = 0
+
+def increaseTrained():
+    global trained
+    trained += 1
     
 # updates choosing in game_display
 def updateChoosing():
@@ -41,6 +54,11 @@ def getPieces():
 def getFields():
     global fields
     return fields
+
+# retunrs the amount of actions left
+def getActions():
+    global plays
+    return plays
 
 # retunrs a list of all valid fields on the board
 def getValids():
@@ -62,7 +80,7 @@ def getAttackingPieces(loc, reach):
                 
 # mousePressed() imported from main
 def mousePressed_(turn):
-    global current, mouse_down, choosing, choosing_info
+    global current, mouse_down, choosing, choosing_info, plays, trained
     
     if choosing == False:
     # reset the current piece being moved to the piece closest to the cursor
@@ -75,36 +93,37 @@ def mousePressed_(turn):
                     current = pos[2]
         
         # piece creation system
-        if t_sys.get_pelotons(turn) > 0 or t_sys.get_autos(turn) > 0 or t_sys.get_tanks(turn) > 0:
-            pCount = n_sys.update_t_dis()['pCount']
-            if (pCount == 2 and turn == 1) or (pCount == 4 and (turn == 1 or turn == 2)):
-                turn_locs = ['b8', 'd8', 'f8', 'h8']
-                field = 'h8'
-            else:
-                turn_locs = ['b1', 'd1', 'f1', 'h1']
-                field = 'h1'
-            for loc in turn_locs:
-                distance = sqrt((fields[loc + 'x'] - mouseX)**2 + (fields[loc + 'y'] - mouseY)**2)
-                if distance < saved:
-                    saved = distance
-                    field = loc
-            result = True
-            for piece in piece_locs:
-                if round(piece[0], 2) == round(fields[field + 'x'], 2) and round(piece[1], 2) == round(fields[field + 'y'], 2):
-                    result = False
-            if result == True:
-                if ((mouseX - fields[field + "x"])**2 + (mouseY - fields[field + "y"])**2 < (width*0.018)**2):
-                    if turn == 1:
-                        colour = 'red'
-                    elif turn == 2:
-                        colour = 'green'
-                    elif turn == 3:
-                        colour = 'blue'
-                    else:
-                        colour = 'yellow'
-                    choosing_info['field'] = field
-                    choosing_info['colour'] = colour
-                    choosing = True
+        if plays > 0:
+            if t_sys.get_pelotons(turn) > 0 or t_sys.get_autos(turn) > 0 or t_sys.get_tanks(turn) > 0:
+                pCount = n_sys.update_t_dis()['pCount']
+                if (pCount == 2 and turn == 1) or (pCount == 4 and (turn == 1 or turn == 2)):
+                    turn_locs = ['b8', 'd8', 'f8', 'h8']
+                    field = 'h8'
+                else:
+                    turn_locs = ['b1', 'd1', 'f1', 'h1']
+                    field = 'h1'
+                for loc in turn_locs:
+                    distance = sqrt((fields[loc + 'x'] - mouseX)**2 + (fields[loc + 'y'] - mouseY)**2)
+                    if distance < saved:
+                        saved = distance
+                        field = loc
+                result = True
+                for piece in piece_locs:
+                    if round(piece[0], 2) == round(fields[field + 'x'], 2) and round(piece[1], 2) == round(fields[field + 'y'], 2):
+                        result = False
+                if result == True:
+                    if ((mouseX - fields[field + "x"])**2 + (mouseY - fields[field + "y"])**2 < (width*0.018)**2):
+                        if turn == 1:
+                            colour = 'red'
+                        elif turn == 2:
+                            colour = 'green'
+                        elif turn == 3:
+                            colour = 'blue'
+                        else:
+                            colour = 'yellow'
+                        choosing_info['field'] = field
+                        choosing_info['colour'] = colour
+                        choosing = True
     else:
         if width*0.285 < mouseX < width*0.315 and height*0.400 < mouseY < height*0.450:
             if t_sys.get_pelotons(turn) > 0 and t_sys.get_tokens(turn) >= 4:
@@ -112,120 +131,142 @@ def mousePressed_(turn):
                 createPiece(choosing_info['field'], 's', choosing_info['colour'])
                 t_sys.pelotons_remove(turn)
                 t_sys.tokens_remove(turn, 4)
+                
+                trained += 1
+                if trained == 1:
+                    plays -= 1
+                elif trained == 4:
+                    plays -= 1
         elif width*0.285 < mouseX < width*0.315 and height*0.475 < mouseY < height*0.525:
             if t_sys.get_autos(turn) > 0 and t_sys.get_tokens(turn) >= 6:
                 choosing = False
                 createPiece(choosing_info['field'], 'c', choosing_info['colour'])
                 t_sys.autos_remove(turn)
                 t_sys.tokens_remove(turn, 6)
+                
+                trained += 1
+                if trained == 1:
+                    plays -= 1
+                elif trained == 4:
+                    plays -= 1
         elif width*0.285 < mouseX < width*0.315 and height*0.550 < mouseY < height*0.600:
             if t_sys.get_tanks(turn) > 0 and t_sys.get_tokens(turn) >= 9:
                 choosing = False
                 createPiece(choosing_info['field'], 't', choosing_info['colour'])
                 t_sys.tanks_remove(turn)
                 t_sys.tokens_remove(turn, 9)
+                
+                trained += 1
+                if trained == 1:
+                    plays -= 1
+                elif trained == 4:
+                    plays -= 1
         elif (mouseX < width*0.275 or mouseX > width*0.325) or (mouseY < height*0.375 or mouseY > height*0.625):
             choosing = False
 
 # draw() imported from main
 def draw_(mouse_pressed, turn):
-    global piece_locs, mouse_down, current, backupx, backupy, valid_locs, choosing
+    global piece_locs, mouse_down, current, backupx, backupy, valid_locs, choosing, plays
     
     # returns if the player is choosing
     if choosing == True:
         return
     
     # piece pickup/movement system
-    if (((mouseX - piece_locs[current][0])**2 + (mouseY - piece_locs[current][1])**2 < (width*0.018)**2) and mouse_pressed) or (mouse_down == True):
-        # check if the piece belongs to the current player
-        if (turn == 1 and piece_locs[current][4] == 'red')\
-        or (turn == 2 and piece_locs[current][4] == 'green')\
-        or (turn == 3 and piece_locs[current][4] == 'blue')\
-        or (turn == 4 and piece_locs[current][4] == 'yellow'):
-            
-            # code on piece pickup
-            if mouse_down == False:
-                mouse_down = True
-                backupx = piece_locs[current][0]
-                backupy = piece_locs[current][1]
+    if plays > 0:
+        pCount = n_sys.update_t_dis()['pCount']
+        if (((mouseX - piece_locs[current][0])**2 + (mouseY - piece_locs[current][1])**2 < (width*0.018)**2) and mouse_pressed) or (mouse_down == True):
+            # check if the piece belongs to the current player
+            if (turn == 1 and piece_locs[current][4] == 'red')\
+            or (turn == 2 and piece_locs[current][4] == 'green')\
+            or (turn == 3 and piece_locs[current][4] == 'blue')\
+            or (turn == 4 and piece_locs[current][4] == 'yellow'):
+                
+                # code on piece pickup
+                if mouse_down == False:
+                    mouse_down = True
+                    backupx = piece_locs[current][0]
+                    backupy = piece_locs[current][1]
+                    loc = 'a7x'
+                    for k in [word for word in fields.keys() if word.endswith("x")]:
+                        if round(piece_locs[current][0], 2) == round(fields[k], 2) and round(piece_locs[current][1], 2) == round(fields[k[:-1] + 'y'], 2):
+                            loc = k
+                    reach = 0
+                    if piece_locs[current][3] == 's':
+                        reach = 3
+                    if piece_locs[current][3] == 'c':
+                        reach = 5
+                    if piece_locs[current][3] == 't':
+                        reach = 2
+                    valid_locs = []
+                    newloc = gridify(loc[:-1])
+                    checkMovement(newloc, reach)
+                # code during piece pickup
+                # if width*0.1 + height*0.025 < mouseX < width*0.5 - height*0.025 and height*0.205 < mouseY < height*0.805:
+    
+                #     piece_locs[current][0] = mouseX
+                #     piece_locs[current][1] = mouseY
+                
+                piece_locs[current][0] = mouseX
+                piece_locs[current][1] = mouseY
+                if mouseX < width*0.1 + height*0.025: # check if the mouse is on the left side of the board
+                    piece_locs[current][0] = width*0.1 + height*0.025
+                if mouseX > width*0.5 - height*0.025: # check if the mouse is on the right side of the board
+                    piece_locs[current][0] = width*0.5 - height*0.025
+                if mouseY < height*0.205:             # check if the mouse is on the top side of the board
+                    piece_locs[current][1] = height*0.205
+                if mouseY > height*0.805:             # check if the mouse is on the bottom side of the board
+                    piece_locs[current][1] = height*0.805
+            else:
                 loc = 'a7x'
                 for k in [word for word in fields.keys() if word.endswith("x")]:
                     if round(piece_locs[current][0], 2) == round(fields[k], 2) and round(piece_locs[current][1], 2) == round(fields[k[:-1] + 'y'], 2):
                         loc = k
-                reach = 0
-                if piece_locs[current][3] == 's':
-                    reach = 3
-                if piece_locs[current][3] == 'c':
-                    reach = 5
-                if piece_locs[current][3] == 't':
-                    reach = 2
-                valid_locs = []
-                newloc = gridify(loc[:-1])
-                checkMovement(newloc, reach)
-            # code during piece pickup
-            # if width*0.1 + height*0.025 < mouseX < width*0.5 - height*0.025 and height*0.205 < mouseY < height*0.805:
-
-            #     piece_locs[current][0] = mouseX
-            #     piece_locs[current][1] = mouseY
-            
-            piece_locs[current][0] = mouseX
-            piece_locs[current][1] = mouseY
-            if mouseX < width*0.1 + height*0.025: # check if the mouse is on the left side of the board
-                piece_locs[current][0] = width*0.1 + height*0.025
-            if mouseX > width*0.5 - height*0.025: # check if the mouse is on the right side of the board
-                piece_locs[current][0] = width*0.5 - height*0.025
-            if mouseY < height*0.205:             # check if the mouse is on the top side of the board
-                piece_locs[current][1] = height*0.205
-            if mouseY > height*0.805:             # check if the mouse is on the bottom side of the board
-                piece_locs[current][1] = height*0.805
-        else:
-            loc = 'a7x'
-            for k in [word for word in fields.keys() if word.endswith("x")]:
-                if round(piece_locs[current][0], 2) == round(fields[k], 2) and round(piece_locs[current][1], 2) == round(fields[k[:-1] + 'y'], 2):
-                    loc = k
-            reach = 1
-            getAttackingPieces(loc, reach)
-            dices = []
-            
-            if turn == 1:
-                colour = 'red'
-            elif turn == 2:
-                colour = 'green'
-            elif turn == 3:
-                colour = 'blue'
-            else:
-                colour = 'yellow'
+                reach = 1
+                getAttackingPieces(loc, reach)
+                dices = []
                 
-            if turn == 1:
-                team_colour = 'green'
-            elif turn == 2:
-                team_colour = 'red'
-            elif turn == 3:
-                team_colour = 'yellow'
-            else:
-                team_colour = 'blue'
+                if turn == 1:
+                    colour = 'red'
+                elif turn == 2:
+                    colour = 'green'
+                elif turn == 3:
+                    colour = 'blue'
+                else:
+                    colour = 'yellow'
+                    
+                if turn == 1:
+                    team_colour = 'green'
+                elif turn == 2:
+                    team_colour = 'red'
+                elif turn == 3:
+                    team_colour = 'yellow'
+                else:
+                    team_colour = 'blue'
+                    
+                if piece_locs[current][4] == team_colour and pCount == 4:
+                    return
                 
-            if piece_locs[current][4] == team_colour:
-                return
-            
-            for field in valid_locs:
-                for piece in piece_locs:
-                    if round(piece[0], 2) == round(fields[field + 'x'], 2) and round(piece[1], 2) == round(fields[field + 'y'], 2):
-                        pCount = n_sys.update_t_dis()['pCount']
-                        if piece[4] == colour or (pCount == 4 and piece[4] == team_colour):
-                            if piece[3] == 's':
-                                dices.append('d6')
-                            if piece[3] == 'c':
-                                dices.append('d4')
-                            if piece[3] == 't':
-                                dices.append('d10')
-            print(dices)
-            #hier kan je je functie callen
+                for field in valid_locs:
+                    for piece in piece_locs:
+                        if round(piece[0], 2) == round(fields[field + 'x'], 2) and round(piece[1], 2) == round(fields[field + 'y'], 2):
+                            pCount = n_sys.update_t_dis()['pCount']
+                            if piece[4] == colour or (pCount == 4 and piece[4] == team_colour):
+                                if piece[3] == 's':
+                                    dices.append('d6')
+                                if piece[3] == 'c':
+                                    dices.append('d4')
+                                if piece[3] == 't':
+                                    dices.append('d10')
+                print(dices)
+                if len(dices) != 0:
+                    plays -= 1
+                    #hier kan je je functie callen
                         
 
 # mouseReleased() imported from main
 def mouseReleased_():
-    global piece_loc, mouse_down, current, fields, backupx, backupy, valid_locs, choosing
+    global piece_loc, mouse_down, current, fields, backupx, backupy, valid_locs, choosing, plays
     
     # returns if the player is choosing
     if choosing == True:
@@ -250,7 +291,9 @@ def mouseReleased_():
             piece_locs[current][1] = fields[loc[:-1] + 'y']
         else:
             piece_locs[current][0] = backupx
-            piece_locs[current][1] = backupy            
+            piece_locs[current][1] = backupy
+        if round(piece_locs[current][0], 2) != round(backupx, 2) or round(piece_locs[current][1], 2) != round(backupy, 2):
+            plays -= 1
 
 def gridify(loc):
     column = loc[:-1]
