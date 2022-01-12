@@ -177,8 +177,7 @@ def draw_(mouse_pressed, turn):
     # piece pickup/movement system
     if plays > 0:
         pCount = n_sys.update_t_dis()['pCount']
-        if ((((mouseX - piece_locs[current][0])**2 + (mouseY - piece_locs[current][1])**2 < (width*0.018)**2) and mouse_pressed) or (mouse_down == True)) and clicked == False:
-            clicked = True
+        if (((mouseX - piece_locs[current][0])**2 + (mouseY - piece_locs[current][1])**2 < (width*0.018)**2) and mouse_pressed) or (mouse_down == True):
             # check if the piece belongs to the current player
             if (turn == 1 and piece_locs[current][4] == 'red')\
             or (turn == 2 and piece_locs[current][4] == 'green')\
@@ -220,7 +219,8 @@ def draw_(mouse_pressed, turn):
                     piece_locs[current][1] = height*0.205
                 if mouseY > height*0.805:             # check if the mouse is on the bottom side of the board
                     piece_locs[current][1] = height*0.805
-            else:
+            elif clicked == False:
+                clicked = True
                 loc = 'a7x'
                 for k in [word for word in fields.keys() if word.endswith("x")]:
                     if round(piece_locs[current][0], 2) == round(fields[k], 2) and round(piece_locs[current][1], 2) == round(fields[k[:-1] + 'y'], 2):
@@ -271,7 +271,7 @@ def draw_(mouse_pressed, turn):
 def mouseReleased_():
     global piece_loc, mouse_down, current, fields, backupx, backupy, valid_locs, choosing, plays, clicked
     
-    clicked == False
+    clicked = False
     
     # returns if the player is choosing
     if choosing == True:
