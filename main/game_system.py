@@ -1,5 +1,6 @@
 import nameinput_system as n_sys
 import token_system as t_sys
+import dice_system as d_sys
 
 fields = {}        # a list of all fields on the board
 field_names = ('a1', 'a2', 'a3', 'a4', 'a5', 'a6', 'a7',
@@ -220,8 +221,7 @@ def draw_(mouse_pressed, turn):
                             if piece[3] == 't':
                                 dices.append('d10')
             print(dices)
-            #hier kan je je functie callen
-                        
+            #hier kan je je functie callen        
 
 # mouseReleased() imported from main
 def mouseReleased_():

@@ -468,17 +468,17 @@ def newBattle(dice,images):
 
 def newD6(images,x,y):
     cijferD6 = random.randint(1,6)
-    #image(images["D6-"+str(cijferD6)],x,y,100,100,)
-    rect(x,y,100,100)
+    image(images["D6-"+str(cijferD6)],x,y,100,100,)
+
     
 def newD4(images,x,y):
     cijferD4 = random.randint(1,4)
-    #image(images["D6-"+str(cijferD4)],x,y,100,100,)
-    rect(x,y,100,100)
+    image(images["D6-"+str(cijferD4)],x,y,100,100,)
+
 def newD10(images,x,y):
     cijferD10 = random.randint(1,10)
-    #image(images["D6-"+str(cijferD10)],x,y,100,100,)        
-    rect(x,y,100,100)
+    image(images["D6-"+str(cijferD10)],x,y,100,100,)        
+
     
 def diceD6(amount):
     global cijferD6
