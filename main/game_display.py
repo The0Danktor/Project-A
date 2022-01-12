@@ -7,6 +7,10 @@ import dice_system as d_sys
 game_turn = 1
 lostreason = 'none'
 
+def getGameTurn():
+    global game_turn
+    return game_turn
+
 # game background image loader
 def loadScreen(images):
     image(images['background_img'], 0, 0, width, height)
@@ -207,8 +211,8 @@ def mousePressed_(players, turn):
         if game_turn > 1:
             t_sys.token_per_turn(turn)
         g_sys.resetTurn(turn)
-        if game_turn % 2 == 0:
-            return -9
+        # if game_turn % 2 == 0:
+        #     return -9
         return turn
     if width*0.1 < mouseX < width*0.2 and height*0.85 < mouseY < height*0.95:
         return -6

@@ -261,6 +261,8 @@ def mousePressed():
         
         if ret > 0:
             turn = ret
+            if g_dis.getGameTurn() % 2 == 0 and turn == 1:
+                state = 9
         else:
             state = ret * -1
     elif state == 9:
