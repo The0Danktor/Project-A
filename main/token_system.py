@@ -106,7 +106,7 @@ def calculateIncome(turn):
                 income += 3
             elif piece[3] == 't':
                 income += 4
-        return income + tokens_eco['tokensecoP'+str(turn)]
+    return income + tokens_eco['tokensecoP'+str(turn)]
                 
 def tokens_remove(turn, amount):
     global tokens

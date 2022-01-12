@@ -60,13 +60,14 @@ def displayScreen(players, turn, images, fields, mousePressed_):
     f.textBox(width*0.4, height*0.85, width*0.1, height*0.1, 'upgrade', 200, 0)
     
     fill(50)
-    rect(width*0.7, height*0.24, width*0.2, height*0.38, 10)
+    rect(width*0.7, height*0.20, width*0.2, height*0.42, 10)
     fill(255)
-    text("Tokens: " + str(t_sys.get_tokens(turn)), f.center("Tokens: " + str(t_sys.get_tokens(turn)), width*0.19, height*0.1, 1) - (width / 2) + width*0.8, height*0.30)
-    text("Pelotons: " + str(t_sys.get_pelotons(turn)), f.center("Pelotons: " + str(t_sys.get_pelotons(turn)), width*0.19, height*0.1, 1) - (width / 2) + width*0.8, height*0.37)
-    text("Auto's: " + str(t_sys.get_autos(turn)), f.center("Auto's: " + str(t_sys.get_autos(turn)), width*0.19, height*0.1, 1) - (width / 2) + width*0.8, height*0.44)
-    text("Tanks: " + str(t_sys.get_tanks(turn)), f.center("Tanks: " + str(t_sys.get_tanks(turn)), width*0.19, height*0.1, 1) - (width / 2) + width*0.8, height*0.51)
-    text("Income per turn: " + str(t_sys.calculateIncome(turn)), f.center("Income per turn: " + str(t_sys.calculateIncome(turn)), width*0.19, height*0.1, 1) - (width / 2) + width*0.8, height*0.58)
+    text("Tokens: " + str(t_sys.get_tokens(turn)), f.center("Tokens: " + str(t_sys.get_tokens(turn)), width*0.19, height*0.1, 1) - (width / 2) + width*0.8, height*0.26)
+    text("Pelotons: " + str(t_sys.get_pelotons(turn)), f.center("Pelotons: " + str(t_sys.get_pelotons(turn)), width*0.19, height*0.1, 1) - (width / 2) + width*0.8, height*0.32)
+    text("Auto's: " + str(t_sys.get_autos(turn)), f.center("Auto's: " + str(t_sys.get_autos(turn)), width*0.19, height*0.1, 1) - (width / 2) + width*0.8, height*0.38)
+    text("Tanks: " + str(t_sys.get_tanks(turn)), f.center("Tanks: " + str(t_sys.get_tanks(turn)), width*0.19, height*0.1, 1) - (width / 2) + width*0.8, height*0.44)
+    text("Income per turn: " + str(t_sys.calculateIncome(turn)), f.center("Income per turn: " + str(t_sys.calculateIncome(turn)), width*0.19, height*0.1, 1) - (width / 2) + width*0.8, height*0.52)
+    text("Actions left: " + str(g_sys.getActions()), f.center("Actions left: " + str(g_sys.getActions()), width*0.19, height*0.1, 1) - (width / 2) + width*0.8, height*0.58)
 
     fill(100)
     text('Turn: ' + str(game_turn), f.center('Turn: ' + str(game_turn), width*0.10, height*0.1, 1) - (width / 2) + width*0.8, height*0.87)
@@ -169,9 +170,6 @@ def displayScreen(players, turn, images, fields, mousePressed_):
             else:
                 image(images['gray_t_img'], width*0.285, height*0.550, width*0.03, height*0.05)
             text('9 Tokens', f.center('9 Tokens', width*0.029, height*0.1, 1) - (width / 2) + width*0.300, height*0.600)
-            
-            
-        d_sys.newBattle(["D6","D6","D6","D6","D6","D6","D6","D6"], images)    
         
         
 def checkSpot(field, images):
@@ -191,9 +189,10 @@ def mousePressed_(players, turn):
         turn += 1
         if turn > n_sys.update_t_dis()['pCount']:
             turn = 1
-            game_turn += 1    
+            game_turn += 1
         if game_turn > 1:
             t_sys.token_per_turn(turn)
+        g_sys.resetTurn(turn)
         return turn
     if width*0.1 < mouseX < width*0.2 and height*0.85 < mouseY < height*0.95:
         return -6

@@ -1,5 +1,6 @@
 import functions as f
 import token_system as t_sys
+import game_system as g_sys
 
 eco = {
     'ecoP1': 0,
@@ -119,15 +120,15 @@ def upgrade_refresh():
         }
 def get_eco(turn):
     global eco
-    return eco
+    return eco['ecoP' + str(turn)]
 
 def get_generaal(turn):
     global generaal
-    return generaal
+    return generaal['generaalP' + str(turn)]
             
 def get_artillerie(turn):
     global artillerie
-    return artillerie
+    return artillerie['artillerieP' + str(turn)]
         
 def upgrade_eco(turn):
     global eco

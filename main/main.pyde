@@ -110,7 +110,30 @@ def setup():
               'generaal_lvl1' : loadImage("generaal_lvl1.png"),
               'generaal_lvl2' : loadImage("generaal_lvl2.png"),
               'art_lvl1'      : loadImage("artillerie_lvl2.png"),
-              'art_lvl2'      : loadImage("artillerie_lvl1.png")
+              'art_lvl2'      : loadImage("artillerie_lvl1.png"),
+              
+              'D4-1'          : loadImage("D4-1.png"),
+              'D4-2'          : loadImage("D4-2.png"),
+              'D4-3'          : loadImage("D4-3.png"),
+              'D4-4'          : loadImage("D4-4.png"),
+              
+              'D6-1'          : loadImage("D6-1.png"),
+              'D6-2'          : loadImage("D6-2.png"),
+              'D6-3'          : loadImage("D6-3.png"),
+              'D6-4'          : loadImage("D6-4.png"),
+              'D6-5'          : loadImage("D6-5.png"),
+              'D6-6'          : loadImage("D6-6.png"),
+              
+              'D10-1'          : loadImage("D10-1.png"),
+              'D10-2'          : loadImage("D10-2.png"),
+              'D10-3'          : loadImage("D10-3.png"),
+              'D10-4'          : loadImage("D10-4.png"),
+              'D10-5'          : loadImage("D10-5.png"),
+              'D10-6'          : loadImage("D10-6.png"),
+              'D10-7'          : loadImage("D10-7.png"),
+              'D10-8'          : loadImage("D10-8.png"),
+              'D10-9'          : loadImage("D10-9.png"),
+              'D10-10'         : loadImage("D10-10.png")
     }
     fields = g_sys.createField()
     g_sys.createPieces()
@@ -164,7 +187,7 @@ def draw():
         e_dis.displayScreen()
     elif state == 8:
         g_dis.displayScreen(players, turn, images, fields, mousePressed)
-        g_sys.draw_(mousePressed, turn)
+        g_sys.draw_(mousePressed, turn,images)
     elif state == 9:
         k_sys.displayScreen(images, turn, players)
     elif state == 10:
@@ -187,7 +210,6 @@ def draw():
 # mouse press function
 def mousePressed():
     global clicked, players, state, turn
-    print(mouseX,mouseY)
     if clicked == True:
         return
     else:
