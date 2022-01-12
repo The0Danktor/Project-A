@@ -458,11 +458,11 @@ def newBattle(dice,images):
     x=[1000,1150,1000,1150,1000,1150,1000,1150,1000,1150]
     y=[190,190,340,340,490,490,640,640,790,790]
     for i in range(len(dice)):
-        if dice[i] == 'D6':
+        if dice[i] == 'd6':
             newD6(images,x[i],y[i])
-        elif dice[i] == 'D10':
+        elif dice[i] == 'd10':
             newD10(images,x[i],y[i])
-        elif dice[i] == 'D4':
+        elif dice[i] == 'd4':
             newD4(images,x[i],y[i])
     
 
