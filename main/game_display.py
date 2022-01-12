@@ -169,9 +169,6 @@ def displayScreen(players, turn, images, fields, mousePressed_):
             else:
                 image(images['gray_t_img'], width*0.285, height*0.550, width*0.03, height*0.05)
             text('9 Tokens', f.center('9 Tokens', width*0.029, height*0.1, 1) - (width / 2) + width*0.300, height*0.600)
-            
-            
-        d_sys.newBattle(["D6","D6","D6","D6","D6","D6","D6","D6"], images)    
         
         
 def checkSpot(field, images):

@@ -436,11 +436,6 @@ def next(mousePressed):
             rectMode(CENTER)
             fill('#5493BF')
             rect(width/2,height/2,1000,400)
-        
-        
-    
-    
-    
     
 def totalCounter(mode,kleur,breedte,hoogte,textbreedte,texthoogte):
     global pressed
@@ -460,8 +455,8 @@ def totalCounter(mode,kleur,breedte,hoogte,textbreedte,texthoogte):
             getelt = True
     
 def newBattle(dice,images):
-    x=[1000,1150,1000,1150,1000,1150,1000,1150]
-    y=[190,190,365,365,515,515,715,715]
+    x=[1000,1150,1000,1150,1000,1150,1000,1150,1000,1150]
+    y=[190,190,340,340,490,490,640,640,790,790]
     for i in range(len(dice)):
         if dice[i] == 'D6':
             newD6(images,x[i],y[i])
