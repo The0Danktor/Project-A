@@ -455,14 +455,14 @@ def totalCounter(mode,kleur,breedte,hoogte,textbreedte,texthoogte):
             getelt = True
     
 def newBattle(dice,images):
-    x=[1000,1150,1000,1150,1000,1150,1000,1150,1000,1150]
-    y=[190,190,340,340,490,490,640,640,790,790]
+    x=[width/1.92,width/1.67,width/1.92,width/1.67,width/1.92,width/1.67,width/1.92,width/1.67,width/1.92,width/1.67]
+    y=[height/5.68,height/5.68,height/3.18,height/3.18,height/2.20,height/2.20,height/1.69,height/1.69,height/1.37,height/1.37]
     for i in range(len(dice)):
-        if dice[i] == 'D6':
+        if dice[i] == 'd6':
             newD6(images,x[i],y[i])
-        elif dice[i] == 'D10':
+        elif dice[i] == 'd10':
             newD10(images,x[i],y[i])
-        elif dice[i] == 'D4':
+        elif dice[i] == 'd4':
             newD4(images,x[i],y[i])
     
 
@@ -473,11 +473,11 @@ def newD6(images,x,y):
     
 def newD4(images,x,y):
     cijferD4 = random.randint(1,4)
-    image(images["D6-"+str(cijferD4)],x,y,100,100,)
+    image(images["D4-"+str(cijferD4)],x,y,100,100,)
 
 def newD10(images,x,y):
     cijferD10 = random.randint(1,10)
-    image(images["D6-"+str(cijferD10)],x,y,100,100,)        
+    image(images["D10-"+str(cijferD10)],x,y,100,100,)        
 
     
 def diceD6(amount):
