@@ -197,7 +197,7 @@ def draw():
     elif state == 5:
         t_dis.displayScreen(players['player1'], players['player2'], players['player3'], players['player4'], images)
     elif state == 6:
-        d_sys.dice_systeem(sfx_files,mousePressed, players, turn)
+        d_sys.dice_systeem(sfx_files,mousePressed, players, turn,images)
     elif state == 7:
         e_dis.displayScreen()
     elif state == 8:
