@@ -187,7 +187,7 @@ def draw():
         e_dis.displayScreen()
     elif state == 8:
         g_dis.displayScreen(players, turn, images, fields, mousePressed)
-        g_sys.draw_(mousePressed, turn)
+        g_sys.draw_(mousePressed, turn,images)
     elif state == 9:
         k_sys.displayScreen(images, turn, players)
     elif state == 10:

@@ -166,7 +166,7 @@ def mousePressed_(turn):
             choosing = False
 
 # draw() imported from main
-def draw_(mouse_pressed, turn):
+def draw_(mouse_pressed, turn,images):
     global piece_locs, mouse_down, current, backupx, backupy, valid_locs, choosing, plays
     
     # returns if the player is choosing
@@ -262,6 +262,7 @@ def draw_(mouse_pressed, turn):
                 print(dices)
                 if len(dices) != 0:
                     plays -= 1
+                    d_sys.newBattle(dices,images)
                     #hier kan je je functie callen
                         
 
