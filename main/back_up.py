@@ -1,10 +1,11 @@
 import functions as f
 add_library("minim")
 
+#taal
 taal1 = True
 taal2 = True
 
-
+#variables
 x = 860
 x2 = 960
 mouse_down = False
@@ -89,9 +90,10 @@ def slider2(mousePressed):
     textSize(36)
     fill(0)
     text('sfx :',660,220)
+
     
 
-
+# talenknop 1
 def languageButton1(mousePressed):
     fill(255)
     f.textBox(660, 350, 150, 150, 'NL')
@@ -101,6 +103,7 @@ def languageButton1(mousePressed):
     if 660 < mouseX < 500 and 200 < mouseY < 300:
         print('NL')
 
+# talenknop 2
 def languageButton2(mousePressed):
     fill(255)
     f.textBox(1110, 350, 150, 150, 'EN')

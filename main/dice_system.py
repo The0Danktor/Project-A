@@ -2,6 +2,7 @@ import functions as f
 import random
 import nameinput_system as n_sys
 import back_up as b_u
+import cards_effects as c_e
 # ==================================================
 # alle global variable
 pressed = True
@@ -454,7 +455,7 @@ def totalCounter(mode,kleur,breedte,hoogte,textbreedte,texthoogte):
         if totaal > 0:
             getelt = True
     
-def newBattle(dice,images, victim_dice):
+def newBattle(dice,images, victim_dice,victim):
     x=[width/1.92,width/1.67,width/1.92,width/1.67,width/1.92,width/1.67,width/1.92,width/1.67,width/1.92,width/1.67]
     y=[height/5.68,height/5.68,height/3.18,height/3.18,height/2.20,height/2.20,height/1.69,height/1.69,height/1.37,height/1.37]
 
@@ -475,6 +476,12 @@ def newBattle(dice,images, victim_dice):
     totaal = 0
     for i in cijfers:
             totaal += i
+            if c_e.keepDigging(turn):
+                totaal += 1
+            if c_e.bodyArmor(victim):
+                totaal //= 2
+            if c_e.ratAttack(turn):
+                totaal -= 1
     if totaal > victim_cijfer:
         win = "attacker"
     elif totaal < victim_cijfer:
