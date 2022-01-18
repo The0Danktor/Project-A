@@ -186,7 +186,7 @@ def mousePressed_(turn, images):
             if t_sys.get_pelotons(turn) > 0 and t_sys.get_tokens(turn) >= 4:
                 choosing = False
                 if choosing_info['attack'] == True:
-                    result = newPieceFight(images, 'd6')
+                    result = newPieceFight(images, 'd6',turn)
                 else:
                     result = 'attacker'
                 if result == 'defender'or result == 'draw':
@@ -205,7 +205,7 @@ def mousePressed_(turn, images):
             if t_sys.get_autos(turn) > 0 and t_sys.get_tokens(turn) >= 6:
                 choosing = False
                 if choosing_info['attack'] == True:
-                    result = newPieceFight(images, 'd4')
+                    result = newPieceFight(images, 'd4',turn)
                 else:
                     result = 'attacker'
                 if result == 'defender'or result == 'draw':
@@ -224,7 +224,7 @@ def mousePressed_(turn, images):
             if t_sys.get_tanks(turn) > 0 and t_sys.get_tokens(turn) >= 9:
                 choosing = False
                 if choosing_info['attack'] == True:
-                    result = newPieceFight(images, 'd10')
+                    result = newPieceFight(images, 'd10',turn)
                 else:
                     result = 'attacker'
                 if result == 'defender'or result == 'draw':
@@ -242,12 +242,12 @@ def mousePressed_(turn, images):
         elif (mouseX < width*0.275 or mouseX > width*0.325) or (mouseY < height*0.375 or mouseY > height*0.625):
             choosing = False
 
-def newPieceFight(images, extra):
+def newPieceFight(images, extra,turn):
     global choosing_info
     
     choosing_info['dices'].append(extra)
     print(choosing_info['dices'])
-    result = d_sys.newBattle(choosing_info['dices'], images, choosing_info['victim_dice'])
+    result = d_sys.newBattle(choosing_info['dices'], images, choosing_info['victim_dice'],piece_locs[current][4],turn)
     if result == 'defender':
         for i in choosing_info['attackers']:
             removePiece(i)
