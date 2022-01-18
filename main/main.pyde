@@ -257,7 +257,7 @@ def mousePressed():
             state = backup_state
     elif state == 8:
         g_sys.mousePressed_(turn, images)
-        ret = g_dis.mousePressed_(players, turn)
+        ret = g_dis.mousePressed_(players, turn,images)
         
         if ret > 0:
             turn = ret

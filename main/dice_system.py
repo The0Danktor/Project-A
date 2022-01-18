@@ -460,6 +460,8 @@ def newBattle(dice,images, victim_dice,victim,turn):
     y=[height/5.68,height/5.68,height/3.18,height/3.18,height/2.20,height/2.20,height/1.69,height/1.69,height/1.37,height/1.37]
 
     cijfers = []
+    text("aanvaller:" ,width/1.92, height/6.5)
+    text("verdediger:", width/38.4,height/6.5)
     for i in range(len(dice)):
         if dice[i] == 'd6':
             cijfers.append(newD6(images,x[i],y[i]))

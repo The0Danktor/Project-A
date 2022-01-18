@@ -28,9 +28,10 @@ def menu(mousePressed):
     rect(610,50,700,700,20)
     slider1(mousePressed)
     slider2(mousePressed)
-    languageButton1(mousePressed)
-    languageButton2(mousePressed)
+    #languageButton1(mousePressed)
+    #languageButton2(mousePressed)
     volume()
+
 
 
 
@@ -136,3 +137,4 @@ def mouseReleased_():
     global mouse_down, mouse_down2
     mouse_down = False
     mouse_down2 = False
+    
